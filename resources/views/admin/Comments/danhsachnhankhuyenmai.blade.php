@@ -1,0 +1,67 @@
+@extends('admin.layout.index')
+@section('content')
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Comments
+                            <small>List</small>
+                        </h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <div class="col-lg-12">
+                        @if(session('thongbao'))
+                            <div class="alert alert-success">{{session('thongbao')}}</div>
+                        @endif
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr align="center">
+                                    <th>ID</th>
+                                    <th>Email</th>
+                                    <th>Số Điện Thoại</th>
+                                    <th>Xác Nhận</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($customer as $cus)
+                                    <tr>
+                                        <td>{{$cus->id}}</td>
+                                        <td>{{$cus->email}}</td>
+                                        <td>{{$cus->phone}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#veriCom_{{$cus->id}}">
+                                              Xác Nhận
+                                            </button>
+                                            <div class="modal fade" id="veriCom_{{$cus->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                  
+                                                        <div class="modal-body">
+                                                        Bạn có thực sự muốn XÁC NHẬN Comment số {{$cus->id}}?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a href="admin/Comments/xacnhankhuyenmai/{{$cus->id}}"><button type="button" class="btn btn-primary">Có</button></a>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+@endsection
