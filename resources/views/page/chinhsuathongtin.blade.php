@@ -24,7 +24,6 @@
 			<hr>
 			<div class="formdangky">
 				<div class="row">
-					<div class="col-md-3"></div>
 					<div class="col-md-6">
 						<form action="tai-khoan/chinhsuathongtin/{{Auth::user()->id}}" method="post">
 							@csrf
@@ -78,16 +77,25 @@
 										<label for="pwd">Điện Thoại</label>
 										<input name="sdt" type="text" class="form-control" value="{{$taikhoan->phone}}"  required>
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label for="pwd">Địa Chỉ</label>
 										<input name="diachi" type="text" class="form-control" value="{{$taikhoan->address}}"  required>
-									</div>
+									</div> -->
+
 									<button type="submit" class="btn btn-primary nutdangky">Chỉnh Sửa</button>
 
                           
 						</form>
 					</div>
-					<div class="col-md-3"></div>
+					<div class="col-md-6">
+						<h4>Sổ Địa Chỉ Cá Nhân</h4>
+						<div class="so-dia-chi">
+
+							<p>Họ Tên: <b>{{$taikhoan->full_name}}</b></p>
+							<p>Địa Chỉ: <b>{{$taikhoan->address}}</b></p>
+							<a href="tai-khoan/chinh-sua-so-dia-chi/{{$taikhoan->id}}">Chỉnh Sửa</a>
+						</div>
+					</div>
 				</div>
 								
 								

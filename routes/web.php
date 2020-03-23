@@ -32,7 +32,7 @@ Route::post('update-giohang',['as'=>'update','uses'=>'CartController@updateGioHa
 Route::get('xoa-gio/{id}',['as'=>'xoagio','uses'=>'CartController@xoaGio']);
 
 //luu vao csdl
-Route::post('thanh-toan2',['as'=>'dathang','uses'=>'CartController@postCheckout']);
+Route::post('thanh-toan',['as'=>'dathang','uses'=>'CartController@postCheckout']);
 
 //dangky
 Route::post('dang-ky2',['as'=>'dangky2','uses'=>'AccountController@postDangKy']);
@@ -44,6 +44,8 @@ Route::group(['prefix'=>'tai-khoan','middleware'=>'thuongLogin'],function(){
 	
     Route::get('chinhsuathongtin/{id}',['as'=>'chinhsua','uses'=>'AccountController@getChinhSua']);
     Route::post('chinhsuathongtin/{id}',['as'=>'chinhsua','uses'=>'AccountController@postChinhSua']);
+    Route::get('chinh-sua-so-dia-chi/{id}',['as'=>'chinhsuasodiachi','uses'=>'AccountController@getChinhSuaSoDiaChi']);
+    Route::post('chinh-sua-so-dia-chi/{id}',['as'=>'chinhsuasodiachi','uses'=>'AccountController@postChinhSuaSoDiaChi']);
     Route::get('lichsumuahang_bill/{id}',['as'=>'lichsumuahang_bill','uses'=>'AccountController@getLichSuMuaHangBill']);
     Route::get('lichsumuahang_billdetail/{id}',['as'=>'lichsumuahang_billdetail','uses'=>'AccountController@getLichSuMuaHangBillDetail']);
 });
@@ -173,4 +175,6 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 });
 Route::group(['prefix'=>'ajax'],function(){
 	Route::get('district/{province_id}','AddressController@getDistrict');
+
+	Route::get('ward/{district_id}','AddressController@getWard');
 });

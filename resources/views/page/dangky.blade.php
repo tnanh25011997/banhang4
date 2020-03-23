@@ -74,12 +74,8 @@
 										<input name="sdt" type="text" class="form-control"  required>
 									</div>
 									<div class="form-group">
-										<label >Địa Chỉ</label>
-										<input name="diachi" type="text" class="form-control"  required>
-									</div>
-									<div class="form-group">
 										<label>Tỉnh</label>
-										<select class="form-control" id="province">
+										<select class="form-control" required name="province" id="province">
 											<option value> Chọn Tỉnh/Thành Phố</option>
 											@foreach($province as $prov)
 										    	<option value="{{sprintf('%02d', $prov->id)}}">{{$prov->name}}</option>
@@ -88,17 +84,21 @@
 									</div>
 									<div class="form-group">
 										<label>Quận/Huyện</label>
-										<select class="form-control" id="district">
+										<select class="form-control" required name="district" id="district">
 											<option value> Chọn Quận/Huyện</option>
 											
 										 </select>
 									</div>
 									<div class="form-group">
-										<label>Quận/Huyện</label>
-										<select class="form-control" id="ward">
+										<label>Xã/Phường</label>
+										<select class="form-control" required name="ward" id="ward">
 											<option value> Chọn Xã/Phường</option>
 											
 										 </select>
+									</div>
+									<div class="form-group">
+										<label >Số Nhà/Thôn</label>
+										<input name="diachi" type="text" required class="form-control"  required>
 									</div>
 									<button type="submit" class="btn btn-primary nutdangky">Đăng Ký</button>
 						</form>
@@ -120,12 +120,13 @@
 				var province_id = $(this).val();
 				$.get("ajax/district/"+province_id,function(data){
 					$("#district").html(data);
+					$("#ward").html("<option value> Chọn Xã/Phường</option>");
 				});
 			});
 			$("#district").change(function(event) {
 				var district_id = $(this).val();
 				$.get("ajax/ward/"+district_id,function(data){
-					$("#district").html(data);
+					$("#ward").html(data);
 				});
 			});
 		});

@@ -14,6 +14,9 @@ use App\BillDetail;
 use App\News;
 use App\CustomerRegister;
 use App\Comments;
+use App\Province;
+use App\District;
+use App\Ward;
 use Illuminate\Support\Facades\DB;
 
 use Hash;
@@ -37,27 +40,38 @@ class AccountController extends Controller
                 'fullname'=>'required',
                 're_password'=>'required|same:password',
                 'sdt'=>'required',
+                'province'=>'required',
+                'district'=>'required',
+                'ward'=>'required',
                 'diachi'=>'required'
             ],
             [
-                'email.required'=>'Vui lòng nhập email',
-                'email.email'=>'Nhập không đúng định dạng email',
-                'email.unique'=>'Email đã có người sử dụng',
-                'password.required'=>'Vui lòng nhập mật khẩu',
-                'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự',
-                'password.max'=>'Mật khẩu phải bé hơn 20 ký tự',
-                're_password.required'=>'Phải nhập trường mật khẩu',
-                're_password.same'=>'Mật khẩu phải giống nhau',
-                'fullname.required'=>'Vui lòng nhập tên của bạn',
-                'sdt.required'=>'Vui lòng nhập SĐT',
-                'diachi.required'=>'Vui lòng nhập địa chỉ'
+                'email.required'=>'Vui lòng nhập email.',
+                'email.email'=>'Nhập không đúng định dạng email.',
+                'email.unique'=>'Email đã có người sử dụng.',
+                'password.required'=>'Vui lòng nhập mật khẩu.',
+                'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự.',
+                'password.max'=>'Mật khẩu phải bé hơn 20 ký tự.',
+                're_password.required'=>'Phải nhập trường mật khẩu.',
+                're_password.same'=>'Mật khẩu phải giống nhau.',
+                'fullname.required'=>'Vui lòng nhập tên của bạn.',
+                'sdt.required'=>'Vui lòng nhập SĐT.',
+                'province.required'=>'Vui lòng Chọn Tỉnh Thành.',
+                'district.required'=>'Vui lòng Chọn Quận Huyện.',
+                'ward.required'=>'Vui lòng Chọn Xã Phường.',
+                'diachi.required'=>'Vui lòng nhập địa chỉ.'
             ]);
         $user = new nguoidung;
         $user->email = $req->email;
         $user->full_name = $req->fullname;
         $user->password = Hash::make($req->password);
         $user->phone = $req->sdt;
-        $user->address = $req->diachi;
+        //adress
+        $province = Province::find($req->province);
+        $district = District::find($req->district);
+        $ward = Ward::find($req->ward);
+        $address = $req->diachi.", ".$ward->name.", ".$district->name.", ".$province->name;
+        $user->address = $address;
         $user->save();
         return redirect()->back()->with('thanhcong','Tạo tài khoản thành công');
     }
@@ -70,10 +84,10 @@ class AccountController extends Controller
                 
             ],
             [
-                'email.required'=>'Vui lòng nhập email',
-                'password.required'=>'Vui lòng nhập mật khẩu',
-                'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự',
-                'password.max'=>'Mật khẩu phải bé hơn 20 ký tự'
+                'email.required'=>'Vui lòng nhập email.',
+                'password.required'=>'Vui lòng nhập mật khẩu.',
+                'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự.',
+                'password.max'=>'Mật khẩu phải bé hơn 20 ký tự.'
                 
             ]);
         $credentials = array('email'=>$req->email,'password'=>$req->password);
@@ -104,23 +118,61 @@ class AccountController extends Controller
         }
         
     }
+    public function getChinhSuaSoDiaChi($id)
+    {
+        $province = Province::all();
+        if(Auth::user()->id == $id){
+            $taikhoan = nguoidung::find($id);
+            return view('page.chinhsuasodiachi',compact('taikhoan','province'));
+        }else{
+            return 'not allowed to see';
+        }
+        
+    }
+    public function postChinhSuaSoDiaChi(Request $req, $id)
+    {
+        $this->validate($req,
+            [
+                'province'=>'required',
+                'district'=>'required',
+                'ward'=>'required',
+                'diachi'=>'required',
+                       
+            ],
+            [
+                'province.required'=>'Vui lòng Chọn Tỉnh Thành.',
+                'district.required'=>'Vui lòng Chọn Quận Huyện.',
+                'ward.required'=>'Vui lòng Chọn Xã Phường.',
+                'diachi.required'=>'Vui lòng nhập địa chỉ.'
+                  
+            ]);
+        $user= nguoidung::find($id);
+        //adress
+        $province = Province::find($req->province);
+        $district = District::find($req->district);
+        $ward = Ward::find($req->ward);
+        //$address = $req->diachi.", ".$ward->name.", ".$district->name.", ".$province->name;
+        $address = $req->diachi.", ".$ward->name.", ".$district->name.", ".$province->name;
+        $user->address = $address;
+        $user->save();
+        return redirect('tai-khoan/chinhsuathongtin/'.$id)->with('thongbao','Sửa Thông Tin Thành Công');
+    }
     public function postChinhSua(Request $req, $id)
     {
         $this->validate($req,
             [
                 'ten'=>'required',
                 'sdt'=>'required',
-                'diachi'=>'required'       
+                       
             ],
             [
                 'ten.required'=>'Bạn Chưa Nhập Họ Tên',
                 'sdt.required'=>'Bạn Chưa Nhập SĐT',
-                'diachi.required'=>'Bạn Chưa Nhập Địa Chỉ'    
+                  
             ]);
         $user= nguoidung::find($id);
         $user->full_name= $req->ten;
         $user->phone= $req->sdt;
-        $user->address= $req->diachi;
         if($req->changePassword =="on")
         {
             if (!(Hash::check($req->get('old_password'), $user->password))) {
@@ -191,6 +243,9 @@ class AccountController extends Controller
     public function getLichSuMuaHangBillDetail($id)
     {
         $bill = Bill::find($id);
+        if($bill == null){
+            return 'not allowed to see';
+        }
         if(Auth::user()->id == $bill->id_user){
             $billDetail = BillDetail::where('id_bill',$id)->get();
             return view('page.lichsumuahang_billdetail',compact('billDetail','bill'));

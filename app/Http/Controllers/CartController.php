@@ -14,6 +14,9 @@ use App\BillDetail;
 use App\News;
 use App\CustomerRegister;
 use App\Comments;
+use App\Province;
+use App\District;
+use App\Ward;
 use Illuminate\Support\Facades\DB;
 
 use Hash;
@@ -88,30 +91,49 @@ class CartController extends Controller
     {
         $cart = Session::get('cart');
 
-        $this->validate($req,
+        
+        $customer = new Customer;
+        if(Auth::check()){
+            $customer->name = Auth::user()->full_name;
+            $customer->email = Auth::user()->email;
+            $customer->phone_number = Auth::user()->phone;
+            $customer->address = Auth::user()->address;
+        }
+        else{
+            $this->validate($req,
             [
                 'email'=>'required|email',
                 'ten'=>'required',
                 'sdt'=>'required',
                 'sdt'=>'digits:10',
                 'diachi'=>'required',
-                'payment'=>'required'
+                'payment'=>'required',
+                'province'=>'required',
+                'district'=>'required',
+                'ward'=>'required'
             ],
             [
-                'email.required'=>'Vui lòng nhập email ',
-                'email.email'=>'Nhập không đúng định dạng email ',
-                'ten.required'=>'Vui lòng nhập Tên ',
-                'sdt.required'=>'Vui lòng nhập SDT ',
-                'sdt.digits'=>'Số điện thoại phải là chuỗi số 10 ký tự',
-                'diachi.required'=>'Vui lòng nhập địa chỉ ',
-                'payment.required'=>'Vui lòng chọn phương thức thanh toán '
+                'email.required'=>'Vui lòng nhập email. ',
+                'email.email'=>'Nhập không đúng định dạng email. ',
+                'ten.required'=>'Vui lòng nhập Tên. ',
+                'sdt.required'=>'Vui lòng nhập SDT. ',
+                'sdt.digits'=>'Số điện thoại phải là chuỗi số 10 ký tự. ',
+                'diachi.required'=>'Vui lòng nhập địa chỉ. ',
+                'payment.required'=>'Vui lòng chọn phương thức thanh toán. ',
+                'province.required'=>'Vui lòng Chọn Tỉnh Thành. ',
+                'district.required'=>'Vui lòng Chọn Quận Huyện. ',
+                'ward.required'=>'Vui lòng Chọn Xã Phường. '
             ]);
-        
-        $customer = new Customer;
-        $customer->name = $req->ten; 
-        $customer->email = $req->email;
-        $customer->phone_number = $req->sdt;
-        $customer->address = $req->diachi;
+            $customer->name = $req->ten; 
+            $customer->email = $req->email;
+            $customer->phone_number = $req->sdt;
+            //adress
+            $province = Province::find($req->province);
+            $district = District::find($req->district);
+            $ward = Ward::find($req->ward);
+            $address = $req->diachi.", ".$ward->name.", ".$district->name.", ".$province->name;
+            $customer->address = $address;
+        } 
         $customer->save();
 
         //khi lưu customer rồi mới lưu vào bill

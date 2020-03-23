@@ -238,7 +238,7 @@
 
 		    input.onchange = function() { 	
 		    	if(isNaN(input.value)){
-		    		alert("số lượng phải từ 1a-20");
+		    		alert("số lượng phải từ 1-20");
 		    	}
 		    	if(input.value < 1){
 		    		input.value = 1;

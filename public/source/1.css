@@ -34,7 +34,9 @@
     }
 }
 @media only screen and (min-width: 576px ) and (max-width: 768px){
-    
+    input.input-phone-checkout{
+        width: 100%!important;
+    }
     .add-to-cart-success{
         right: 99px!important;
     }
@@ -70,6 +72,7 @@
     }
 }
 @media only screen and (min-width: 768px ){
+    
     .dungyen{
         position: fixed;
         z-index: 99999;
@@ -82,6 +85,9 @@
 }
 
 @media only screen and (max-width: 576px) {
+    input.input-phone-checkout{
+        width: 100%!important;
+    }
     /*spin*/
     .spin span, .spin input {
         height: 32px!important;
@@ -275,6 +281,26 @@
         justify-content: space-between;
         margin-top: 13px;
     }
+}
+
+.noidungthanhtoan .delivery-address a{
+    padding-top: 10px!important;
+}
+.delivery-address p{
+    margin-bottom: 0px;
+    color: black!important;
+    font-size: 14px;
+}
+.delivery-address {
+    border: 1px dashed #090;
+    padding: 10px;
+    margin-right: 25px;
+    margin-bottom: 15px;
+}
+.so-dia-chi {
+    padding: 10px;
+    border: 1px dotted grey;
+    font-size: 13px;
 }
 /*spin chi tiet san pham*/
 .spin {
@@ -888,9 +914,11 @@ button.btn.btn-primary.nutdathang {
 }
 
 .formmuahang .form-group {
-    width: 48%;
-    float: left;
-    margin-right: 17px;
+    width: 95%;
+    
+}
+.input-phone-checkout{
+    width: 91%!important;
 }
 
 .tongtien {

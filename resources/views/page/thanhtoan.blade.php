@@ -113,12 +113,12 @@
 									@if(count($errors)>0)
 							            <div class="alert alert-danger">
 								    	@foreach($errors->all() as $err)
-								    	   {{$err}}. 
+								    	   {{$err}}
 								    	@endforeach
 								            </div>
 							        @endif
 									@if(Auth::check())
-									<div class="form-group">
+									<!-- <div class="form-group">
                   						<label for="ten">Họ & Tên</label>
                   						<input name="ten" type="text" required value="{{Auth::user()->full_name}}" class="form-control" id="ten">
                   					</div>
@@ -133,26 +133,70 @@
                   					<div class="form-group">
                   						<label >Địa Chỉ</label>
                   						<input name="diachi" type="text" required value="{{Auth::user()->address}}" class="form-control" >
-                  					</div>
-
-
+                  					</div> -->
+									<div class="delivery-address">
+										<h5>{{Auth::user()->full_name}}</h5>
+										<p>Điện Thoại: {{Auth::user()->phone}}</p>
+										<p>Email: {{Auth::user()->email}}</p>
+										<p style="padding-bottom: 5px;">Địa Chỉ: {{Auth::user()->address}}</p>
+										<a href="tai-khoan/chinhsuathongtin/{{Auth::user()->id}}">Chỉnh Sửa Thông Tin</a>
+									</div>
+				
                   					@else
-                  					<div class="form-group">
-                  						<label for="ten">Họ & Tên</label>
-                  						<input name="ten" type="text" required class="form-control" id="ten">
-                  					</div>
-                  					<div class="form-group">
-                  						<label for="">Số Điện Thoại</label>
-                  						<input name="sdt" type="text" required class="form-control" >
-                  					</div>
-                  					<div class="form-group">
-                  						<label for="">Email</label>
-                  						<input name="email" type="email" required class="form-control" >
-                  					</div>
-                  					<div class="form-group">
-                  						<label for="">Địa Chỉ</label>
-                  						<input name="diachi" type="text" required class="form-control" >
-                  					</div>
+                  					<div class="row">
+                  						<div class="col-md-6">
+                  							
+		                  					<div class="form-group">
+		                  						
+		                  						<input name="ten" type="text" required placeholder="Nhập Họ Tên" class="form-control" id="ten">
+		                  					</div>
+		                  					<div class="row">
+		                  						<div class="col-md-7">
+		                  							<div class="form-group">
+				                  						
+				                  						<input name="email" type="email" placeholder="Nhập Email" required class="form-control" >
+				                  					</div>
+		                  						</div>
+		                  						<div class="col-md-5">
+		                  							<div class="form-group">
+		                  						
+		                  							<input name="sdt" placeholder="Nhập SĐT" type="text" required class="form-control input-phone-checkout" >
+		                  					</div>
+		                  						</div>
+		                  					</div>
+		                  					<div class="form-group">
+		                  						
+		                  						<input name="diachi" type="text" placeholder="Nhập Số Nhà/Thôn" required class="form-control" >
+		                  					</div>
+		                  					
+			                  					
+                  						</div>
+                  						<div class="col-md-6">
+                  							<div class="form-group">
+												
+												<select class="form-control"  name="province" id="province">
+													<option value> Chọn Tỉnh/Thành Phố</option>
+													@foreach($province as $prov)
+												    	<option value="{{sprintf('%02d', $prov->id)}}">{{$prov->name}}</option>
+												    @endforeach
+												 </select>
+											</div>
+											<div class="form-group">
+												
+												<select class="form-control"  name="district" id="district">
+													<option value> Chọn Quận/Huyện</option>
+													
+												 </select>
+											</div>
+											<div class="form-group">
+												
+												<select class="form-control"  name="ward" id="ward">
+													<option value> Chọn Xã/Phường</option>
+													
+												 </select>
+											</div>
+		                  						</div>
+											</div>
 
 									@endif
 									
@@ -209,6 +253,21 @@
 		    else if (this.value == 'COD') {
 		        $("#clusterchuyenkhoan").removeClass('clusterpassshow');
 		    }
+		});
+		$(document).ready(function() {
+			$("#province").change(function(event) {
+				var province_id = $(this).val();
+				$.get("ajax/district/"+province_id,function(data){
+					$("#district").html(data);
+					$("#ward").html("<option value> Chọn Xã/Phường</option>");
+				});
+			});
+			$("#district").change(function(event) {
+				var district_id = $(this).val();
+				$.get("ajax/ward/"+district_id,function(data){
+					$("#ward").html(data);
+				});
+			});
 		});	
     </script>
 @endsection

@@ -15,6 +15,8 @@ use App\News;
 use App\CustomerRegister;
 use App\Comments;
 use App\Province;
+use App\District;
+use App\Ward;
 use Illuminate\Support\Facades\DB;
 
 use Hash;
@@ -96,8 +98,8 @@ class PageController extends Controller
     }
     public function getThanhToan()
     {
-
-        return view('page.thanhtoan');
+        $province = Province::all();
+        return view('page.thanhtoan',compact('province'));
     }
     public function getHoanTat()
     {

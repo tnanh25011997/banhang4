@@ -14,18 +14,22 @@ class AddressController extends Controller
     {
     	
         $district = District::where('province_id',$province_id)->get();
+        $output = "<option value> Chọn Quận/Huyện</option>";
         foreach ($district as $dt) {
-        	echo "<option value='".$dt->id."'>".$dt->name."</option>";
+        	$output.= "<option value='".sprintf('%03d', $dt->id)."'>".$dt->name."</option>";
         }
+        echo $output;
        
     }
     public function getWard($district_id)
     {
     	
         $ward = Ward::where('district_id',$district_id)->get();
+        $output = "<option value> Chọn Xã/Phường</option>";
         foreach ($ward as $wa) {
-        	echo "<option value='".$wa->id."'>".$wa->name."</option>";
+        	$output.= "<option value='".sprintf('%05d', $wa->id)."'>".$wa->name."</option>";
         }
+        echo $output;
        
     }
 }
