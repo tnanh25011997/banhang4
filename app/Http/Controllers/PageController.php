@@ -68,14 +68,20 @@ class PageController extends Controller
     public function getTinTuc()
     {
         $sale_product = Product::where('promotion_price','<>',0)->orderby('created_at','desc')->take(4)->get();
-        $tin = News::orderby('created_at','desc')->paginate(3);
+        $tin = News::orderby('created_at','desc')->paginate(3);    
         return view('page.tintuc',['tin'=>$tin,'sale_product'=>$sale_product]);
     }
     public function getChiTietTinTuc($id)
     {
         $sale_product = Product::where('promotion_price','<>',0)->orderby('created_at','desc')->take(4)->get();
-        $tin = News::where('id',$id)->first();    
-        return view('page.chitiet_tintuc',compact('tin','sale_product'));
+        $tin = News::where('id',$id)->first();
+        if($tin == null){
+            return "Không tìm thấy trang, Bạn bấm lại nha";
+        }
+        else{
+            return view('page.chitiet_tintuc',compact('tin','sale_product'));
+        }  
+        
     }
     public function getDangKy()
     {

@@ -112,10 +112,10 @@
 									@csrf
 									@if(count($errors)>0)
 							            <div class="alert alert-danger">
-								    	@foreach($errors->all() as $err)
-								    	   {{$err}}
-								    	@endforeach
-								            </div>
+									    	@foreach($errors->all() as $err)
+									    	   <li>{{$err}}</li>
+									    	@endforeach
+								        </div>
 							        @endif
 									@if(Auth::check())
 									<!-- <div class="form-group">
@@ -199,9 +199,6 @@
 											</div>
 
 									@endif
-									
-									
-									
 							        <div class="cacthucvanchuyen form-group">
 										<h5>CÁCH THỨC THANH TOÁN</h5>
 										<div class="form-check">
@@ -223,13 +220,8 @@
 										<button type="submit" class="btn btn-primary nutdathang">ĐẶT HÀNG</button>
 
 									</div>
-									
-									
-									
 								</form>
-								
 							</div>
-							
 						</div>
 					</div>
 					

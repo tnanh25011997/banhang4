@@ -15,7 +15,7 @@
                         @if(count($errors)>0)
                             <alert class="alert alert-danger">
                                 @foreach($errors->all() as $err)
-                                   {{$err}}<br><br><br>
+                                   <li>{{$err}}</li>
                                 @endforeach
                             </alert>
                         @endif

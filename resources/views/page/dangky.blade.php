@@ -24,88 +24,90 @@
 			<hr>
 			<div class="formdangky">
 				<div class="row">
-					<div class="col-lg-3"></div>
-					<div class="col-lg-6">
+					<!-- <div class="col-lg-3"></div> -->
+					<div class="col-lg-12">
 						<form action="{{route('dangky2')}}" method="post">
 							@csrf
 							@if(count($errors)>0)
 							    <div class="alert alert-danger">
 							    	@foreach($errors->all() as $err)
-							    	   {{$err}}
+							    	   <li>{{$err}}</li>
 							    	@endforeach
 							    </div>
 							@endif
 							@if(Session::has('thanhcong'))
 							    <div class="alert alert-success">{{Session::get('thanhcong')}}</div>
 							@endif
-							        <h4>Thông Tin Tài Khoản</h4>
-							        <hr>
+							        
+							        
+									<div class="row">
+										<div class="col-md-6">
+											<h4>Thông Tin Tài Khoản</h4>
+											<hr>
+											<div class="form-group">
+												<label >Email</label>
+												<input name="email" type="email" class="form-control"  required>
+												<p style="font-size: 12px; font-style: italic;">(*) Chúng tôi sẽ không xác nhận email của bạn, nhưng 1 email chính chủ sẽ giúp bạn lấy lại mật khẩu khi đã mất</p>
+											</div>
+											<div class="form-group">
+												<label >Mật Khẩu</label>
+												<input name="password" type="password" class="form-control"  required>
+											</div>
+											<div class="form-group">
+												<label >Nhập Lại Mật Khẩu</label>
+												<input name="re_password" type="password" class="form-control"  required>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<h4>Thông Tin Cá Nhân</h4>
+									        <hr>
+									        <div class="form-group">
+												<label for="ten">Họ & Tên</label>
+												<input name="fullname" type="text" class="form-control" id="ten" required>
+											</div>
+											
+											<div class="form-group">
+												<label >Điện Thoại</label>
+												<input name="sdt" type="text" class="form-control"  required>
+											</div>
+											<div class="form-group">
+												<label>Tỉnh</label>
+												<select class="form-control" required name="province" id="province">
+													<option value> Chọn Tỉnh/Thành Phố</option>
+													@foreach($province as $prov)
+												    	<option value="{{sprintf('%02d', $prov->id)}}">{{$prov->name}}</option>
+												    @endforeach
+												 </select>
+											</div>
+											<div class="form-group">
+												<label>Quận/Huyện</label>
+												<select class="form-control" required name="district" id="district">
+													<option value> Chọn Quận/Huyện</option>
+													
+												 </select>
+											</div>
+											<div class="form-group">
+												<label>Xã/Phường</label>
+												<select class="form-control" required name="ward" id="ward">
+													<option value> Chọn Xã/Phường</option>
+													
+												 </select>
+											</div>
+											<div class="form-group">
+												<label >Số Nhà/Thôn</label>
+												<input name="diachi" type="text" required class="form-control"  required>
+											</div>
+											<button type="submit" class="btn btn-primary nutdangky">Đăng Ký</button>
+										</div>
+									</div>
 									
-									<div class="form-group">
-										<label >Email</label>
-										<input name="email" type="email" class="form-control"  required>
-										<p style="font-size: 12px; font-style: italic;">(*) Chúng tôi sẽ không xác nhận email của bạn, nhưng 1 email chính chủ sẽ giúp bạn lấy lại mật khẩu khi đã mất</p>
-									</div>
-									<div class="form-group">
-										<label >Mật Khẩu</label>
-										<input name="password" type="password" class="form-control"  required>
-									</div>
-									<div class="form-group">
-										<label >Nhập Lại Mật Khẩu</label>
-										<input name="re_password" type="password" class="form-control"  required>
-									</div>
 									
-									<h4>Thông Tin Cá Nhân</h4>
-							        <hr>
-							        <div class="form-group">
-										<label for="ten">Họ & Tên</label>
-										<input name="fullname" type="text" class="form-control" id="ten" required>
-									</div>
-									<!-- <div class="form-group">
-										<label for="sel1">Giới Tính</label>
-										<select class="form-control" id="sel1" name="gioitinh">
-											<option>Nam</option>
-											<option>Nữ</option>
-											
-										</select>
-									</div> -->
-									<div class="form-group">
-										<label >Điện Thoại</label>
-										<input name="sdt" type="text" class="form-control"  required>
-									</div>
-									<div class="form-group">
-										<label>Tỉnh</label>
-										<select class="form-control" required name="province" id="province">
-											<option value> Chọn Tỉnh/Thành Phố</option>
-											@foreach($province as $prov)
-										    	<option value="{{sprintf('%02d', $prov->id)}}">{{$prov->name}}</option>
-										    @endforeach
-										 </select>
-									</div>
-									<div class="form-group">
-										<label>Quận/Huyện</label>
-										<select class="form-control" required name="district" id="district">
-											<option value> Chọn Quận/Huyện</option>
-											
-										 </select>
-									</div>
-									<div class="form-group">
-										<label>Xã/Phường</label>
-										<select class="form-control" required name="ward" id="ward">
-											<option value> Chọn Xã/Phường</option>
-											
-										 </select>
-									</div>
-									<div class="form-group">
-										<label >Số Nhà/Thôn</label>
-										<input name="diachi" type="text" required class="form-control"  required>
-									</div>
-									<button type="submit" class="btn btn-primary nutdangky">Đăng Ký</button>
+									
 						</form>
 					</div>
-					<div class="col-lg-3">
+					<!-- <div class="col-lg-3">
 						
-					</div>
+					</div> -->
 				</div>
 								
 								

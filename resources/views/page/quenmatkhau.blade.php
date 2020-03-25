@@ -31,9 +31,11 @@
 							@csrf
 
                             @if(count($errors)>0)
-                               @foreach($errors->all() as $err)
-                                   <div class="alert alert-danger">{{$err}} <br></div>
-                               @endforeach
+                              	<div class="alert alert-danger">
+							    	@foreach($errors->all() as $err)
+							    	   <li>{{$err}}</li>
+							    	@endforeach
+							    </div>
                             @endif
                              @if(session('error'))
                                 <div class="alert alert-danger">{{session('error')}}</div>

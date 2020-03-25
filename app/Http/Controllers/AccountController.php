@@ -52,7 +52,7 @@ class AccountController extends Controller
                 'password.required'=>'Vui lòng nhập mật khẩu.',
                 'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự.',
                 'password.max'=>'Mật khẩu phải bé hơn 20 ký tự.',
-                're_password.required'=>'Phải nhập trường mật khẩu.',
+                're_password.required'=>'Vui lòng nhập trường nhập lại mật khẩu.',
                 're_password.same'=>'Mật khẩu phải giống nhau.',
                 'fullname.required'=>'Vui lòng nhập tên của bạn.',
                 'sdt.required'=>'Vui lòng nhập SĐT.',
