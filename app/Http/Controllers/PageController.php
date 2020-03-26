@@ -12,7 +12,7 @@ use App\Customer;
 use App\Bill;
 use App\BillDetail;
 use App\News;
-use App\CustomerRegister;
+use App\PromotionRegister;
 use App\Comments;
 use App\Province;
 use App\District;
@@ -147,10 +147,10 @@ class PageController extends Controller
                 'txtsdtkhuyenmai.digits'=>'Số điện thoại phải là chuỗi số 10 ký tự'
                 
             ]);
-        $customerRegister = new CustomerRegister;
-        $customerRegister->email = $req->txtemailkhuyenmai;
-        $customerRegister->phone = $req->txtsdtkhuyenmai;
-        $customerRegister->save();
+        $promotionRegister = new PromotionRegister;
+        $promotionRegister->email = $req->txtemailkhuyenmai;
+        $promotionRegister->phone = $req->txtsdtkhuyenmai;
+        $promotionRegister->save();
         return redirect()->back()->with('thongbao','Đăng Ký Nhận Thông Tin Thành Công');
     }
 

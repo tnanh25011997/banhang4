@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comments;
 use App\Product;
-use App\CustomerRegister;
+use App\PromotionRegister;
 
 class CommentsController extends Controller
 {
@@ -43,14 +43,14 @@ class CommentsController extends Controller
     }
     public function getDanhSachNhanKhuyenMai()
     {
-        $customer = CustomerRegister::where('status',0)->get();
+        $customer = PromotionRegister::where('status',0)->get();
         return view('admin.Comments.danhsachnhankhuyenmai',compact('customer'));
     }
     public function getXacNhanKhuyenMai($id)
     {
-        $idxacnhan = CustomerRegister::find($id);
-        $idxacnhan->status = 1;
-        $idxacnhan->save();
+        $promotion = PromotionRegister::find($id);
+        $promotion->status = 1;
+        $promotion->save();
         return redirect('admin/Comments/danhsachnhankhuyenmai')->with('thongbao','Xác Nhận Thành Công');
     }
 }
