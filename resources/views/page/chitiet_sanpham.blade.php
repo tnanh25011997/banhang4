@@ -37,7 +37,7 @@
 					    <div class="col-md-7">
 					    	<div class="noidunganhchinh">
 						        <h2>{{$ct->name}}</h2>
-								@if($ct->rate == null)
+								@if($ct->rate == null || $ct->rate == 0)
 									<i class="fas fa-star" style="color: grey"></i>
 									<i class="fas fa-star" style="color: grey"></i>
 									<i class="fas fa-star" style="color: grey"></i>
@@ -84,13 +84,10 @@
 				    		</li>
 				    	</ul>
 				    	<!-- Tab panes -->
-				    	<div class="tab-content">
-				    		
+				    	<div class="tab-content">  		
 				    		<div class="tab-pane container active" id="menu1">
-				    			
-								
 								<div class="average-rate">
-									@if($ct->rate == null)
+									@if($ct->rate == null || $ct->rate == 0)
 										Chưa có đánh giá nào
 									@else
 										<h5>Đánh Giá Trung Bình</h5>

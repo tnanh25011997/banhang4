@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\nguoidung;
+use App\Comments;
+use App\Product;
 use Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -117,6 +119,31 @@ class UserController extends Controller
     public function getXoa($id)
     {
     	$user = nguoidung::find($id);
+        //tìm tất cả những comment người này đã comments
+        $comments = Comments::where('id_user',$id)->get();
+        foreach ($comments as $cm) {
+            // xóa cmt đó
+            $cm->delete();
+            // tìm sản phẩm ứng với cmt đó
+            $product = Product::find($cm->id_product);
+            // tìm tất cả comment của sản phẩm đó
+            $com = Comments::where('id_product',$product->id)->where('status',1)->get();
+            // đánh giá lại rate cho sp đó
+            if(sizeof($com)==0){
+                $product->rate = 0;
+            }
+            else{
+                $sum = 0;
+                $index = 0;
+                foreach ($com as $c) {
+                    $sum = $sum + $c->star;
+                    $index = $index + 1;
+                }
+                $ave = round($sum/$index);
+                $product->rate = $ave;
+            }
+            $product->save();
+        }
     	$user->delete();
     	return redirect('admin/nguoidung/danhsach')->with('thongbao','Xóa User Thành Công');
     }
