@@ -58,7 +58,7 @@
 								<tr>
 									<td>{{$item['item']['name']}}</td>
 									<td class="anhgiohangtd"><img  src="source/images/{{$item['item']['image']}}" alt="" class="anhgiohang"></td>
-									@if($item['item']['promotion_price'] == 0)
+									@if($item['item']['promotion_price'] == $item['item']['unit_price'])
 										<td class="giagiohang">{{number_format($item['item']['unit_price'])}}đ</td>
 									@else
 										<td class="giagiohang">{{number_format($item['item']['promotion_price'])}}đ</td>

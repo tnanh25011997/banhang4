@@ -53,7 +53,13 @@ class ProductController extends Controller
         $product->id_brand = $req->thuonghieu;
     	$product->description = $req->mota;
     	$product->unit_price = $req->giagoc;
-    	$product->promotion_price = $req->giakhuyenmai;
+        if($req->giakhuyenmai == null || $req->giakhuyenmai == 0 || $req->giakhuyenmai >  $req->giagoc){
+            $product->promotion_price = $product->unit_price;
+        }
+        else{
+            $product->promotion_price = $req->giakhuyenmai;
+        }
+    	
         $product->unit = $req->unit;
     	if($req->hasFile('hinhanh'))
     	{
@@ -92,7 +98,7 @@ class ProductController extends Controller
         $product->slug = $slug;
         
         //sale
-        if($req->giakhuyenmai == 0){
+        if($product->promotion_price == $product->unit_price){
             $product->sale = 0.00;
         }else{
             $product->sale = 100-(($req->giakhuyenmai/$req->giagoc)*100);
@@ -111,6 +117,7 @@ class ProductController extends Controller
     public function postSua(Request $req,$id)
     {
         $product = Product::find($id);
+        $req->ten = trim(preg_replace('/\s+/',' ', $req->ten));
         $this->validate($req,
             [
                 'loaisp'=>'required',
@@ -131,7 +138,12 @@ class ProductController extends Controller
         $product->id_brand = $req->thuonghieu;
         $product->description = $req->mota;
         $product->unit_price = $req->giagoc;
-        $product->promotion_price = $req->giakhuyenmai;
+        if($req->giakhuyenmai == null || $req->giakhuyenmai == 0 || $req->giakhuyenmai >  $req->giagoc){
+            $product->promotion_price = $product->unit_price;
+        }
+        else{
+            $product->promotion_price = $req->giakhuyenmai;
+        }
         $product->unit = $req->unit;
         if($req->hasFile('hinhanh'))
         {
@@ -157,7 +169,7 @@ class ProductController extends Controller
         $product->slug = $slug;
 
         //sale
-        if($req->giakhuyenmai == 0){
+        if($product->promotion_price == $product->unit_price){
             $product->sale = 0.00;
         }else{
             $product->sale = 100-(($req->giakhuyenmai/$req->giagoc)*100);

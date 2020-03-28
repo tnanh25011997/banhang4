@@ -27,3 +27,7 @@ Route::get('api-cheapest-unit-price-product-in-category/{slug}',['as'=>'api-chea
 Route::get('api-cheapest-promotion-price-product-in-category/{slug}',['as'=>'api-cheapest-promotion-price-product-in-category','uses'=>'APIController@getCheapestPromotionPriceProductInCategory']);
 Route::get('api-list-product-of-category/{slug}',['as'=>'api-list-product-of-category','uses'=>'APIController@getListProductOfCategory']);
 Route::get('api-list-product-of-brand/{slug}',['as'=>'api-list-product-of-brand','uses'=>'APIController@getListProductOfBrand']);
+Route::get('api-promotion-product-in-category/{slug}',['as'=>'api-newest-product-in-category','uses'=>'APIController@getPromotionProductInCategory']);
+Route::get('api-best-seller-in-category/{slug}',['as'=>'api-best-seller','uses'=>'APIController@getBestSellerInCategory']);
+
+

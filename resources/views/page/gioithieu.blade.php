@@ -46,8 +46,8 @@
 									<div class="col-5" style="text-align: right;"><img src="source/images/{{$sp->image}}"  alt="" class="img-fluid"></div>
 									<div class="col-7 thongtin">
 										<p class="tensp">{{$sp->name}}</p>
-										<p class="gia">{{$sp->unit_price}}đ</p>
-										<p class="giakm">{{$sp->promotion_price}}đ</p>
+										<p class="gia">{{number_format($sp->unit_price)}}đ</p>
+										<p class="giakm">{{number_format($sp->promotion_price)}}đ</p>
 									</div>
 								</div>
 

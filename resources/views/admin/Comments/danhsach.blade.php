@@ -21,6 +21,7 @@
                                     <th>Email</th>
                                     <th>Sản Phẩm Comment</th>
                                     <th>Nội Dung</th>
+                                    <th>Star</th>
                                     <th>Xác Nhận</th>
                                     <th>Xóa</th>
                                 </tr>
@@ -32,6 +33,7 @@
                                         <td>{{$cm->user->email}}</td>
                                         <td>{{$cm->product->name}}</td>
                                         <td>{{$cm->content}}</td>
+                                        <td>{{$cm->star}} sao</td>
                                         <td>
                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#veriCom_{{$cm->id}}">
                                               Xác Nhận

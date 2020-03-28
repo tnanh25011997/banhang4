@@ -3,7 +3,6 @@
 @section('content')
 <div class="danhsachsanpham">
 		<div class="container">
-			
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb bread2">
 					<li class="breadcrumb-item"><a href="home">Trang Chủ</a></li>
@@ -12,7 +11,7 @@
 			</nav>
 			<div class="row">
 				<div class="col-sm-6">
-					<h4>Sản phẩm loại :  {{$tenloai->name}}</h4>
+					<h2>SẢN PHẨM</h2>
 				</div>
 				<div class="col-sm-6">
 					<div style="text-align: right; margin-top: 15px;" class="sort-by">
@@ -31,6 +30,7 @@
 					</div>
 				</div>
 			</div>
+			
 			
 			<hr>
 			<div class="row">
@@ -65,7 +65,7 @@
 				</div>
 				<div class="col-lg-9">
 					<div class="row">
-						@foreach($loai_sanpham as $sp)
+						@foreach($sanpham as $sp)
 						<div class="col-lg-4 col-md-6 col-sm-6">
 							<div class="motsanpham2">
 								<div class="anh2">
@@ -85,11 +85,11 @@
 									@endif
 								</div>
 							</div>
-
 						</div>
 						@endforeach
+
 					</div>
-					<div class="row" style="">{{$loai_sanpham->links()}}</div>
+					<div class="row" style="">{{$sanpham->links()}}</div>
 				</div>
 				
 				

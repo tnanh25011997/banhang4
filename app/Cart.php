@@ -26,7 +26,7 @@ class Cart
 		}
 
 		$giohang['qty']++;
-		if($item->promotion_price==0){
+		if($item->promotion_price==$item->unit_price){
 			$giohang['price'] = $item->unit_price * $giohang['qty'];
 		}
 		else{
@@ -34,7 +34,7 @@ class Cart
 		}
 		$this->items[$id] = $giohang; // bằng 1 mảng $giohang
 		$this->totalQty++;
-		if($item->promotion_price==0){
+		if($item->promotion_price==$item->unit_price){
 			$this->totalPrice += $item->unit_price;
 		}
 		else{
@@ -51,7 +51,7 @@ class Cart
 			}
 		}
 		$giohang['qty'] = $giohang['qty'] + $qty;
-		if($item->promotion_price==0){
+		if($item->promotion_price==$item->unit_price){
 			$giohang['price'] = $item->unit_price * $giohang['qty'];
 		}
 		else{
@@ -59,7 +59,7 @@ class Cart
 		}
 		$this->items[$id] = $giohang; 
 		$this->totalQty++;
-		if($item->promotion_price==0){
+		if($item->promotion_price==$item->unit_price){
 			$this->totalPrice += $item->unit_price * $qty;
 		}
 		else{
@@ -81,7 +81,7 @@ class Cart
 
 		$oldQty = $giohang['qty']; //tạo 1 biến lưu giá trị Qty cũ
 		$giohang['qty'] =  $qty; // Qty mới mà mình thay đổi
-		if($item->promotion_price==0){
+		if($item->promotion_price==$item->unit_price){
 			$giohang['price'] = $item->unit_price * $giohang['qty'];
 		}
 		else{
@@ -92,7 +92,7 @@ class Cart
 		$this->totalQty += $qty-$oldQty; //?
 		
 
-		if($item->promotion_price==0){
+		if($item->promotion_price==$item->unit_price){
 			$oldPrice = $oldQty*$item->unit_price;
 			$newPrice = $giohang['qty']*$item->unit_price;
 			$this->totalPrice += $newPrice-$oldPrice;

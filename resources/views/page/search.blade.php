@@ -25,7 +25,7 @@
 						</div>
 						<div class="thongtin2">
 							<div class="ten2"><a href="chi-tiet-san-pham/{{$sp->slug}}">{{$sp->name}}</a></div>
-							@if($sp->promotion_price==0)
+							@if($sp->promotion_price==$sp->unit_price)
 							    <div class="gia2"><p style="text-decoration: none;">{{$sp->unit_price}}đ</p></div>
 							@else
 							    <div class="gia2"><p>{{$sp->unit_price}}đ</p></div>

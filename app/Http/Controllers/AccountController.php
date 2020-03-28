@@ -114,7 +114,7 @@ class AccountController extends Controller
             $taikhoan = nguoidung::find($id);
             return view('page.chinhsuathongtin',compact('taikhoan'));
         }else{
-            return 'not allowed to see';
+            return view('page.errors');
         }
         
     }
@@ -125,7 +125,7 @@ class AccountController extends Controller
             $taikhoan = nguoidung::find($id);
             return view('page.chinhsuasodiachi',compact('taikhoan','province'));
         }else{
-            return 'not allowed to see';
+            return view('page.errors');
         }
         
     }
@@ -236,7 +236,7 @@ class AccountController extends Controller
             return view('page.lichsumuahang_bill',compact('bill'));
         }
         else{
-            return 'not allowed to see';
+            return view('page.errors');;
         }
        
     }
@@ -244,14 +244,14 @@ class AccountController extends Controller
     {
         $bill = Bill::find($id);
         if($bill == null){
-            return 'not allowed to see';
+            return view('page.errors');
         }
         if(Auth::user()->id == $bill->id_user){
             $billDetail = BillDetail::where('id_bill',$id)->get();
             return view('page.lichsumuahang_billdetail',compact('billDetail','bill'));
         }
         else{
-            return 'not allowed to see';
+            return view('page.errors');;
         }
        
     }

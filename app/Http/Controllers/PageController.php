@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Slide;
 use App\Product;
 use App\ProductType;
+use App\Brand;
 use App\Cart;
 use Session;
 use App\Customer;
@@ -34,27 +35,82 @@ class PageController extends Controller
     {
         $slide = Slide::all();
         $new_product = Product::orderby('created_at','desc')->paginate(4);
-        $sale_product = Product::where('promotion_price','<>',0)->orderby('created_at','desc')->take(4)->get();
+        $sale_product = Product::where('sale','<>',0)->orderby('created_at','desc')->take(4)->get();
         $myphamnu = ProductType::where('description','1')->get();
         $myphamnam = ProductType::where('description','0')->get();
         $sanpham_nam = Product::where('unit','nam')->orderby('created_at','desc')->paginate(6);
         $sanpham_nu = Product::where('unit','nu')->orderby('created_at','desc')->paginate(6);
     	return view('page.trangchu',compact('slide','new_product','sale_product','myphamnu','myphamnam','sanpham_nam','sanpham_nu'));
     }
-    public function getLoaiSanPham()
+    public function getSanPham(Request $request)
     {
-        $sanpham = Product::orderby('created_at','desc')->paginate(8);
-    	return view('page.loaisanpham',compact('sanpham'));
+        //$sanpham = Product::orderby('id','asc')->paginate(9);
+        $sanpham = Product::where('sale','<',100);
+        $danhmuc = ProductType::orderBy('description','desc')->orderby('description','desc')->get();
+        $brand = Brand::where('name','!=','None')->get();   
+        if($request->price){
+            $price = $request->price;
+            switch ($price) {
+                case 1:
+                    $sanpham->where('promotion_price','<',200000);
+                    break;
+                case 2:
+                    $sanpham->whereBetween('promotion_price',[200000,400000]);
+                    break;
+                case 3:
+                    $sanpham->whereBetween('promotion_price',[400000,600000]);
+                    break;
+                case 4:
+                    $sanpham->whereBetween('promotion_price',[600000,800000]);
+                    break;
+                case 5:
+                    $sanpham->whereBetween('promotion_price',[800000,1000000]);
+                    break;
+                case 6:
+                    $sanpham->where('promotion_price','>',1000000);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if($request->orderby){
+            $orderby = $request->orderby;
+            switch ($orderby) {
+                case 'created-descending':
+                    $sanpham->orderby('created_at','desc');
+                    break;
+                case 'created-ascending':
+                    $sanpham->orderby('created_at','asc');
+                    break;
+                case 'price-ascending':
+                    $sanpham->orderby('promotion_price','asc')->orderby('unit_price','asc');
+                    break;
+                case 'price-descending':
+                    $sanpham->orderby('promotion_price','desc')->orderby('unit_price','desc');
+                    break;
+                case 'name-ascending':
+                    $sanpham->orderby('name','asc');
+                    break;
+                case 'name-descending':
+                    $sanpham->orderby('name','desc');
+                    break;
+                default:
+                    $sanpham->orderby('id','asc');
+                    break;
+            }
+        }
+        $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
+    	return view('page.sanpham',compact('sanpham','danhmuc','brand'));
     }
     public function getChiTiet($id)
     {
         $ct = Product::where('slug',$id)->first();
         if($ct == null){
-            return "Không tìm thấy trang, Bạn bấm lại nha";
+            return view('page.errors');
         }
         else{
             $idsp = $ct->id;
-            $sale_product2 = Product::where('promotion_price','<>',0)->orderby('created_at','desc')->take(4)->get();
+            $sale_product2 = Product::where('sale','<>',0)->orderby('created_at','desc')->take(4)->get();
             $comments = Comments::where('id_product',$idsp)->where('status',1)->orderby('created_at','desc')->paginate(5);
             return view('page.chitiet_sanpham',compact('ct','sale_product2','comments'));
         }
@@ -62,21 +118,21 @@ class PageController extends Controller
     }
     public function getGioiThieu()
     {
-        $sale_product = Product::where('promotion_price','<>',0)->orderby('created_at','desc')->take(4)->get();
+        $sale_product = Product::where('sale','<>',0)->orderby('created_at','desc')->take(4)->get();
         return view('page.gioithieu',compact('sale_product'));  
     }
     public function getTinTuc()
     {
-        $sale_product = Product::where('promotion_price','<>',0)->orderby('created_at','desc')->take(4)->get();
+        $sale_product = Product::where('sale','<>',0)->orderby('created_at','desc')->take(4)->get();
         $tin = News::orderby('created_at','desc')->paginate(3);    
         return view('page.tintuc',['tin'=>$tin,'sale_product'=>$sale_product]);
     }
     public function getChiTietTinTuc($id)
     {
-        $sale_product = Product::where('promotion_price','<>',0)->orderby('created_at','desc')->take(4)->get();
+        $sale_product = Product::where('sale','<>',0)->orderby('created_at','desc')->take(4)->get();
         $tin = News::where('id',$id)->first();
         if($tin == null){
-            return "Không tìm thấy trang, Bạn bấm lại nha";
+            return view('page.errors');
         }
         else{
             return view('page.chitiet_tintuc',compact('tin','sale_product'));
@@ -111,15 +167,137 @@ class PageController extends Controller
     {
         return view('page.hoantat');
     }
-    public function getTheoLoai($id)
+    public function getTheoLoai($id, Request $request)
     {
         $tenloai = ProductType::where('id',$id)->first();
         if($tenloai == null){
-            return "Không tìm thấy trang, Bạn bấm lại nha";
+            return view('page.errors');
         }
         else{
-            $loai_sanpham = Product::where('id_type',$id)->get();
-            return view('page.sanphamtheoloai',compact('loai_sanpham','tenloai'));
+
+            $loai_sanpham = Product::where('id_type',$id);
+            $danhmuc = ProductType::orderBy('description','desc')->orderby('description','desc')->get();
+            $brand = Brand::where('name','!=','None')->get();
+            if($request->price){
+                $price = $request->price;
+                switch ($price) {
+                    case 1:
+                        $loai_sanpham->where('promotion_price','<',200000);
+                        break;
+                    case 2:
+                        $loai_sanpham->whereBetween('promotion_price',[200000,400000]);
+                        break;
+                    case 3:
+                        $loai_sanpham->whereBetween('promotion_price',[400000,600000]);
+                        break;
+                    case 4:
+                        $loai_sanpham->whereBetween('promotion_price',[600000,800000]);
+                        break;
+                    case 5:
+                        $loai_sanpham->whereBetween('promotion_price',[800000,1000000]);
+                        break;
+                    case 6:
+                        $loai_sanpham->where('promotion_price','>',1000000);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if($request->orderby){
+                $orderby = $request->orderby;
+                switch ($orderby) {
+                    case 'created-descending':
+                        $loai_sanpham->orderby('created_at','desc');
+                        break;
+                    case 'created-ascending':
+                        $loai_sanpham->orderby('created_at','asc');
+                        break;
+                    case 'price-ascending':
+                        $loai_sanpham->orderby('promotion_price','asc')->orderby('unit_price','asc');
+                        break;
+                    case 'price-descending':
+                        $loai_sanpham->orderby('promotion_price','desc')->orderby('unit_price','desc');
+                        break;
+                    case 'name-ascending':
+                        $loai_sanpham->orderby('name','asc');
+                        break;
+                    case 'name-descending':
+                        $loai_sanpham->orderby('name','desc');
+                        break;
+                    default:
+                        $loai_sanpham->orderby('id','asc');
+                        break;
+                }
+            }
+            $loai_sanpham = $loai_sanpham->paginate(9)->appends(request()->except('page'));
+            return view('page.sanphamtheoloai',compact('loai_sanpham','tenloai','danhmuc','brand'));
+        }
+    }
+
+    public function getThuongHieu($id, Request $request)
+    {
+        $thuonghieu = Brand::where('id',$id)->first();
+        if($thuonghieu == null){
+            return view('page.errors');
+        }
+        else{
+            $sanpham = Product::where('id_brand',$id);
+            $danhmuc = ProductType::orderBy('description','desc')->orderby('description','desc')->get();
+            $brand = Brand::where('name','!=','None')->get();  
+            if($request->price){
+                $price = $request->price;
+                switch ($price) {
+                    case 1:
+                        $sanpham->where('promotion_price','<',200000);
+                        break;
+                    case 2:
+                        $sanpham->whereBetween('promotion_price',[200000,400000]);
+                        break;
+                    case 3:
+                        $sanpham->whereBetween('promotion_price',[400000,600000]);
+                        break;
+                    case 4:
+                        $sanpham->whereBetween('promotion_price',[600000,800000]);
+                        break;
+                    case 5:
+                        $sanpham->whereBetween('promotion_price',[800000,1000000]);
+                        break;
+                    case 6:
+                        $sanpham->where('promotion_price','>',1000000);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if($request->orderby){
+                $orderby = $request->orderby;
+                switch ($orderby) {
+                    case 'created-descending':
+                        $sanpham->orderby('created_at','desc');
+                        break;
+                    case 'created-ascending':
+                        $sanpham->orderby('created_at','asc');
+                        break;
+                    case 'price-ascending':
+                        $sanpham->orderby('promotion_price','asc')->orderby('unit_price','asc');
+                        break;
+                    case 'price-descending':
+                        $sanpham->orderby('promotion_price','desc')->orderby('unit_price','desc');
+                        break;
+                    case 'name-ascending':
+                        $sanpham->orderby('name','asc');
+                        break;
+                    case 'name-descending':
+                        $sanpham->orderby('name','desc');
+                        break;
+                    default:
+                        $sanpham->orderby('id','asc');
+                        break;
+                }
+            }
+            
+            $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
+            return view('page.sanphamtheothuonghieu',compact('sanpham','thuonghieu','danhmuc','brand'));
         }
        
     }

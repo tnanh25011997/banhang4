@@ -51,7 +51,7 @@
 	    								<i class="fas fa-star" style="color: grey"></i>
 	    							<?php } ?>
 								@endif
-						        @if($ct->promotion_price==0)
+						        @if($ct->promotion_price==$ct->unit_price)
 						            <h5 class="giachinh" style="text-decoration: none;">{{number_format($ct->unit_price)}}đ</h5>
 						        @else
 						            <h5 class="giachinh">{{number_format($ct->unit_price)}}đ</h5>

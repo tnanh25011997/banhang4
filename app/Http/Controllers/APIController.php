@@ -37,11 +37,11 @@ class APIController extends Controller
         return response()->json($sanpham);
     }
     public function getSaleProduct(){
-        $sale_product = Product::where('promotion_price','<>',0)->orderby('sale','desc')->first();
+        $sale_product = Product::where('sale','<>',0)->orderby('sale','desc')->first();
         return response()->json($sale_product);
     }
     public function getBestSeller(){
-        $best_seller = DB::table("products")->join('bill_detail','products.id','=','bill_detail.id_product')->select(DB::raw("id_product"), DB::raw("products.name"),DB::raw("products.unit_price"), DB::raw("products.promotion_price"),DB::raw("products.slug"),DB::raw("SUM(quantity) AS soluong"))->groupBy(DB::raw("bill_detail.id_product"), DB::raw("products.name"),DB::raw("products.unit_price"), DB::raw("products.promotion_price"),DB::raw("products.slug"))->orderByRaw('SUM(quantity) DESC')->first();
+        $best_seller = DB::table("products")->join('bill_detail','products.id','=','bill_detail.id_product')->select(DB::raw("products.id"), DB::raw("products.name"),DB::raw("products.unit_price"), DB::raw("products.promotion_price"),DB::raw("products.slug"),DB::raw("SUM(quantity) AS soluong"))->groupBy(DB::raw("products.id"), DB::raw("products.name"),DB::raw("products.unit_price"), DB::raw("products.promotion_price"),DB::raw("products.slug"))->orderByRaw('SUM(quantity) DESC')->first();
         return response()->json($best_seller);
     }
     //tôi muốn mua 1 loại son môi có giá khoảng 200 ngàn
@@ -71,5 +71,16 @@ class APIController extends Controller
         $brand = Brand::where('slug',$slug)->first();
         $sanpham = Product::where('id_brand',$brand->id)->orderby('created_at','desc')->take(3)->get();
         return response()->json($sanpham);
+    }
+
+    //các loại son môi đang khuyến mãi
+     public function getPromotionProductInCategory($slug){
+        $category = ProductType::where('slug',$slug)->first();
+        $sanpham = Product::where('id_type',$category->id)->where('promotion_price','!=',0)->orderby('created_at','desc')->take(3)->get();
+        return response()->json($sanpham);
+    }
+    public function getBestSellerInCategory($slug){
+        $best_seller = DB::table("products")->leftJoin('bill_detail','products.id','=','bill_detail.id_product')->join('type_products','products.id_type','=','type_products.id')->select(DB::raw("products.id"), DB::raw("products.name"),DB::raw("products.unit_price"), DB::raw("products.promotion_price"),DB::raw("products.slug"),DB::raw("SUM(quantity) AS soluong"))->groupBy(DB::raw("products.id"), DB::raw("products.name"),DB::raw("products.unit_price"), DB::raw("products.promotion_price"),DB::raw("products.slug"))->orderByRaw('SUM(quantity) DESC')->where('type_products.slug',$slug)->first();
+        return response()->json($best_seller);
     }
 }

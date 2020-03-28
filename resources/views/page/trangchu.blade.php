@@ -28,7 +28,7 @@
 									<div class="col-5" style="text-align: right;"><img src="source/images/{{$new->image}}" alt="" class="img-fluid"></div>
 									<div class="col-7 thongtin">
 										<p class="tensp">{{$new->name}}</p>
-										@if($new->promotion_price==0)
+										@if($new->promotion_price==$new->unit_price)
 										   <p class="gia" style="text-decoration: none;">{{number_format($new->unit_price)}}đ</p>
 										   
 										@else
@@ -111,7 +111,7 @@
 					    				</div>
 					    				<div class="thongtin">
 					    					<div class="ten"><a href="chi-tiet-san-pham/{{$spnu->slug}}">{{$spnu->name}}</a></div>
-					    					@if($spnu->promotion_price==0)
+					    					@if($spnu->promotion_price==$spnu->unit_price)
 					    					    <div class="gia" style="text-decoration: none"><p>{{number_format($spnu->unit_price)}}đ</p></div>
 					    					@else
 					    					    <div class="gia"><p>{{number_format($spnu->unit_price)}}đ</p></div>
@@ -163,7 +163,7 @@
 					    				</div>
 					    				<div class="thongtin">
 					    					<div class="ten"><a href="chi-tiet-san-pham/{{$spnam->slug}}">{{$spnam->name}}</a></div>
-					    					@if($spnam->promotion_price==0)
+					    					@if($spnam->promotion_price==$spnam->unit_price)
 					    					    <div class="gia" style="text-decoration: none;"><p>{{number_format($spnam->unit_price)}}đ</p></div>
 					    					@else
 					    					    <div class="gia"><p>{{number_format($spnam->unit_price)}}đ</p></div>

@@ -15,7 +15,7 @@
 
 Route::get('/',['as'=>'trang-chu','uses'=>'PageController@getIndex']);
 Route::get('home',['as'=>'trang-chu','uses'=>'PageController@getIndex']);
-Route::get('san-pham',['as'=>'loaisanpham','uses'=>'PageController@getLoaiSanPham']);
+Route::get('san-pham',['as'=>'loaisanpham','uses'=>'PageController@getSanPham']);
 Route::get('chi-tiet-san-pham/{id}',['as'=>'chitietsanpham','uses'=>'PageController@getChiTiet']);
 Route::get('dang-ky',['as'=>'dangky','uses'=>'PageController@getDangKy']);
 Route::get('dang-nhap',['as'=>'dangnhap','uses'=>'PageController@getDangNhap']);
@@ -23,6 +23,7 @@ Route::get('gio-hang',['as'=>'giohang','uses'=>'PageController@getGioHang']);
 Route::get('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@getThanhToan']);
 Route::get('hoan-tat',['as'=>'hoantat','uses'=>'PageController@getHoanTat']);
 Route::get('san-pham-theo-loai/{id}',['as'=>'sanphamtheoloai','uses'=>'PageController@getTheoLoai']);
+Route::get('thuong-hieu/{id}',['as'=>'thuong-hieu','uses'=>'PageController@getThuongHieu']);
 //giohang
 Route::get('gio-hang/{id}',['as'=>'giohangid','uses'=>'CartController@getGioHangId']);
 
@@ -71,8 +72,13 @@ Route::post('quen-mat-khau',['as'=>'quen-mat-khau','uses'=>'AccountController@po
 Route::get('password-reset',['as'=>'passwordreset','uses'=>'AccountController@getResetPassword']);
 Route::post('password-reset',['as'=>'password-reset','uses'=>'AccountController@postResetPassword']);
 
+Route::group(['prefix'=>'ajax'],function(){
+	Route::get('district/{province_id}','AddressController@getDistrict');
+
+	Route::get('ward/{district_id}','AddressController@getWard');
+});
 Route::fallback(function(){
-    return 'Không tìm thấy trang, Bạn bấm lại nha';    
+    return view('page.errors');
 });
 
 
@@ -172,9 +178,4 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
 		Route::get('xoa/{id}','BrandController@getXoa');
 	});
-});
-Route::group(['prefix'=>'ajax'],function(){
-	Route::get('district/{province_id}','AddressController@getDistrict');
-
-	Route::get('ward/{district_id}','AddressController@getWard');
 });
