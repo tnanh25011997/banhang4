@@ -46,7 +46,7 @@ class APIController extends Controller
     }
     //tôi muốn mua 1 loại son môi có giá khoảng 200 ngàn
     public function getListCategory($slug){
-        $list = DB::table("products")->join('type_products','products.id_type','=','type_products.id')->select(DB::raw("products.name"),DB::raw("products.unit_price"),DB::raw("products.promotion_price"),DB::raw("products.slug"))->where('type_products.slug',$slug)->orderBy("products.unit_price","desc")->get();
+        $list = DB::table("products")->join('type_products','products.id_type','=','type_products.id')->select(DB::raw("products.name"),DB::raw("products.unit_price"),DB::raw("products.promotion_price"),DB::raw("products.slug"))->where('type_products.slug',$slug)->orderBy("products.promotion_price","desc")->get();
         return response()->json($list);
     }
 
@@ -56,7 +56,7 @@ class APIController extends Controller
         return response()->json($list);
     }
     public function getCheapestPromotionPriceProductInCategory($slug){
-        $list = DB::table("products")->join('type_products','products.id_type','=','type_products.id')->select(DB::raw("products.name"),DB::raw("products.unit_price"),DB::raw("products.promotion_price"),DB::raw("products.slug"))->where('type_products.slug',$slug)->where('products.promotion_price','<>',0)->orderBy("products.promotion_price","ASC")->first();
+        $list = DB::table("products")->join('type_products','products.id_type','=','type_products.id')->select(DB::raw("products.name"),DB::raw("products.unit_price"),DB::raw("products.promotion_price"),DB::raw("products.slug"))->where('type_products.slug',$slug)->orderBy("products.promotion_price","ASC")->first();
         return response()->json($list);
     }
 
@@ -76,7 +76,7 @@ class APIController extends Controller
     //các loại son môi đang khuyến mãi
      public function getPromotionProductInCategory($slug){
         $category = ProductType::where('slug',$slug)->first();
-        $sanpham = Product::where('id_type',$category->id)->where('promotion_price','!=',0)->orderby('created_at','desc')->take(3)->get();
+        $sanpham = Product::where('id_type',$category->id)->where('sale','!=',0)->orderby('created_at','desc')->take(3)->get();
         return response()->json($sanpham);
     }
     public function getBestSellerInCategory($slug){

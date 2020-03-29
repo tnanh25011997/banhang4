@@ -19,7 +19,9 @@
 						<div class="anh2">
 							<img src="source/images/{{$sp->image}}" alt="" class="img-fluid">
 							<div class="haiicon2">
-								<a href="gio-hang/{{$sp->id}}" data-placement="top" data-toggle="tooltip" title="Thêm vào giỏ"><i class="fas fa-shopping-cart iconnho"></i></a>
+								@if($sp->status==1)
+								<a href="gio-hang/{{$sp->id}}" data-placement="top" data-toggle="tooltip" title="Thêm vào giỏ"><i class="fas fa-shopping-cart iconnho icon-shopping-cart"></i></a>
+								@endif
 								<a href="chi-tiet-san-pham/{{$sp->slug}}" data-placement="top" data-toggle="tooltip" title="Xem chi tiết"><i class="fas fa-align-center iconnho"></i></a>
 							</div>
 						</div>
@@ -28,8 +30,20 @@
 							@if($sp->promotion_price==$sp->unit_price)
 							    <div class="gia2"><p style="text-decoration: none;">{{$sp->unit_price}}đ</p></div>
 							@else
+								<div class="flag-sale">SALE <div class="fold"></div></div>
+								<div class="number-sale">-{{round($sp->sale)}}%</div>
 							    <div class="gia2"><p>{{$sp->unit_price}}đ</p></div>
 							    <div class="gia2km"><p>{{$sp->promotion_price}}đ</p></div>
+							@endif
+							@if($sp->rate!=null && $sp->rate!=0)
+								<div class="rating-pro-page">
+									<?php for($i=1; $i<=$sp->rate; $i++){ ?>
+	    								<i class="fas fa-star" style="color: #ffc120"></i>
+	    							<?php } ?>
+	    							<?php for($i=1; $i<=5-$sp->rate; $i++){ ?>
+	    								<i class="fas fa-star" style="color: grey"></i>
+	    							<?php } ?>
+								</div>
 							@endif
 						</div>
 					</div>

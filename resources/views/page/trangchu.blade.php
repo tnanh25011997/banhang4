@@ -104,16 +104,23 @@
 					    			<div class="motsanpham">
 					    				<div class="anh">
 					    				    <img src="source/images/{{$spnu->image}}" alt="" class="img-fluid">
+					    				    
 					    				    <div class="haiicon">
+					    				    	@if($spnu->status==1)
 					    				    	<a href="gio-hang/{{$spnu->id}}" data-placement="top" data-toggle="tooltip" title="Thêm vào giỏ"><i class="fas fa-shopping-cart iconnho"></i></a>
+					    				    	@endif
 					    				    	<a href="chi-tiet-san-pham/{{$spnu->slug}}" class="tooltest" data-placement="top" data-toggle="tooltip" title="Xem chi tiết"><i class="fas fa-align-center iconnho"></i></a>
 					    				    </div>
+					    				    
+					    				    
 					    				</div>
 					    				<div class="thongtin">
 					    					<div class="ten"><a href="chi-tiet-san-pham/{{$spnu->slug}}">{{$spnu->name}}</a></div>
 					    					@if($spnu->promotion_price==$spnu->unit_price)
 					    					    <div class="gia" style="text-decoration: none"><p>{{number_format($spnu->unit_price)}}đ</p></div>
 					    					@else
+					    						<div class="flag-sale main-page">SALE <div class="fold"></div></div>
+												<div class="number-sale main-page">-{{round($spnu->sale)}}%</div>
 					    					    <div class="gia"><p>{{number_format($spnu->unit_price)}}đ</p></div>
 					    					    <div class="giakm"><p>{{number_format($spnu->promotion_price)}}đ</p></div>
 					    					@endif
@@ -157,7 +164,9 @@
 					    				<div class="anh">
 					    				    <img src="source/images/{{$spnam->image}}" alt="" class="img-fluid">
 					    				    <div class="haiicon">
+					    				    	@if($spnam->status==1)
 					    				    	<a href="gio-hang/{{$spnam->id}}"  data-placement="top" data-toggle="tooltip" title="Thêm vào giỏ"><i class="fas fa-shopping-cart iconnho"></i></a>
+					    				    	@endif
 					    				    	<a href="chi-tiet-san-pham/{{$spnam->slug}}" class="tooltest" data-placement="top" data-toggle="tooltip" title="Xem chi tiết"><i class="fas fa-align-center iconnho"></i></a>
 					    				    </div>
 					    				</div>
@@ -166,6 +175,8 @@
 					    					@if($spnam->promotion_price==$spnam->unit_price)
 					    					    <div class="gia" style="text-decoration: none;"><p>{{number_format($spnam->unit_price)}}đ</p></div>
 					    					@else
+					    						<div class="flag-sale main-page">SALE <div class="fold"></div></div>
+												<div class="number-sale main-page">-{{round($spnam->sale)}}%</div>
 					    					    <div class="gia"><p>{{number_format($spnam->unit_price)}}đ</p></div>
 					    					    <div class="giakm"><p>{{number_format($spnam->promotion_price)}}đ</p></div>
 					    					@endif

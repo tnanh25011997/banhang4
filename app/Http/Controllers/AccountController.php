@@ -299,7 +299,7 @@ class AccountController extends Controller
         if(!$checkUser){
             return redirect()->back()->with('error','Link xác nhận tài khoản không tồn tại');
         }
-         $this->validate($request,
+        $this->validate($request,
             [
                 'password'=>'required|min:6|max:20',
                 're_password'=>'required|same:password'

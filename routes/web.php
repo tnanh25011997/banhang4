@@ -52,13 +52,16 @@ Route::group(['prefix'=>'tai-khoan','middleware'=>'thuongLogin'],function(){
 });
 Route::get('dangxuat',['as'=>'logout','uses'=>'AccountController@postDangXuat']);
 
-
-
+Route::get('gioi-thieu',['as'=>'gioithieu','uses'=>'PageController@getGioiThieu']);
+Route::get('chinh-sach-bao-mat',['as'=>'chinh-sach-bao-mat','uses'=>'PageController@getChinhSachBaoMat']);
+Route::get('huong-dan-mua-hang',['as'=>'huong-dan-mua-hang','uses'=>'PageController@getHuongDanMuaHang']);
+Route::get('tai-khoan-giao-dich',['as'=>'tai-khoan-giao-dich','uses'=>'PageController@getTaiKhoanGiaoDich']);
+Route::get('giao-hang-va-doi-tra',['as'=>'giao-hang-va-doi-tra','uses'=>'PageController@getGiaoHangVaDoiTra']);
 
 //timkiem
 Route::get('search',['as'=>'search','uses'=>'PageController@getSearch']);
 //tintuc
-Route::get('gioi-thieu',['as'=>'gioithieu','uses'=>'PageController@getGioiThieu']);
+
 Route::get('tin-tuc',['as'=>'tintuc','uses'=>'PageController@getTinTuc']);
 Route::get('chitiet-tintuc/{id}',['as'=>'chitiettintuc','uses'=>'PageController@getChiTietTinTuc']);
 
@@ -114,6 +117,10 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::post('them','ProductController@postThem');
 
 		Route::get('xoa/{id}','ProductController@getXoa');
+		Route::get('het-hang/{id}','ProductController@getHetHang');
+		Route::get('con-hang/{id}','ProductController@getConHang');
+		Route::get('ngung-kinh-doanh/{id}','ProductController@getNgungKinhDoanh');
+
 	});
 	Route::group(['prefix'=>'nguoidung'],function(){
 

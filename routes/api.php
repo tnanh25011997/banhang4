@@ -23,6 +23,7 @@ Route::get('api-newest-product',['as'=>'api-newest-product','uses'=>'APIControll
 Route::get('api-sale-product',['as'=>'api-sale-product','uses'=>'APIController@getSaleProduct']);
 Route::get('api-best-seller',['as'=>'api-best-seller','uses'=>'APIController@getBestSeller']);
 Route::get('api-list-category/{slug}',['as'=>'api-list-category','uses'=>'APIController@getListCategory']);
+
 Route::get('api-cheapest-unit-price-product-in-category/{slug}',['as'=>'api-cheapest-unit-price-product-in-category','uses'=>'APIController@getCheapestUnitPriceProductInCategory']);
 Route::get('api-cheapest-promotion-price-product-in-category/{slug}',['as'=>'api-cheapest-promotion-price-product-in-category','uses'=>'APIController@getCheapestPromotionPriceProductInCategory']);
 Route::get('api-list-product-of-category/{slug}',['as'=>'api-list-product-of-category','uses'=>'APIController@getListProductOfCategory']);

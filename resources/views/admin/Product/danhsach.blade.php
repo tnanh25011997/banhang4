@@ -24,6 +24,8 @@
                             <th>Giá Gốc</th>
                             <th>Giá Khuyến Mãi</th>
                             <th>Ảnh</th>
+                            <th>Trạng Thái</th>
+                            <th>Thao Tác</th>
                             <th>Xóa</th>
                             <th>Sửa</th>
                         </tr>
@@ -38,11 +40,40 @@
                             <th>{{number_format($sp->unit_price)}}đ</th>
                             <th>{{number_format($sp->promotion_price)}}đ</th>
                             <th><img src="source/images/{{$sp->image}}" class="img-fluid" style="width: 100px;" alt=""></th>
-
+                            <th>
+                                <p style="background-color: yellow;">
+                                <?php 
+                                    if ($sp->status==1) {
+                                        echo 'Còn Hàng';
+                                    } else if($sp->status==2) {
+                                        echo 'Hết Hàng';
+                                    } else {
+                                        echo 'Ngừng Kinh Doanh';
+                                    }
+                                ?>
+                                </p>
+                                    
+                            </th>
+                            <td>
+                                <?php 
+                                    if ($sp->status==1) {
+                                ?>  <a href="admin/Product/het-hang/{{$sp->id}}"><button style="width: 145px; margin-bottom: 10px;" class="btn btn-warning">Hết Hàng</button></a><br>
+                                    <a href="admin/Product/ngung-kinh-doanh/{{$sp->id}}"><button class="btn btn-primary">Ngừng Kinh Doanh</button></a>
+                                <?php
+                                    } else if($sp->status==2) {
+                                ?> <a href="admin/Product/con-hang/{{$sp->id}}"><button style="width: 145px; margin-bottom: 10px;" class="btn btn-success">Còn Hàng</button></a><br>
+                                   <a href="admin/Product/ngung-kinh-doanh/{{$sp->id}}"><button class="btn btn-primary">Ngừng Kinh Doanh</button></a>
+                                <?php 
+                                    } else {
+                                ?> <a href="admin/Product/con-hang/{{$sp->id}}"><button class="btn btn-Info">Kinh Doanh</button></a>
+                                <?php 
+                                    }
+                                ?>
+                            </td>
                             <td class="center">
 
                                 <!-- <a href="admin/Product/xoa/{{$sp->id}}"> Xóa</a> -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delPro_{{$sp->id}}">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delPro_{{$sp->id}}">
                                   <i class="fa fa-trash-o  fa-fw"></i>
                                 </button>
                                 <div class="modal fade" id="delPro_{{$sp->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

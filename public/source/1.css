@@ -283,6 +283,60 @@
     }
 }
 
+/*sale icon*/
+.number-sale.main-page{
+    top: 186px;
+    left: 5px;
+}
+.flag-sale.main-page{
+    right: 4px;
+    top: 1px;
+}
+.number-sale {
+    font-family: inherit;
+    position: absolute;
+    border-radius: 5px;
+    top: 258px;
+    left: 26px;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 8px;
+    background: #e9272b;
+}
+.flag-sale {
+    position: absolute;
+    display: block;
+    right: 20px;
+    top: 0px;
+    font-size: 11px;
+    padding: 6px 12px;
+    text-transform: uppercase;
+    background: #e9272b;
+    color: #fff;
+    font-family: 'Party Delights Regular';
+    z-index: 1;
+    line-height: 1.15em;
+    
+}
+.fold {
+    position: absolute;
+    right: 0;
+    bottom: -8px;
+    display: block;
+    height: 8px;
+    width: 8px;
+    z-index: 1;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    border-left: 4px solid #811518;
+    border-top: 4px solid #811518;
+    border-bottom: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
+
 /**************************ERRORS PAGE**************************/
 #notfound {
   position: relative;
@@ -660,13 +714,16 @@ span.sogiohang{
 
 /*tooltip inner*/
 .tooltip-inner {
-  background-color: white !important;
+  background-color: white!important;
   color: black!important ;
-  margin-bottom: 5px;
+ /* margin-bottom: 5px;*/
 }
 .bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {
-  display: none;
+   color: white !important;
+  /*display: none;*/
+  border-top-color: white!important;;
 }
+
 
 .add-to-cart-success:after {
     content: "";
@@ -886,14 +943,17 @@ ul.pagination {
 }
 
 .motsanpham2 .anh2 {
-    height: 320px;
+    height: 300px;
 }
 
 .danhsachsanpham .motsanpham2 .thongtin2 .gia2km p {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     color: #d75a5a;
     font-weight: 800;
+}
+.rating-pro-page {
+    text-align: center;
 }
 
 .danhsachsanpham .motsanpham2 .thongtin2 .gia2 p {
@@ -1215,23 +1275,29 @@ img.anhgiohang {
 }
 
 .motsanpham2 .ten2 a:hover {
+    color: #6986CA;
     text-decoration: none;
 }
 .anh2:hover .haiicon2{
-    display:block;
+    opacity: 1;
+    visibility: visible;
+    top: 30%;
 }
 
-
-.haiicon2 {
-
-    z-index: 9998;
-    display:none
+.iconnho.icon-shopping-cart{
+    margin-right: 7px;
 }
 .haiicon2 {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 30%;
+    top: 50%;
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    display:flex;
+    
 }
 
 .anh2:hover:before {
@@ -1242,7 +1308,7 @@ img.anhgiohang {
     content: "";
     left: 16px;
     right: 15px;
-    bottom: 144px;
+    bottom: 154px;
     top: 0;
     position: absolute;
     opacity: 0;
@@ -1357,6 +1423,12 @@ nav.navbar.navbar-expand-sm.navbar-light {
 .footerduoi {
     padding-bottom: 80px;
 }
+.footerduoi p{
+    color: #939393;
+    padding: 7px 0px;
+    font-size: 13px;
+
+}
 
 .copyright {
     color: #939393;
@@ -1469,7 +1541,10 @@ nav.navbar.navbar-expand-sm.navbar-light {
 }
 
 .anh:hover .haiicon{
-    display:flex;
+    /*display:flex;*/
+    opacity: 1;
+    visibility: visible;
+    top: 43%;
 }
 .haiicon a{
     padding-right:6px;
@@ -1477,7 +1552,15 @@ nav.navbar.navbar-expand-sm.navbar-light {
 
 .haiicon {
     z-index: 9998;
-    display:none
+    display:flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    position: absolute;
+    left: 52%;
+    transform: translateX(-50%);
+    top: 65%;
+    
 }
 
 .iconnho {
@@ -1485,6 +1568,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
     border: 2px solid white;
     padding: 9px;
     width: 41px;
+    text-align: center;
 }
 
 .anh:hover:before {
@@ -1615,10 +1699,7 @@ span.icondanhmuc {
 }
 
 .haiicon {
-    position: absolute;
-    left: 52%;
-    transform: translateX(-50%);
-    top: 43%;
+    
 }
 
 .anh:hover:before {
@@ -1754,6 +1835,7 @@ span.icondanhmuc {
 .thoitrang2 .cacsanpham .motsanpham{
     min-height:303.9px;
 }
-.thoitrang2 anh:hover .haiicon{
+/*.thoitrang2 anh:hover .haiicon{
     display:flex;
-}
+}*/
+

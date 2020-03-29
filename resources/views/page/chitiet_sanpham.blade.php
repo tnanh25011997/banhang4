@@ -31,7 +31,7 @@
 					<div class="row">
 					    <div class="col-md-5">
 						    <div class="anhchinh">
-							    <img src="source/images/{{$ct->image}}" alt="" class="img-fluid">
+							    <img src="source/images/{{$ct->image}}"  alt="" class="img-fluid">
 						    </div>
 					    </div>
 					    <div class="col-md-7">
@@ -66,7 +66,14 @@
 										<span>&ndash;</span><input value="1" name="soluong"/><span>+</span>
 									</div>
 						        	<input type="hidden" value="{{$ct->id}}" name="idsp">
-						        	<p><button type="submit" class="btn btn-primary nutthemvaogio">Thêm Vào Giỏ</button>
+						        	<p>
+						        		@if($ct->status==1)
+						        		<button type="submit" class="btn btn-primary nutthemvaogio">Thêm Vào Giỏ</button>
+						        		@elseif($ct->status==2)
+						        		<h4 style="color: red;">Sản Phẩm Đang Hết Hàng</h4>
+						        		@else
+						        		<h4 style="color: red;">Ngừng Kinh Doanh</h4>
+						        		@endif
 						        	</p>
 						        </form>
 						        
@@ -195,6 +202,7 @@
 @endsection
 @section('script')
 	<script>
+		
 		//rating
 		const stars=document.querySelector(".productRating").children;
 		const ratingValue = document.querySelector("#rating-value");

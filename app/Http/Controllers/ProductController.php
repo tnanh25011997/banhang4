@@ -35,7 +35,7 @@ class ProductController extends Controller
                 'thuonghieu'=>'required',
     			'ten'=>'required|unique:products,name',
     			'mota'=>'required',
-    			'giagoc'=>'required',
+    			'giagoc'=>'required|gte:50000|lte:10000000',
     			'hinhanh'=>'required'
     		],
     		[
@@ -44,7 +44,9 @@ class ProductController extends Controller
     			'ten.required'=>'Bạn Chưa Nhập Tên Sản Phẩm',
     			'ten.unique'=>'Tên Sản Phẩm đã tồn tại',
     			'mota.required'=>'Bạn Chưa Nhập Mô Tả Sản Phẩm',
-    			'giagoc.required'=>'Bạn Chưa Nhập Giá Gốc Sản Phẩm',			
+    			'giagoc.required'=>'Bạn Chưa Nhập Giá Gốc Sản Phẩm',	
+                'giagoc.gte'=>'Giá Gốc Của Sản Phẩm Phải Lớn Hơn 50,000đ',
+                'giagoc.lte'=>'Giá Gốc Của Sản Phẩm Phải Bé Hơn 10,000,000đ',	
     			'hinhanh.required'=>'Bạn Chưa Chọn Ảnh Sản Phẩm'
     		]);
     	$product = new Product;
@@ -53,7 +55,7 @@ class ProductController extends Controller
         $product->id_brand = $req->thuonghieu;
     	$product->description = $req->mota;
     	$product->unit_price = $req->giagoc;
-        if($req->giakhuyenmai == null || $req->giakhuyenmai == 0 || $req->giakhuyenmai >  $req->giagoc){
+        if($req->giakhuyenmai == null || $req->giakhuyenmai <= 0 || $req->giakhuyenmai >  $req->giagoc){
             $product->promotion_price = $product->unit_price;
         }
         else{
@@ -123,14 +125,18 @@ class ProductController extends Controller
                 'loaisp'=>'required',
                 'thuonghieu'=>'required',
                 'ten'=>'required',
-                'giagoc'=>'required'
+                'giagoc'=>'required|gte:50000|lte:10000000',
+                'giakhuyenmai'=>'gte:0'
                 // 'hinhanh'=>'required'
             ],
             [
                 'loaisp.required'=>'Bạn Chưa Chọn Loại Sản Phẩm',
                 'thuonghieu.required'=>'Bạn Chưa Chọn Thương Hiệu',
                 'ten.required'=>'Bạn Chưa Nhập Tên Sản Phẩm',
-                'giagoc.required'=>'Bạn Chưa Nhập Giá Gốc Sản Phẩm'
+                'giagoc.required'=>'Bạn Chưa Nhập Giá Gốc Sản Phẩm',
+                'giagoc.gte'=>'Giá Gốc Của Sản Phẩm Phải Lớn Hơn 50,000đ',
+                'giagoc.lte'=>'Giá Gốc Của Sản Phẩm Phải Bé Hơn 10,000,000đ',
+                'giakhuyenmai.gte'=>'Giá Khuyến Mãi Của Sản Phẩm Phải Là Số Nguyên Dương',
                 // 'hinhanh.required'=>'Bạn Chưa Chọn Ảnh Sản Phẩm'
             ]);
         $product->name = $req->ten;
@@ -138,7 +144,7 @@ class ProductController extends Controller
         $product->id_brand = $req->thuonghieu;
         $product->description = $req->mota;
         $product->unit_price = $req->giagoc;
-        if($req->giakhuyenmai == null || $req->giakhuyenmai == 0 || $req->giakhuyenmai >  $req->giagoc){
+        if($req->giakhuyenmai == null || $req->giakhuyenmai <= 0 || $req->giakhuyenmai >  $req->giagoc){
             $product->promotion_price = $product->unit_price;
         }
         else{
@@ -176,7 +182,28 @@ class ProductController extends Controller
         }
         $product->save();
         return redirect('admin/Product/sua/'.$id)->with('thongbao','Sửa Sản Phẩm Thành Công');
-
     }
+    public function getHetHang($id)
+    {
+        $product = Product::find($id);
+        $product->status = 2;
+        $product->save();
+        return redirect('admin/Product/danhsach')->with('thongbao','Cập Nhật Thành Công');
+    }
+    public function getConHang($id)
+    {
+        $product = Product::find($id);
+        $product->status = 1;
+        $product->save();
+        return redirect('admin/Product/danhsach')->with('thongbao','Cập Nhật Thành Công');
+    }
+    public function getNgungKinhDoanh($id)
+    {
+        $product = Product::find($id);
+        $product->status = 3;
+        $product->save();
+        return redirect('admin/Product/danhsach')->with('thongbao','Cập Nhật Thành Công');
+    }
+    
     
 }

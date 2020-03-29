@@ -45,10 +45,10 @@
 					<p>VỀ CHÚNG TÔI</p>
 				</div>
 				<div class="footerduoi">
-					<a href="gioithieu">Giới thiệu</a>
-					<a href="">Giao hàng - Đổi trả</a>
-					<a href="">Chính sách bảo mật</a>
-					<a href="">Liên hệ</a>
+					<a href="gioi-thieu">Giới thiệu</a>
+					<a href="giao-hang-va-doi-tra">Giao hàng - Đổi trả</a>
+					<a href="chinh-sach-bao-mat">Chính sách bảo mật</a>
+					<a href="https://www.facebook.com/NA-Store-2617915788253381/" target="_blank">Liên hệ</a>
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6">
@@ -56,9 +56,8 @@
 					<p>TRỢ GIÚP</p>
 				</div>
 				<div class="footerduoi">
-					<a href="">Hướng dẫn mua hàng</a>
-					<a href="">Hướng dẫn thanh toán</a>
-					<a href="">Tài khoản giao dịch</a>
+					<a href="huong-dan-mua-hang">Hướng dẫn mua hàng</a>
+					<a href="tai-khoan-giao-dich">Tài khoản giao dịch</a>
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-6">
@@ -74,10 +73,12 @@
 			</div>
 			<div class="col-md-3 col-sm-6">
 				<div class="footertren">
-					<p>HÃY ĐẾN VỚI CHÚNG TÔI</p>
+					<p>HỆ THỐNG CỬA HÀNG</p>
 				</div>
 				<div class="footerduoi">
-
+					<p><i class="fas fa-map-marker-alt"></i><b> Thừa Thiên Huế - </b> Quốc lộ 1A, Lộc An, Phú Lộc, Thừa Thiên Huế</p>
+					<p><i class="fas fa-map-marker-alt"></i><b> Đà Nẵng - </b> 526 Trưng Nữ Vương, Hải Châu, Đà Nẵng</p>
+					<p><i class="fas fa-map-marker-alt"></i><b> Hà Nội - </b> 14b Hào Nam, Chợ Dừa, Đống Đa, Hà Nội</p>
 				</div>
 			</div>
 		</div>
