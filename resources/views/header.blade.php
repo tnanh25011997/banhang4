@@ -71,7 +71,7 @@
 					<a class="nav-link" href="san-pham">SẢN PHẨM <i class="fas fa-angle-down"></i></a>
 					<ul class='sub-nav'>
 						@foreach($loai_sp as $loai)
-						<a href="san-pham-theo-loai/{{$loai->id}}"><li>{{$loai->name}}</li></a>
+						<a href="san-pham-theo-loai/{{$loai->slug}}"><li>{{$loai->name}}</li></a>
 						@endforeach
 						
 					</ul>

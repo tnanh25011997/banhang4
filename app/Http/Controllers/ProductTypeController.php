@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\ProductType;
 use App\Product;
+use App\Slug;
 
 class ProductTypeController extends Controller
 {
@@ -31,9 +32,12 @@ class ProductTypeController extends Controller
     		]);
     	$producttype = new ProductType;
     	$producttype->name = $req->ten;
-        $str = $req->ten;
-        $slug = Str::slug($str, '-');
-        $producttype->slug = $slug;
+        // $str = $req->ten;
+        // $slug = Str::slug($str, '-');
+        // $producttype->slug = $slug;
+        $slug = new Slug();
+        $producttype->slug = $slug->createSlugCategory($req->ten);
+
     	if($req->loai=='Nam'){
     		$producttype->description = "0";
     	}
@@ -59,9 +63,13 @@ class ProductTypeController extends Controller
     			'ten.required'=>'Bạn Chưa Nhập Tên Loại Sản Phẩm'
     		]);
     	$producttype->name = $req->ten;
-        $str = $req->ten;
-        $slug = Str::slug($str, '-');
-        $producttype->slug = $slug;
+        // $str = $req->ten;
+        // $slug = Str::slug($str, '-');
+        // $producttype->slug = $slug;
+        $slug = new Slug();
+        $producttype->slug = $slug->createSlugCategory($req->ten,$id);
+        
+
     	if($req->loai=='Nam'){
     		$producttype->description = "0";
     	}

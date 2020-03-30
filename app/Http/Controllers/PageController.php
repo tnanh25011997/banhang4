@@ -194,15 +194,15 @@ class PageController extends Controller
         $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
         return view('page.sanpham',compact('sanpham','danhmuc','brand'));
     }
-    public function getTheoLoai($id, Request $request)
+    public function getTheoLoai($slug, Request $request)
     {
-        $tenloai = ProductType::where('id',$id)->first();
+        $tenloai = ProductType::where('slug',$slug)->first();
         if($tenloai == null){
             return view('page.errors');
         }
         else{
 
-            $loai_sanpham = Product::where('id_type',$id)->where('status','!=',3);;
+            $loai_sanpham = Product::where('id_type',$tenloai->id)->where('status','!=',3);;
             $danhmuc = ProductType::orderBy('description','desc')->orderby('description','desc')->get();
             $brand = Brand::where('name','!=','None')->get();
             if($request->price){
@@ -261,14 +261,14 @@ class PageController extends Controller
         }
     }
 
-    public function getThuongHieu($id, Request $request)
+    public function getThuongHieu($slug, Request $request)
     {
-        $thuonghieu = Brand::where('id',$id)->first();
+        $thuonghieu = Brand::where('slug',$slug)->first();
         if($thuonghieu == null){
             return view('page.errors');
         }
         else{
-            $sanpham = Product::where('id_brand',$id)->where('status','!=',3);;
+            $sanpham = Product::where('id',$thuonghieu->id)->where('status','!=',3);
             $danhmuc = ProductType::orderBy('description','desc')->orderby('description','desc')->get();
             $brand = Brand::where('name','!=','None')->get();  
         

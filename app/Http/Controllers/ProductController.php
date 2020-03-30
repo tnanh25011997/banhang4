@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 use App\Product;
 use App\ProductType;
 use App\Brand;
+use App\Slug;
+
 
 class ProductController extends Controller
 {
@@ -33,7 +35,8 @@ class ProductController extends Controller
     		[
     			'loaisp'=>'required',
                 'thuonghieu'=>'required',
-    			'ten'=>'required|unique:products,name',
+    			// 'ten'=>'required|unique:products,name',
+                'ten'=>'required',
     			'mota'=>'required',
     			'giagoc'=>'required|gte:50000|lte:10000000',
     			'hinhanh'=>'required'
@@ -42,7 +45,7 @@ class ProductController extends Controller
     			'loaisp.required'=>'Bạn Chưa Chọn Loại Sản Phẩm',
                 'thuonghieu.required'=>'Bạn Chưa Chọn Thương Hiệu',
     			'ten.required'=>'Bạn Chưa Nhập Tên Sản Phẩm',
-    			'ten.unique'=>'Tên Sản Phẩm đã tồn tại',
+    			// 'ten.unique'=>'Tên Sản Phẩm đã tồn tại',
     			'mota.required'=>'Bạn Chưa Nhập Mô Tả Sản Phẩm',
     			'giagoc.required'=>'Bạn Chưa Nhập Giá Gốc Sản Phẩm',	
                 'giagoc.gte'=>'Giá Gốc Của Sản Phẩm Phải Lớn Hơn 50,000đ',
@@ -79,25 +82,11 @@ class ProductController extends Controller
     		$product->image="";
     	}
         //slug
-        $str = $req->ten;
-        // $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", "a", $str);
-        // $str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", "e", $str);
-        // $str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", "i", $str);
-        // $str = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", "o", $str);
-        // $str = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", "u", $str);
-        // $str = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", "y", $str);
-        // $str = preg_replace("/(đ)/", "d", $str);
-        // $str = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", "A", $str);
-        // $str = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", "E", $str);
-        // $str = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", "I", $str);
-        // $str = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", "O", $str);
-        // $str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", "U", $str);
-        // $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", "Y", $str);
-        // $str = preg_replace("/(Đ)/", "D", $str);
-        // $str = preg_replace("/( )/","-",$str);
-        // $str = strtolower($str);
-        $slug = Str::slug($str, '-');
-        $product->slug = $slug;
+        // $str = $req->ten;
+        // $slug = Str::slug($str, '-');
+        // $product->slug = $slug;
+        $slug = new Slug();
+        $product->slug = $slug->createSlugProduct($req->ten);
         
         //sale
         if($product->promotion_price == $product->unit_price){
@@ -119,7 +108,12 @@ class ProductController extends Controller
     public function postSua(Request $req,$id)
     {
         $product = Product::find($id);
-        $req->ten = trim(preg_replace('/\s+/',' ', $req->ten));
+        // $req->ten = trim(preg_replace('/\s+/',' ', $req->ten));
+        $giakm = $req->giakhuyenmai;
+        $giagoc = $req->giagoc;
+        if($giakm>$giagoc){
+            return redirect()->back()->with('error','Giá Khuyến Mãi Không Được Lớn Hơn Giá Gốc');
+        }
         $this->validate($req,
             [
                 'loaisp'=>'required',
@@ -170,9 +164,11 @@ class ProductController extends Controller
         }
 
         //slug
-        $str = $req->ten;
-        $slug = Str::slug($str, '-');
-        $product->slug = $slug;
+        // $str = $req->ten;
+        // $slug = Str::slug($str, '-');
+        // $product->slug = $slug;
+        $slug = new Slug();
+        $product->slug = $slug->createSlugProduct($req->ten,$id);
 
         //sale
         if($product->promotion_price == $product->unit_price){

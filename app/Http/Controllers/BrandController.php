@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Brand;
 use App\Product;
+use App\Slug;
 
 
 class BrandController extends Controller
@@ -34,9 +35,12 @@ class BrandController extends Controller
     		]);
     	$brand = new Brand;
     	$brand->name = $req->ten;
-        $str = $req->ten;
-        $slug = Str::slug($str, '-');
-        $brand->slug = $slug;
+        // $str = $req->ten;
+        // $slug = Str::slug($str, '-');
+        // $brand->slug = $slug;
+        $slug = new Slug();
+        $brand->slug = $slug->createSlugBrand($req->ten);
+
     	$brand->origin = $req->xuatxu;
     	$brand->save();
     	return redirect('admin/Brand/them')->with('thongbao','Thêm Thành Công');
@@ -59,9 +63,12 @@ class BrandController extends Controller
     			'xuatxu.required'=>'Bạn Chưa Nhập Xuất Xứ'
     		]);
     	$brand->name = $req->ten;
-        $str = $req->ten;
-        $slug = Str::slug($str, '-');
-        $brand->slug = $slug;
+        // $str = $req->ten;
+        // $slug = Str::slug($str, '-');
+        // $brand->slug = $slug;
+        $slug = new Slug();
+        $brand->slug = $slug->createSlugBrand($req->ten,$id);
+
     	$brand->origin = $req->xuatxu;
     	$brand->save();
     	return redirect('admin/Brand/sua/'.$brand->id)->with('thongbao','Sửa Thành Công');
