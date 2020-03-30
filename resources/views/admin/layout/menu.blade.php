@@ -73,6 +73,16 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Thống Kê<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="admin/thong-ke/danhsach">Doanh Thu</a>
+                                </li>
+                               
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Slide<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -101,6 +111,9 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="admin/Comments/danhsach">Duyệt Comments</a>
+                                </li>
+                                <li>
+                                    <a href="admin/Comments/danh-sach-comments">Danh Sách Comments</a>
                                 </li>
                                 <li>
                                     <a href="admin/Comments/danhsachnhankhuyenmai">Nhận Tin Khuyến Mãi</a>

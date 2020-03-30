@@ -41,24 +41,7 @@
                            
                         </tbody>
                     </table>
-                    <!-- /.col-lg-12 -->
-                    <h3>DOANH THU TRONG NĂM</h3>
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                        <thead>
-                            <tr align="center">
-                                <th>Tháng</th>
-                                <th>Doanh Thu</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($thongke as $key)
-                            <tr  class="odd gradeX" align="center">
-                                <th>{{$key->Thang}}</th>
-                                <th>{{number_format($key->Tong)}} VNĐ</th>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                   
 
                     
                 </div>

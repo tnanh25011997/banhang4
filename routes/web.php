@@ -166,12 +166,13 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::get('xoa/{id}','TinTucController@getXoa');
 	});
 	Route::group(['prefix'=>'Comments'],function(){
-
 		Route::get('danhsach','CommentsController@getDanhSach');
+		Route::get('danh-sach-comments','CommentsController@getDanhSachComment');
 		Route::get('danhsachnhankhuyenmai','CommentsController@getDanhSachNhanKhuyenMai');
 		Route::get('xacnhan/{id}','CommentsController@getXacNhan');
 		Route::get('xacnhankhuyenmai/{id}','CommentsController@getXacNhanKhuyenMai');
 		Route::get('xoa/{id}','CommentsController@getXoa');
+		Route::get('xoa-comment/{id}','CommentsController@getXoaComment');
 
 	});
 	Route::group(['prefix'=>'Brand'],function(){
@@ -184,5 +185,9 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::post('them','BrandController@postThem');
 
 		Route::get('xoa/{id}','BrandController@getXoa');
+	});
+	Route::group(['prefix'=>'thong-ke'],function(){
+		Route::get('danhsach','StatisticController@getDoanhThu');
+
 	});
 });

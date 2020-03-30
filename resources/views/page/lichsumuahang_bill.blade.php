@@ -22,6 +22,9 @@
 			</div>
 			<div class="giohangcuatoi"><p>LỊCH SỬ MUA HÀNG</p></div>
 			<hr>
+			@if(sizeof($bill)==0)
+				<p>Quý khách chưa có đơn hàng nào, hãy mua sắm nhé!</p>
+			@else
 			<div class="banggiohang">
 				<table class="table table-hover">
 					<thead class="threadgiohang">
@@ -57,7 +60,7 @@
 					</tbody>
 				</table>
 			</div>
-
+			@endif
 		</div>
 </div>
 	
