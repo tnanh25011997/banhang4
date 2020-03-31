@@ -91,7 +91,7 @@
 						    <div class="list-group">
 							    <p href="#" class="list-group-item list-group-item-action tenthoitrang"><span class="iconthoitrang"><i class="fas fa-female"></i></span></i></span>MỸ PHẨM NỮ</p>
 							    @foreach($myphamnu as $nu)
-							    <a href="san-pham-theo-loai/{{$nu->id}}" class="list-group-item list-group-item-action motthoitrang">{{$nu->name}}</a>
+							    <a href="san-pham-theo-loai/{{$nu->slug}}" class="list-group-item list-group-item-action motthoitrang">{{$nu->name}}</a>
 							    @endforeach
 						    </div>
 					    </div>
@@ -149,7 +149,7 @@
 						    <div class="list-group">
 							    <p href="#" class="list-group-item list-group-item-action tenthoitrang"><span class="iconthoitrang"><i class="fas fa-heart"></i></span></i></span>MỸ PHẨM NAM</p>
 							    @foreach($myphamnam as $nam)
-							    <a href="san-pham-theo-loai/{{$nam->id}}" class="list-group-item list-group-item-action motthoitrang">{{$nam->name}}</a>
+							    <a href="san-pham-theo-loai/{{$nam->slug}}" class="list-group-item list-group-item-action motthoitrang">{{$nam->name}}</a>
 							    @endforeach
 							    
 						    </div>

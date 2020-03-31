@@ -27,11 +27,11 @@
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="form-group">
                                 <label>Tên Thương Hiệu</label>
-                                <input class="form-control" name="ten" placeholder="Nhập Tên Thương Hiệu" />
+                                <input class="form-control" name="ten" value="{{ old('ten') }}" placeholder="Nhập Tên Thương Hiệu" />
                             </div>
                             <div class="form-group">
                                 <label>Xuất Xứ</label>
-                                <input class="form-control" name="xuatxu" placeholder="Nhập Xuất Xứ" />
+                                <input class="form-control" name="xuatxu" value="{{ old('xuatxu') }}" placeholder="Nhập Xuất Xứ" />
                             </div>
                             
                             <button type="submit" class="btn btn-default">Thêm</button>

@@ -42,11 +42,11 @@
 
 							<div class="form-group">
 								<label for="email">Email</label>
-								<input name="email" type="email" class="form-control" id="email" required>
+								<input name="email" type="email" value="{{ old('email') }}" class="form-control" id="email" required>
 							</div>
 							<div class="form-group">
 								<label for="pwd">Mật Khẩu</label>
-								<input name="password" type="password" class="form-control" id="pwd" required>
+								<input name="password" type="password"  class="form-control" id="pwd" required>
 							</div>
 							<div class="form-group form-check">
 								<label class="form-check-label">

@@ -31,6 +31,11 @@ class ProductController extends Controller
     }
     public function postThem(Request $req)
     {
+        $giakm = $req->giakhuyenmai;
+        $giagoc = $req->giagoc;
+        if($giakm>$giagoc){
+            return redirect()->back()->with('error','Giá Khuyến Mãi Không Được Lớn Hơn Giá Gốc');
+        }
     	$this->validate($req,
     		[
     			'loaisp'=>'required',

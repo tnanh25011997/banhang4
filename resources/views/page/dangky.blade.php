@@ -46,7 +46,7 @@
 											<hr>
 											<div class="form-group">
 												<label >Email</label>
-												<input name="email" type="email" class="form-control"  required>
+												<input name="email" type="email" value="{{ old('email') }}" class="form-control"  required>
 												<p style="font-size: 12px; font-style: italic;">(*) Chúng tôi sẽ không xác nhận email của bạn, nhưng 1 email chính chủ sẽ giúp bạn lấy lại mật khẩu khi đã mất</p>
 											</div>
 											<div class="form-group">
@@ -63,12 +63,12 @@
 									        <hr>
 									        <div class="form-group">
 												<label for="ten">Họ & Tên</label>
-												<input name="fullname" type="text" class="form-control" id="ten" required>
+												<input name="fullname" type="text" value="{{ old('fullname') }}" class="form-control" id="ten" required>
 											</div>
 											
 											<div class="form-group">
 												<label >Điện Thoại</label>
-												<input name="sdt" type="text" class="form-control"  required>
+												<input name="sdt" type="text" value="{{ old('sdt') }}" class="form-control"  required>
 											</div>
 											<div class="form-group">
 												<label>Tỉnh</label>
@@ -95,7 +95,7 @@
 											</div>
 											<div class="form-group">
 												<label >Số Nhà/Thôn</label>
-												<input name="diachi" type="text" required class="form-control"  required>
+												<input name="diachi" type="text" value="{{ old('diachi') }}" required class="form-control"  required>
 											</div>
 											<button type="submit" class="btn btn-primary nutdangky">Đăng Ký</button>
 										</div>

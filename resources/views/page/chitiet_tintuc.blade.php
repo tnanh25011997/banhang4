@@ -21,7 +21,7 @@
 					<div class="noidungtintuc2">
 						<h3 class="tieude">{{$tin->title}}</h3>
 						<div class="highlight"><p>{!!$tin->highlight!!}</p></div>
-						<div class="anhtin"><img src="source/images/{{$tin->image}}" alt="" class="img-fluid" style="width: 800px;"></div>
+						<div class="anhtin"><img src="source/images/{{$tin->image}}" alt="" class="img-fluid" style="width: 800px; height: 500px;"></div>
 						<p>{!!$tin->content!!}</p>
 					</div>
 

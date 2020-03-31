@@ -77,7 +77,7 @@ class AccountController extends Controller
     }
     public function postDangNhap(Request $req)
     {
-         $this->validate($req,
+        $this->validate($req,
             [
                 'email'=>'required',
                 'password'=>'required|min:6|max:20'

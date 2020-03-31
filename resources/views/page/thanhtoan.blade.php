@@ -148,25 +148,25 @@
                   							
 		                  					<div class="form-group">
 		                  						
-		                  						<input name="ten" type="text" required placeholder="Nhập Họ Tên" class="form-control" id="ten">
+		                  						<input name="ten" value="{{ old('ten') }}" type="text" required placeholder="Nhập Họ Tên" class="form-control" id="ten">
 		                  					</div>
 		                  					<div class="row">
 		                  						<div class="col-md-7">
 		                  							<div class="form-group">
 				                  						
-				                  						<input name="email" type="email" placeholder="Nhập Email" required class="form-control" >
+				                  						<input name="email" value="{{ old('email') }}" type="email" placeholder="Nhập Email" required class="form-control" >
 				                  					</div>
 		                  						</div>
 		                  						<div class="col-md-5">
 		                  							<div class="form-group">
 		                  						
-		                  							<input name="sdt" placeholder="Nhập SĐT" type="text" required class="form-control input-phone-checkout" >
+		                  							<input name="sdt" value="{{ old('sdt') }}" placeholder="Nhập SĐT" type="text" required class="form-control input-phone-checkout" >
 		                  					</div>
 		                  						</div>
 		                  					</div>
 		                  					<div class="form-group">
 		                  						
-		                  						<input name="diachi" type="text" placeholder="Nhập Số Nhà/Thôn" required class="form-control" >
+		                  						<input name="diachi" value="{{ old('diachi') }}" type="text" placeholder="Nhập Số Nhà/Thôn" required class="form-control" >
 		                  					</div>
 		                  					
 			                  					

@@ -47,28 +47,26 @@
                             </div>
                             <div class="form-group">
                                 <label>Tên Sản Phẩm</label>
-                                <input class="form-control" name="ten" placeholder="Nhập tên sản phẩm" />
+                                <input class="form-control" name="ten" value="{{ old('ten') }}" placeholder="Nhập tên sản phẩm" />
                             </div>
                             <div class="form-group">
                                 <label>Mô Tả</label>
-                                <textarea id="demo" class="form-control ckeditor" rows="3" name="mota"></textarea>
+                                <textarea id="demo" class="form-control ckeditor" rows="3" name="mota">
+                                {{ old('mota') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Giá Gốc</label>
-                                <input class="form-control" type="number" name="giagoc" placeholder="Nhập giá gốc" />
+                                <input class="form-control" type="number" name="giagoc" value="{{ old('giagoc') }}" placeholder="Nhập giá gốc" />
                             </div>
                             <div class="form-group">
                                 <label>Giá Khuyến Mãi</label>
-                                <input class="form-control" type="number" name="giakhuyenmai" placeholder="Nhập giá khuyến mãi" />
+                                <input class="form-control" type="number" name="giakhuyenmai" value="{{ old('giakhuyenmai') }}" placeholder="Nhập giá khuyến mãi" />
                             </div>
                             <div class="form-group">
                                 <label>Nam/nữ</label>
-                                <select class="form-control" name="unit">
-                                  
+                                <select class="form-control" name="unit"> 
                                     <option value="nam">Nam</option>
-                                    <option value="nu">Nữ</option>
-                                    
-                                    
+                                    <option value="nu">Nữ</option> 
                                 </select>
                             </div>
 

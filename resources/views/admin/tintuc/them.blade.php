@@ -27,16 +27,20 @@
                             
                             <div class="form-group">
                                 <label>Tiêu Đề</label>
-                                <input class="form-control" name="tieude" placeholder="Nhập Tiêu đề" />
+                                <input class="form-control" name="tieude" value="{{ old('tieude') }}" placeholder="Nhập Tiêu đề" />
                             </div>
                             <div class="form-group">
                                 <label>Highlight</label>
-                                <textarea class="form-control" name="highlight" rows="3" placeholder="Nhập Highlight" /></textarea>
+                                <textarea class="form-control" name="highlight" rows="3" placeholder="Nhập Highlight" />
+                                    {{ old('highlight') }}
+                                </textarea>
                             </div>
                            
                             <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea id="demo" class="form-control ckeditor" rows="5" name="noidung"></textarea>
+                                <textarea id="demo" class="form-control ckeditor" rows="5" name="noidung">
+                                    {{ old('noidung') }}
+                                </textarea>
                             </div>
                             <div class="form-group">
                                 <label>Images</label>

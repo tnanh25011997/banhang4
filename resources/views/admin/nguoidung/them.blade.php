@@ -27,11 +27,11 @@
                             
                             <div class="form-group">
                                 <label>Họ Tên</label>
-                                <input class="form-control" name="ten" placeholder="Nhập Họ Tên" />
+                                <input class="form-control" name="ten" value="{{ old('ten') }}" placeholder="Nhập Họ Tên" />
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="Nhập Email" />
+                                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Nhập Email" />
                             </div>
                             <div class="form-group">
                                 <label>Mật Khẩu</label>
@@ -43,11 +43,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Số Điện Thoại</label>
-                                <input  class="form-control" name="sdt" placeholder="Nhập SĐT" />
+                                <input  class="form-control" name="sdt" value="{{ old('sdt') }}" placeholder="Nhập SĐT" />
                             </div>
                             <div class="form-group">
                                 <label>Địa Chỉ</label>
-                                <input  class="form-control" name="diachi" placeholder="Nhập Địa Chỉ" />
+                                <input  class="form-control" name="diachi" value="{{ old('diachi') }}" placeholder="Nhập Địa Chỉ" />
                             </div>
                             <div class="form-group">
                                 <label>Phân Quyền</label>

@@ -27,7 +27,7 @@
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="form-group">
                                 <label>Tên Loại Sản Phẩm</label>
-                                <input class="form-control" name="ten" placeholder="Nhập Tên Loại Sản Phẩm" />
+                                <input class="form-control" name="ten" value="{{ old('ten') }}" placeholder="Nhập Tên Loại Sản Phẩm" />
                             </div>
                             <div class="form-group">
                                 <label for="sel1">Nam/Nữ</label>
