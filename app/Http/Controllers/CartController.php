@@ -98,6 +98,13 @@ class CartController extends Controller
             $customer->email = Auth::user()->email;
             $customer->phone_number = Auth::user()->phone;
             $customer->address = Auth::user()->address;
+            $this->validate($req,
+            [
+                'payment'=>'required',
+            ],
+            [
+                'payment.required'=>'Vui lòng chọn phương thức thanh toán. ',
+            ]);
         }
         else{
             $this->validate($req,
@@ -117,7 +124,7 @@ class CartController extends Controller
                 'email.email'=>'Nhập không đúng định dạng email. ',
                 'ten.required'=>'Vui lòng nhập Tên. ',
                 'sdt.required'=>'Vui lòng nhập SDT. ',
-                'sdt.digits'=>'Số điện thoại phải là chuỗi số 10 ký tự. ',
+                'sdt.digits'=>'SĐT phải là chuỗi số 10 ký tự.',
                 'diachi.required'=>'Vui lòng nhập địa chỉ. ',
                 'payment.required'=>'Vui lòng chọn phương thức thanh toán. ',
                 'province.required'=>'Vui lòng Chọn Tỉnh Thành. ',

@@ -79,26 +79,27 @@ class AccountController extends Controller
     {
         $this->validate($req,
             [
-                'email'=>'required',
-                'password'=>'required|min:6|max:20'
+                'email_login'=>'required|email',
+                'password_login'=>'required|min:6|max:20'
                 
             ],
             [
-                'email.required'=>'Vui lòng nhập email.',
-                'password.required'=>'Vui lòng nhập mật khẩu.',
-                'password.min'=>'Mật khẩu phải có ít nhất 6 ký tự.',
-                'password.max'=>'Mật khẩu phải bé hơn 20 ký tự.'
+                'email_login.required'=>'Vui lòng nhập email.',
+                'email_login.email'=>'Không đúng định dạng email. ',
+                'password_login.required'=>'Vui lòng nhập mật khẩu.',
+                'password_login.min'=>'Mật khẩu phải có ít nhất 6 ký tự.',
+                'password_login.max'=>'Mật khẩu phải bé hơn 20 ký tự.'
                 
             ]);
-        $credentials = array('email'=>$req->email,'password'=>$req->password);
+        $credentials = array('email'=>$req->email_login,'password'=>$req->password_login);
         
         if(Auth::attempt($credentials))
         {
-           return redirect('home');
+           return redirect()->back();
         }
         else
         {
-            return redirect()->back()->with('thongbao','Đăng Nhập Không Thành Công');
+            return redirect()->back()->with('LoginError','Sai email hoặc mật khẩu');
         }
 
     }

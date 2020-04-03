@@ -28,13 +28,7 @@
 					<div class="col-lg-12">
 						<form action="{{route('dangky2')}}" method="post">
 							@csrf
-							@if(count($errors)>0)
-							    <div class="alert alert-danger">
-							    	@foreach($errors->all() as $err)
-							    	   <li>{{$err}}</li>
-							    	@endforeach
-							    </div>
-							@endif
+						
 							@if(Session::has('thanhcong'))
 							    <div class="alert alert-success">{{Session::get('thanhcong')}}</div>
 							@endif
@@ -48,14 +42,23 @@
 												<label >Email</label>
 												<input name="email" type="email" value="{{ old('email') }}" class="form-control"  required>
 												<p style="font-size: 12px; font-style: italic;">(*) Chúng tôi sẽ không xác nhận email của bạn, nhưng 1 email chính chủ sẽ giúp bạn lấy lại mật khẩu khi đã mất</p>
+												@if ($errors->has('email'))
+											        <p class="help is-danger">{{ $errors->first('email') }}</p>
+											    @endif
 											</div>
 											<div class="form-group">
 												<label >Mật Khẩu</label>
 												<input name="password" type="password" class="form-control"  required>
+												@if ($errors->has('password'))
+											        <p class="help is-danger">{{ $errors->first('password') }}</p>
+											    @endif
 											</div>
 											<div class="form-group">
 												<label >Nhập Lại Mật Khẩu</label>
 												<input name="re_password" type="password" class="form-control"  required>
+												@if ($errors->has('re_password'))
+											        <p class="help is-danger">{{ $errors->first('re_password') }}</p>
+											    @endif
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -64,11 +67,17 @@
 									        <div class="form-group">
 												<label for="ten">Họ & Tên</label>
 												<input name="fullname" type="text" value="{{ old('fullname') }}" class="form-control" id="ten" required>
+												@if ($errors->has('fullname'))
+											        <p class="help is-danger">{{ $errors->first('fullname') }}</p>
+											    @endif
 											</div>
 											
 											<div class="form-group">
 												<label >Điện Thoại</label>
 												<input name="sdt" type="text" value="{{ old('sdt') }}" class="form-control"  required>
+												@if ($errors->has('sdt'))
+											        <p class="help is-danger">{{ $errors->first('sdt') }}</p>
+											    @endif
 											</div>
 											<div class="form-group">
 												<label>Tỉnh</label>
@@ -77,7 +86,11 @@
 													@foreach($province as $prov)
 												    	<option value="{{sprintf('%02d', $prov->id)}}">{{$prov->name}}</option>
 												    @endforeach
+
 												 </select>
+												 @if ($errors->has('province'))
+											        <p class="help is-danger">{{ $errors->first('province') }}</p>
+											    @endif
 											</div>
 											<div class="form-group">
 												<label>Quận/Huyện</label>
@@ -85,6 +98,9 @@
 													<option value> Chọn Quận/Huyện</option>
 													
 												 </select>
+												 @if ($errors->has('district'))
+											        <p class="help is-danger">{{ $errors->first('district') }}</p>
+											    @endif
 											</div>
 											<div class="form-group">
 												<label>Xã/Phường</label>
@@ -92,10 +108,16 @@
 													<option value> Chọn Xã/Phường</option>
 													
 												 </select>
+												 @if ($errors->has('ward'))
+											        <p class="help is-danger">{{ $errors->first('ward') }}</p>
+											    @endif
 											</div>
 											<div class="form-group">
 												<label >Số Nhà/Thôn</label>
 												<input name="diachi" type="text" value="{{ old('diachi') }}" required class="form-control"  required>
+												@if ($errors->has('diachi'))
+											        <p class="help is-danger">{{ $errors->first('diachi') }}</p>
+											    @endif
 											</div>
 											<button type="submit" class="btn btn-primary nutdangky">Đăng Ký</button>
 										</div>

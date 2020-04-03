@@ -102,7 +102,7 @@
 							<h5>THÔNG TIN THANH TOÁN</h5>
 							@if(Auth::check())
 							@else
-							    <a href="{{route('dangnhap')}}">Đăng Nhập để mua hàng</a>
+							    <a style="cursor: pointer; color: red;" data-toggle="modal" data-target="#loginModal">Đăng Nhập để mua hàng</a>
 							    <p>Mua hàng không cần tài khoản</p>
 
 							@endif
@@ -110,30 +110,14 @@
 							<div class="formmuahang">
 								<form action="{{route('dathang')}}" method="post" >
 									@csrf
-									@if(count($errors)>0)
+									<!-- @if(count($errors)>0)
 							            <div class="alert alert-danger">
 									    	@foreach($errors->all() as $err)
 									    	   <li>{{$err}}</li>
 									    	@endforeach
 								        </div>
-							        @endif
+							        @endif -->
 									@if(Auth::check())
-									<!-- <div class="form-group">
-                  						<label for="ten">Họ & Tên</label>
-                  						<input name="ten" type="text" required value="{{Auth::user()->full_name}}" class="form-control" id="ten">
-                  					</div>
-                  					<div class="form-group">
-                  						<label >Số Điện Thoại</label>
-                  						<input name="sdt" type="text" required value="{{Auth::user()->phone}}" class="form-control" >
-                  					</div>
-                  					<div class="form-group">
-                  						<label >Email</label>
-                  						<input name="email" type="email" required value="{{Auth::user()->email}}" class="form-control" >
-                  					</div>
-                  					<div class="form-group">
-                  						<label >Địa Chỉ</label>
-                  						<input name="diachi" type="text" required value="{{Auth::user()->address}}" class="form-control" >
-                  					</div> -->
 									<div class="delivery-address">
 										<h5>{{Auth::user()->full_name}}</h5>
 										<p>Điện Thoại: {{Auth::user()->phone}}</p>
@@ -149,24 +133,35 @@
 		                  					<div class="form-group">
 		                  						
 		                  						<input name="ten" value="{{ old('ten') }}" type="text" required placeholder="Nhập Họ Tên" class="form-control" id="ten">
+		                  						@if ($errors->has('ten'))
+											        <p class="help is-danger">{{ $errors->first('ten') }}</p>
+											    @endif
 		                  					</div>
 		                  					<div class="row">
 		                  						<div class="col-md-7">
 		                  							<div class="form-group">
-				                  						
 				                  						<input name="email" value="{{ old('email') }}" type="email" placeholder="Nhập Email" required class="form-control" >
+				                  						@if ($errors->has('email'))
+											        		<p class="help is-danger">{{ $errors->first('email') }}</p>
+											    		@endif
 				                  					</div>
 		                  						</div>
 		                  						<div class="col-md-5">
 		                  							<div class="form-group">
 		                  						
 		                  							<input name="sdt" value="{{ old('sdt') }}" placeholder="Nhập SĐT" type="text" required class="form-control input-phone-checkout" >
+		                  							@if ($errors->has('sdt'))
+											        	<p class="help is-danger">{{ $errors->first('sdt') }}</p>
+											    	@endif
 		                  					</div>
 		                  						</div>
 		                  					</div>
 		                  					<div class="form-group">
 		                  						
 		                  						<input name="diachi" value="{{ old('diachi') }}" type="text" placeholder="Nhập Số Nhà/Thôn" required class="form-control" >
+		                  						@if ($errors->has('diachi'))
+											        <p class="help is-danger">{{ $errors->first('diachi') }}</p>
+											    @endif
 		                  					</div>
 		                  					
 			                  					
@@ -174,26 +169,35 @@
                   						<div class="col-md-6">
                   							<div class="form-group">
 												
-												<select class="form-control"  name="province" id="province">
+												<select class="form-control"  required="" name="province" id="province">
 													<option value> Chọn Tỉnh/Thành Phố</option>
 													@foreach($province as $prov)
 												    	<option value="{{sprintf('%02d', $prov->id)}}">{{$prov->name}}</option>
 												    @endforeach
-												 </select>
+												</select>
+												@if ($errors->has('province'))
+											        <p class="help is-danger">{{ $errors->first('province') }}</p>
+											    @endif
 											</div>
 											<div class="form-group">
 												
-												<select class="form-control"  name="district" id="district">
+												<select class="form-control" required=""  name="district" id="district">
 													<option value> Chọn Quận/Huyện</option>
 													
 												 </select>
+												@if ($errors->has('district'))
+											        <p class="help is-danger">{{ $errors->first('district') }}</p>
+											    @endif
 											</div>
 											<div class="form-group">
 												
-												<select class="form-control"  name="ward" id="ward">
+												<select class="form-control" required=""  name="ward" id="ward">
 													<option value> Chọn Xã/Phường</option>
 													
-												 </select>
+												</select>
+												@if ($errors->has('ward'))
+											        <p class="help is-danger">{{ $errors->first('ward') }}</p>
+											    @endif
 											</div>
 		                  						</div>
 											</div>
@@ -217,6 +221,9 @@
 												</div>
 											</label>
 										</div>
+										@if ($errors->has('payment'))
+											<p class="help is-danger">{{ $errors->first('payment') }}</p>
+										@endif
 										<button type="submit" class="btn btn-primary nutdathang">ĐẶT HÀNG</button>
 
 									</div>

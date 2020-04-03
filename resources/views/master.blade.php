@@ -34,6 +34,14 @@
 	@yield('script')
 	@include('chatbot')
 
+	<script type="text/javascript">
+		@if ($errors->has('email_login') || $errors->has('password_login'))
+		    $('#loginModal').modal('show');
+		@endif
+		@if (session('LoginError'))
+		    $('#loginModal').modal('show');
+		@endif
+	</script>
 	<script type="text/javascript" src="source/1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
     <script type="text/javascript" src="source/chatbot/js/script.js"></script>

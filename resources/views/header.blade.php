@@ -21,17 +21,69 @@
 					    	<li><a href="{{route('logout')}}">Đăng Xuất</a></li>
 					    </ul>
 				    </li>
-				    <!-- <li class="nav-item">
-					    <span class="nav-link" href="">/</span>
-				    </li> -->
-				   <!--  <li class="nav-item">
-					    <a class="nav-link" href="{{route('logout')}}">Đăng Xuất</a>
-				     </li> -->
+				    
 
 				@else
 					<li class="nav-item">
-						<a class="nav-link" href="dang-nhap"><i class="fas fa-user"></i> Đăng Nhập</a>
+						<a class="nav-link" style="cursor: pointer;" data-toggle="modal" data-target="#loginModal"><i class="fas fa-user"></i> Tài Khoản</a>
 					</li>
+					<!-- Modal -->
+					<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title giohangcuatoi" id="exampleModalLabel"><p>ĐĂNG NHẬP VÀO HỆ THỐNG</p></h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      		<div class="formdangnhap">
+									<div class="row">
+										
+										<div class="col-lg-12">
+											<form action="{{route('dangnhap2')}}" method="post">
+												@csrf
+
+					                            @if($errors->has('email_login') || $errors->has('password_login'))
+					                              	<div class="alert alert-danger">
+												    	@foreach($errors->all() as $err)
+												    	   <li>{{$err}}</li>
+												    	@endforeach
+												    </div>
+					                            @endif
+					                            @if(session('LoginError'))
+					                                <div class="alert alert-danger">{{session('LoginError')}}</div>
+					                            @endif
+
+												<div class="form-group">
+													<label for="email">Email</label>
+													<input name="email_login" type="email" value="{{ old('email_login') }}" class="form-control" id="email" required>
+												</div>
+												<div class="form-group">
+													<label for="pwd">Mật Khẩu</label>
+													<input name="password_login" type="password"  class="form-control" id="pwd" required>
+												</div>
+												<div class="form-group form-check">
+													<label class="form-check-label">
+														<input class="form-check-input" type="checkbox"> Remember me
+													</label>
+												</div>
+												<button type="submit" class="btn btn-primary nutdangnhap">Đăng Nhập</button> 
+												<p style="margin-top: 20px;">Bạn chưa có tài khoản?<a href="dang-ky" style="color: #7AAEDD;"> Đăng ký</a></p>
+												<p style="margin-top: 20px;"><a href="quen-mat-khau" style="color: #7AAEDD;"> Quên mật khẩu?</a></p>
+											</form>
+										</div>
+										
+									</div>
+													
+													
+								</div>
+					      </div>
+					      
+					    </div>
+					  </div>
+					</div>
 					<!-- <li class="nav-item">
 						<span class="nav-link" href="">/</span>
 					</li>

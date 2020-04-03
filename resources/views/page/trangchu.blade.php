@@ -4,7 +4,7 @@
 @if(session('thongbao'))
     <div class="alert alert-success" style="text-align: center;">{{session('thongbao')}}</div>
 @endif
-@if(count($errors)>0)
+@if($errors->has('txtsdtkhuyenmai') || $errors->has('txtemailkhuyenmai'))
     <div class="alert alert-danger" style="text-align: center;">
         @foreach($errors->all() as $err)
             {{$err}}<br>

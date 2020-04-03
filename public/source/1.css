@@ -75,7 +75,7 @@
     
     .dungyen{
         position: fixed;
-        z-index: 99999;
+        z-index: 99;
         width: 100%;
         top:0px;
     }
@@ -106,7 +106,7 @@
     nav.navbar.navbar-expand-sm.bg-dark.navbar-dark{
         height: 96px!important;
     }
-    .menutren input.form-control{
+    .menutren input.form-control.inputtimkiem{
         margin-right: 0px;
         width: 260px!important;
     }
@@ -283,6 +283,10 @@
     }
 }
 
+.noidungthanhtoan p.is-danger, p.is-danger{
+    color: red;
+    font-size: 12px;
+}
 /*sale icon*/
 .number-sale.main-page{
     top: 186px;
@@ -1225,7 +1229,7 @@ img.anhgiohang {
 .sothutu {
     position: relative;
     top: 12px;
-    z-index: 9999;
+    z-index: 9;
     background: #7AAEDD;
     width: 26px;
     border-radius: 50%;
@@ -1244,7 +1248,7 @@ img.anhgiohang {
 .giohangcuatoi p {
     color: #7AAEDD;
     font-weight:600;
-    font-size:30px;
+    font-size:25px;
 }
 
 .thanhngang {
