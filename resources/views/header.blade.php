@@ -120,9 +120,18 @@
 					<a class="nav-link" href="gioi-thieu">GIỚI THIỆU</a>
 				</li>
 				<li class="nav-item sanphammenu">
-					<a class="nav-link" href="san-pham">SẢN PHẨM <i class="fas fa-angle-down"></i></a>
+					<a class="nav-link" href="san-pham">MỸ PHẨM NAM <i class="fas fa-angle-down"></i></a>
 					<ul class='sub-nav'>
-						@foreach($loai_sp as $loai)
+						@foreach($loai_sp_nam as $loai)
+						<a href="san-pham-theo-loai/{{$loai->slug}}"><li>{{$loai->name}}</li></a>
+						@endforeach
+						
+					</ul>
+				</li>
+				<li class="nav-item sanphammenu">
+					<a class="nav-link" href="san-pham">MỸ PHẨM NỮ <i class="fas fa-angle-down"></i></a>
+					<ul class='sub-nav'>
+						@foreach($loai_sp_nu as $loai)
 						<a href="san-pham-theo-loai/{{$loai->slug}}"><li>{{$loai->name}}</li></a>
 						@endforeach
 						

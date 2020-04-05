@@ -268,7 +268,7 @@ class PageController extends Controller
             return view('page.errors');
         }
         else{
-            $sanpham = Product::where('id',$thuonghieu->id)->where('status','!=',3);
+            $sanpham = Product::where('id_brand',$thuonghieu->id)->where('status','!=',3);
             $danhmuc = ProductType::orderBy('description','desc')->orderby('description','desc')->get();
             $brand = Brand::where('name','!=','None')->get();  
         

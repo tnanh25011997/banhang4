@@ -36,16 +36,16 @@ class AppServiceProvider extends ServiceProvider
         });
         view()->composer('header',function($view)
         {
-            $loai_sp = ProductType::orderBy('description','desc')->get();
-           
+            $loai_sp_nu = ProductType::where('description','1')->orderBy('description','desc')->get();
+            $loai_sp_nam = ProductType::where('description','0')->orderBy('description','desc')->get();
             if(Session('cart')){
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);
                 $count = count($cart->items);
-                $view->with(['loai_sp'=>$loai_sp,'counttt'=>$count]);
+                $view->with(['loai_sp_nu'=>$loai_sp_nu,'loai_sp_nam'=>$loai_sp_nam,'counttt'=>$count]);
             }
             else{
-                $view->with('loai_sp',$loai_sp);
+                $view->with(['loai_sp_nu'=>$loai_sp_nu,'loai_sp_nam'=>$loai_sp_nam]);
             }
 
             

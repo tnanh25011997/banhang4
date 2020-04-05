@@ -7,6 +7,9 @@
         width: 84%!important;
         
     }
+    .navbar-nav .nav-item a{
+        font-size: 16px!important;
+    }
 
 }
 @media only screen and (min-width: 768px ) and (max-width: 992px){
@@ -26,7 +29,7 @@
         width: 700px!important;
     }
     .navbar-nav .nav-item a{
-        font-size: 15px!important;
+        font-size: 10px!important;
     }
     .motsanpham2 .anh2 img.img-fluid{
         display: block;
