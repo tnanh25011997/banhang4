@@ -39,10 +39,10 @@ class ProductTypeController extends Controller
         $producttype->slug = $slug->createSlugCategory($req->ten);
 
     	if($req->loai=='Nam'){
-    		$producttype->description = "0";
+    		$producttype->gender = 1;
     	}
     	else{
-    		$producttype->description = "1";
+    		$producttype->gender = 0;
     	}
     	$producttype->save();
     	return redirect('admin/ProductType/them')->with('thongbao','Thêm Thành Công');
@@ -71,10 +71,10 @@ class ProductTypeController extends Controller
         
 
     	if($req->loai=='Nam'){
-    		$producttype->description = "0";
+    		$producttype->gender = 1;
     	}
     	else{
-    		$producttype->description = "1";
+    		$producttype->gender = 0;
     	}
     	$producttype->save();
     	return redirect('admin/ProductType/sua/'.$producttype->id)->with('thongbao','Sửa Thành Công');

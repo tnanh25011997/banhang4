@@ -69,8 +69,15 @@ class ProductController extends Controller
         else{
             $product->promotion_price = $req->giakhuyenmai;
         }
-    	
-        $product->unit = $req->unit;
+    	//gender
+        //$product->unit = $req->unit;
+        $type = ProductType::find($req->loaisp);
+        if($type->gender == 1){
+            $product->gender = 1;
+        }else{
+            $product->gender = 0;
+        }
+        
     	if($req->hasFile('hinhanh'))
     	{
 
@@ -113,7 +120,6 @@ class ProductController extends Controller
     public function postSua(Request $req,$id)
     {
         $product = Product::find($id);
-        // $req->ten = trim(preg_replace('/\s+/',' ', $req->ten));
         $giakm = $req->giakhuyenmai;
         $giagoc = $req->giagoc;
         if($giakm>$giagoc){
@@ -149,7 +155,14 @@ class ProductController extends Controller
         else{
             $product->promotion_price = $req->giakhuyenmai;
         }
-        $product->unit = $req->unit;
+        //$product->unit = $req->unit;
+        $type = ProductType::find($req->loaisp);
+        if($type->gender == 1){
+            $product->gender = 1;
+        }else{
+            $product->gender = 0;
+        }
+
         if($req->hasFile('hinhanh'))
         {
 

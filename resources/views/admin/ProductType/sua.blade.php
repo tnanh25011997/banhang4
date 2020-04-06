@@ -30,8 +30,8 @@
                             <div class="form-group">
                                 <label for="sel1">Nam/Nữ</label>
                                 <select class="form-control" id="sel1" name="loai">
-                                    <option @if($producttype->description == '0') {{"selected"}} @endif >Nam</option>
-                                    <option @if($producttype->description == '1') {{"selected"}} @endif>Nữ</option>
+                                    <option @if($producttype->gender == 1) {{"selected"}} @endif >Nam</option>
+                                    <option @if($producttype->gender == 0) {{"selected"}} @endif>Nữ</option>
                                     
                                </select>
                              </div>

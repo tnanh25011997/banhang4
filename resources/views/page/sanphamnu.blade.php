@@ -1,17 +1,17 @@
 @extends('master')
-@section('title', 'Sản Phẩm')
+@section('title', 'Mỹ Phẩm Nữ')
 @section('content')
 <div class="danhsachsanpham">
 		<div class="container">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb bread2">
 					<li class="breadcrumb-item"><a href="home">Trang Chủ</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Sản Phẩm</li>
+					<li class="breadcrumb-item active" aria-current="page">Mỹ Phẩm Nữ</li>
 				</ol>
 			</nav>
 			<div class="row">
 				<div class="col-sm-6">
-					<h2>SẢN PHẨM</h2>
+					<h4>Mỹ Phẩm Nữ</h4>
 				</div>
 				<div class="col-sm-6">
 					<div style="text-align: right; margin-top: 15px;" class="sort-by">
@@ -62,6 +62,7 @@
 							@endforeach
 						</ul>
 					</div>
+					
 				</div>
 				<div class="col-lg-9">
 					<div class="row">

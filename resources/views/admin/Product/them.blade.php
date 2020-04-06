@@ -61,16 +61,7 @@
                             <div class="form-group">
                                 <label>Giá Khuyến Mãi</label>
                                 <input class="form-control" type="number" name="giakhuyenmai" value="{{ old('giakhuyenmai') }}" placeholder="Nhập giá khuyến mãi" />
-                            </div>
-                            <div class="form-group">
-                                <label>Nam/nữ</label>
-                                <select class="form-control" name="unit"> 
-                                    <option value="nam">Nam</option>
-                                    <option value="nu">Nữ</option> 
-                                </select>
-                            </div>
-
-                            
+                            </div> 
                             <div class="form-group">
                                 <label>Images</label>
                                 <input type="file" name="hinhanh">

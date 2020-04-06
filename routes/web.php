@@ -24,6 +24,8 @@ Route::get('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@getThanhToan'
 Route::get('hoan-tat',['as'=>'hoantat','uses'=>'PageController@getHoanTat']);
 Route::get('san-pham-theo-loai/{slug}',['as'=>'sanphamtheoloai','uses'=>'PageController@getTheoLoai']);
 Route::get('thuong-hieu/{slug}',['as'=>'thuong-hieu','uses'=>'PageController@getThuongHieu']);
+Route::get('my-pham-nu',['as'=>'my-pham-nu','uses'=>'PageController@getSanPhamNu']);
+Route::get('my-pham-nam',['as'=>'my-pham-nam','uses'=>'PageController@getSanPhamNam']);
 //giohang
 Route::get('gio-hang/{id}',['as'=>'giohangid','uses'=>'CartController@getGioHangId']);
 

@@ -36,8 +36,8 @@ class AppServiceProvider extends ServiceProvider
         });
         view()->composer('header',function($view)
         {
-            $loai_sp_nu = ProductType::where('description','1')->orderBy('description','desc')->get();
-            $loai_sp_nam = ProductType::where('description','0')->orderBy('description','desc')->get();
+            $loai_sp_nu = ProductType::where('gender',0)->orderBy('gender','desc')->get();
+            $loai_sp_nam = ProductType::where('gender',1)->orderBy('gender','desc')->get();
             if(Session('cart')){
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);

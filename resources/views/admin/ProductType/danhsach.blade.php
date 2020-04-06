@@ -34,7 +34,7 @@
                                         <td>{{$pt->name}}</td>
                                         <td>
                                             <?php
-                                                if($pt->description==1){
+                                                if($pt->gender==0){
                                                     echo "Nữ";
                                                 }else{
                                                     echo "Nam";

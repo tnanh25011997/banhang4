@@ -34,12 +34,12 @@ class PageController extends Controller
     public function getIndex()
     {
         $slide = Slide::all();
-        $new_product = Product::where('status','!=',3)->orderby('created_at','desc')->paginate(4);
+        $new_product = Product::where('status','!=',3)->orderby('created_at','desc')->take(4)->get();
         $sale_product = Product::where('sale','<>',0)->where('status','!=',3)->orderby('created_at','desc')->take(4)->get();
-        $myphamnu = ProductType::where('description','1')->get();
-        $myphamnam = ProductType::where('description','0')->get();
-        $sanpham_nam = Product::where('unit','nam')->where('status','!=',3)->orderby('created_at','desc')->paginate(6);
-        $sanpham_nu = Product::where('unit','nu')->where('status','!=',3)->orderby('created_at','desc')->paginate(6);
+        $myphamnu = ProductType::where('gender',0)->get();
+        $myphamnam = ProductType::where('gender',1)->get();
+        $sanpham_nam = Product::where('gender',1)->where('status','!=',3)->orderby('created_at','desc')->take(6)->get();
+        $sanpham_nu = Product::where('gender',0)->where('status','!=',3)->orderby('created_at','desc')->take(6)->get();
     	return view('page.trangchu',compact('slide','new_product','sale_product','myphamnu','myphamnam','sanpham_nam','sanpham_nu'));
     }
     public function getChiTiet($id)
@@ -138,7 +138,7 @@ class PageController extends Controller
     {
         //$sanpham = Product::orderby('id','asc')->paginate(9);
         $sanpham = Product::where('sale','<',100)->where('status','!=',3);
-        $danhmuc = ProductType::orderBy('description','desc')->orderby('description','desc')->get();
+        $danhmuc = ProductType::orderBy('gender','desc')->get();
         $brand = Brand::where('name','!=','None')->get();   
         if($request->price){
             $price = $request->price;
@@ -194,6 +194,126 @@ class PageController extends Controller
         $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
         return view('page.sanpham',compact('sanpham','danhmuc','brand'));
     }
+    public function getSanPhamNu(Request $request)
+    {
+        //$sanpham = Product::orderby('id','asc')->paginate(9);
+        $sanpham = Product::where('sale','<',100)->where('gender',0)->where('status','!=',3);
+        $danhmuc = ProductType::orderBy('gender','desc')->get();
+        $brand = Brand::where('name','!=','None')->get();   
+        if($request->price){
+            $price = $request->price;
+            switch ($price) {
+                case 1:
+                    $sanpham->where('promotion_price','<',200000);
+                    break;
+                case 2:
+                    $sanpham->whereBetween('promotion_price',[200000,400000]);
+                    break;
+                case 3:
+                    $sanpham->whereBetween('promotion_price',[400000,600000]);
+                    break;
+                case 4:
+                    $sanpham->whereBetween('promotion_price',[600000,800000]);
+                    break;
+                case 5:
+                    $sanpham->whereBetween('promotion_price',[800000,1000000]);
+                    break;
+                case 6:
+                    $sanpham->where('promotion_price','>',1000000);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if($request->orderby){
+            $orderby = $request->orderby;
+            switch ($orderby) {
+                case 'created-descending':
+                    $sanpham->orderby('created_at','desc');
+                    break;
+                case 'created-ascending':
+                    $sanpham->orderby('created_at','asc');
+                    break;
+                case 'price-ascending':
+                    $sanpham->orderby('promotion_price','asc')->orderby('unit_price','asc');
+                    break;
+                case 'price-descending':
+                    $sanpham->orderby('promotion_price','desc')->orderby('unit_price','desc');
+                    break;
+                case 'name-ascending':
+                    $sanpham->orderby('name','asc');
+                    break;
+                case 'name-descending':
+                    $sanpham->orderby('name','desc');
+                    break;
+                default:
+                    $sanpham->orderby('id','asc');
+                    break;
+            }
+        }
+        $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
+        return view('page.sanphamnu',compact('sanpham','danhmuc','brand'));
+    }
+    public function getSanPhamNam(Request $request)
+    {
+        $sanpham = Product::where('sale','<',100)->where('gender',1)->where('status','!=',3);
+        $danhmuc = ProductType::orderBy('gender','desc')->get();
+        $brand = Brand::where('name','!=','None')->get();   
+        if($request->price){
+            $price = $request->price;
+            switch ($price) {
+                case 1:
+                    $sanpham->where('promotion_price','<',200000);
+                    break;
+                case 2:
+                    $sanpham->whereBetween('promotion_price',[200000,400000]);
+                    break;
+                case 3:
+                    $sanpham->whereBetween('promotion_price',[400000,600000]);
+                    break;
+                case 4:
+                    $sanpham->whereBetween('promotion_price',[600000,800000]);
+                    break;
+                case 5:
+                    $sanpham->whereBetween('promotion_price',[800000,1000000]);
+                    break;
+                case 6:
+                    $sanpham->where('promotion_price','>',1000000);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if($request->orderby){
+            $orderby = $request->orderby;
+            switch ($orderby) {
+                case 'created-descending':
+                    $sanpham->orderby('created_at','desc');
+                    break;
+                case 'created-ascending':
+                    $sanpham->orderby('created_at','asc');
+                    break;
+                case 'price-ascending':
+                    $sanpham->orderby('promotion_price','asc')->orderby('unit_price','asc');
+                    break;
+                case 'price-descending':
+                    $sanpham->orderby('promotion_price','desc')->orderby('unit_price','desc');
+                    break;
+                case 'name-ascending':
+                    $sanpham->orderby('name','asc');
+                    break;
+                case 'name-descending':
+                    $sanpham->orderby('name','desc');
+                    break;
+                default:
+                    $sanpham->orderby('id','asc');
+                    break;
+            }
+        }
+        $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
+        return view('page.sanphamnam',compact('sanpham','danhmuc','brand'));
+    }
+    
     public function getTheoLoai($slug, Request $request)
     {
         $tenloai = ProductType::where('slug',$slug)->first();
@@ -203,7 +323,7 @@ class PageController extends Controller
         else{
 
             $loai_sanpham = Product::where('id_type',$tenloai->id)->where('status','!=',3);;
-            $danhmuc = ProductType::orderBy('description','desc')->orderby('description','desc')->get();
+            $danhmuc = ProductType::orderBy('gender','desc')->get();
             $brand = Brand::where('name','!=','None')->get();
             if($request->price){
                 $price = $request->price;
@@ -269,7 +389,7 @@ class PageController extends Controller
         }
         else{
             $sanpham = Product::where('id_brand',$thuonghieu->id)->where('status','!=',3);
-            $danhmuc = ProductType::orderBy('description','desc')->orderby('description','desc')->get();
+            $danhmuc = ProductType::orderBy('gender','desc')->get();
             $brand = Brand::where('name','!=','None')->get();  
         
             if($request->orderby){

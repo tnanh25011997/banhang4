@@ -50,7 +50,7 @@
 						<ul>
 							<p>DANH MỤC SẢN PHẨM</p>
 							@foreach($danhmuc as $danh)
-							<a href="san-pham-theo-loai/{{$danh->slug}}"><li><?php if($danh->description==1) echo '<i class="fas fa-venus" style="color:#ef77a0;"></i>'; else echo '<i class="fas fa-mars" style="color:#2196f3;"></i>' ?>&nbsp;&nbsp;{{$danh->name}}</li></a>
+							<a href="san-pham-theo-loai/{{$danh->slug}}"><li><?php if($danh->gender==0) echo '<i class="fas fa-venus" style="color:#ef77a0;"></i>'; else echo '<i class="fas fa-mars" style="color:#2196f3;"></i>' ?>&nbsp;&nbsp;{{$danh->name}}</li></a>
 							@endforeach
 						</ul>
 					</div>

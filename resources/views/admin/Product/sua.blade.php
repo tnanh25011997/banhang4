@@ -73,17 +73,6 @@
                                 <input class="form-control" type="number" name="giakhuyenmai" placeholder="Nhập giá khuyến mãi" value="{{$product->promotion_price}}" />
                             </div>
                             <div class="form-group">
-                                <label>Nam/nữ</label>
-                                <select class="form-control" name="unit">
-                                  
-                                    <option @if($product->unit=="nam") {{"selected"}} @endif value="nam">Nam</option>
-                                    <option @if($product->unit=="nu") {{"selected"}} @endif value="nu">Nữ</option>
-                                    
-                                    
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
                                 <label>Images</label>
                                 <p><img src="source/images/{{$product->image}}" style="width: 200px"  alt=""></p>
                                 <input type="file" name="hinhanh">
