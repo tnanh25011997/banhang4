@@ -65,7 +65,7 @@ Route::get('search',['as'=>'search','uses'=>'PageController@getSearch']);
 //tintuc
 
 Route::get('tin-tuc',['as'=>'tintuc','uses'=>'PageController@getTinTuc']);
-Route::get('chitiet-tintuc/{id}',['as'=>'chitiettintuc','uses'=>'PageController@getChiTietTinTuc']);
+Route::get('chi-tiet-tin-tuc/{id}',['as'=>'chitiettintuc','uses'=>'PageController@getChiTietTinTuc']);
 
 Route::post('dang-ky-khuyen-mai',['as'=>'dang-ky-khuyen-mai','uses'=>'PageController@postDangKyKhuyenMai']);
 //comment

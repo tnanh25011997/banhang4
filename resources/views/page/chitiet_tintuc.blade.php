@@ -11,7 +11,7 @@
 					    <nav aria-label="breadcrumb">
 						    <ol class="breadcrumb">
 							    <li class="breadcrumb-item"><a href="home">Trang Chủ</a></li>
-							    <li class="breadcrumb-item"><a href="tintuc">Tin Tức</a></li>
+							    <li class="breadcrumb-item"><a href="tin-tuc">Tin Tức</a></li>
 							    <li class="breadcrumb-item active" aria-current="page">{{$tin->title}}</li>
 							    
 						    </ol>

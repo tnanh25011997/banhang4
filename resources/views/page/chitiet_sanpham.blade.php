@@ -133,7 +133,7 @@
 				    			@else
 				    			<div class="loginToComment">
 				    				<div class="productRating" style="display: none;"></div>
-				    				<p></p>Bạn hãy <a href="dang-nhap">Đăng nhập</a> để viết nhận xét.</p>
+				    				<p></p>Bạn hãy <a style="cursor: pointer; color: #7AAEDD;" data-toggle="modal" data-target="#loginModal">Đăng nhập</a> để viết nhận xét.</p>
 				    			</div>
 				    			@endif
 								<hr>

@@ -451,7 +451,7 @@ class PageController extends Controller
     
     public function getSearch(Request $req)
     {
-        $product = DB::table("products")->join('brand','products.id_brand','=','brand.id')->select(DB::raw("products.id"), DB::raw("products.name"), DB::raw("products.image"),DB::raw("products.status"),DB::raw("products.rate"),DB::raw("products.sale"),DB::raw("products.promotion_price"),DB::raw("products.unit_price"),DB::raw("products.slug"))->where('products.name','like','%'.$req->key.'%')->where('products.status','!=',3)->orWhere('products.unit_price',$req->key)->orWhere('brand.name','like','%'.$req->key.'%')->orderby('products.created_at','desc')->get();
+        $product = DB::table("products")->join('brand','products.id_brand','=','brand.id')->select(DB::raw("products.id"), DB::raw("products.name"), DB::raw("products.image"),DB::raw("products.status"),DB::raw("products.rate"),DB::raw("products.sale"),DB::raw("products.promotion_price"),DB::raw("products.unit_price"),DB::raw("products.slug"))->where('products.name','like','%'.$req->key.'%')->where('products.status','!=',3)->orWhere('products.unit_price',$req->key)->orWhere('brand.name','like','%'.$req->key.'%')->orderby('products.created_at','desc')->paginate(8)->appends(request()->except('page'));
         return view('page.search',compact('product'));
         // $product = Product::where('name','like','%'.$req->key.'%')->orWhere('unit_price',$req->key)->get();
         // return view('page.search',compact('product'));

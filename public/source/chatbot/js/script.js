@@ -8,6 +8,7 @@ $('.usrInput').on('keyup keypress', function (e) {
 			return false;
 		} else {
 			//$(".usrInput").blur();
+			$("#paginated_cards").remove();
 			setUserResponse(text);
 			send(text);
 			e.preventDefault();
@@ -23,7 +24,9 @@ $('.btnsend').click(function(event) {
 		e.preventDefault();
 		return false;
 	} else {
+
 		//$(".usrInput").blur();
+		$("#paginated_cards").remove();
 		setUserResponse(text);
 		send(text);
 		e.preventDefault();
@@ -103,6 +106,19 @@ function setBotResponse(val) {
 				if (val[i].hasOwnProperty("buttons")) {
 					addSuggestion(val[i].buttons);
 				}
+				//check if the response contains "custom" message  
+                if (val[i].hasOwnProperty("custom")) {
+
+                    
+                    //check if the custom payload type is "listProductCard"
+                    if (val[i].custom.payload == "listProductCard") {
+                        listProduct = (val[i].custom.data)
+                        showCardsCarousel(listProduct);
+                        return;
+                    }
+
+                   
+                }
 
 			}
 			scrollToBottomOfResults();
@@ -157,3 +173,80 @@ $(document).on("click", ".menu .menuChips", function () {
 	send(payload);
 	$('.suggestions').remove(); //delete the suggestions 
 });
+
+//====================================== Cards Carousel =========================================
+
+function showCardsCarousel(listProduct) {
+    var cards = createCardsCarousel(listProduct);
+
+    $(cards).appendTo(".chats").show();
+
+
+    if (listProduct.length <= 2) {
+    	for (var i = 0; i < listProduct.length; i++) {
+    		$(".cards_scroller>div.carousel_cards:nth-of-type(" + i + ")").fadeIn(1000);
+    	}
+        
+    } else {
+        for (var i = 0; i < listProduct.length; i++) {
+            $(".cards_scroller>div.carousel_cards:nth-of-type(" + i + ")").fadeIn(1000);
+        }
+        $(".cards .arrow.prev").fadeIn(2000);
+        $(".cards .arrow.next").fadeIn(2000);
+    }
+
+
+    scrollToBottomOfResults();
+
+    const card = document.querySelector("#paginated_cards");
+    const card_scroller = card.querySelector(".cards_scroller");
+    var card_item_size = 225;
+
+    card.querySelector(".arrow.next").addEventListener("click", scrollToNextPage);
+    card.querySelector(".arrow.prev").addEventListener("click", scrollToPrevPage);
+
+
+    // For paginated scrolling, simply scroll the card one item in the given
+    // direction and let css scroll snaping handle the specific alignment.
+    function scrollToNextPage() {
+        card_scroller.scrollBy({
+		  top: 0,
+		  left: 160,
+		  behavior: 'smooth'
+		});
+    }
+
+    function scrollToPrevPage() {
+        card_scroller.scrollBy({
+		  top: 0,
+		  left: -160,
+		  behavior: 'smooth'
+		});
+    }
+
+}
+
+function createCardsCarousel(listProduct) {
+
+    var cards = "";
+    
+
+    for (i = 0; i < listProduct.length; i++) {
+        title = listProduct[i].name;
+        //ratings = Math.round((listProduct[i].ratings / 5) * 100) + "%";
+        price_test = listProduct[i].promotion_price;
+        //for local
+        price_test2 = price_test.toString();
+
+        price = price_test2.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        slug = listProduct[i].slug;
+        data = listProduct[i];
+        item = '<div class="carousel_cards in-left">' + '<img class="cardBackgroundImage" src="http://localhost/banhang/public/source/images/' + listProduct[i].image + '"><div class="cardFooter">' + '<a class="cardTitle" href="http://localhost/banhang/public/chi-tiet-san-pham/'+slug+'" target="_blank">' + title + "</a> " + '<div class="cardDescription">' + price +  " VNĐ</div>" + "</div>" + "</div>";
+
+        cards += item;
+    }
+
+    var cardContents = '<div id="paginated_cards" class="cards"> <div class="cards_scroller">' + cards + '  <span class="arrow prev fa fa-chevron-circle-left in-left"></span> <span class="arrow next fa fa-chevron-circle-right in-left"></span> </div> </div>';
+
+    return cardContents;
+}

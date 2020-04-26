@@ -10,6 +10,9 @@
     .navbar-nav .nav-item a{
         font-size: 16px!important;
     }
+    .sanphamkhuyenmai .motsanpham p.tensp {
+        font-size: 14px!important;
+    }
 
 }
 @media only screen and (min-width: 768px ) and (max-width: 992px){
@@ -1300,7 +1303,7 @@ img.anhgiohang {
     left: 50%;
     transform: translateX(-50%);
     top: 50%;
-    z-index: 9998;
+    z-index: 10;
     opacity: 0;
     visibility: hidden;
     transition: 0.3s;

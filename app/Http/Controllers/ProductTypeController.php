@@ -50,7 +50,7 @@ class ProductTypeController extends Controller
     public function getSua($id)
     {
     	$producttype = ProductType::find($id);
-    	return view('admin.ProductType.Sua',['producttype'=>$producttype]);
+    	return view('admin.ProductType.sua',['producttype'=>$producttype]);
     }
     public function postSua(Request $req,$id)
     {

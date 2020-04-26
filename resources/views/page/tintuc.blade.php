@@ -23,7 +23,7 @@
 								<img src="source/images/{{$t->image}}" style="width: 300px; height: 200px;" alt="">
 							</div>
 							</a>
-							<a href="chitiet-tintuc/{{$t->id}}"><div class="tieudetin"> <h5>{{$t->title}}</h5></div></a>
+							<a href="chi-tiet-tin-tuc/{{$t->id}}"><div class="tieudetin"> <h5>{{$t->title}}</h5></div></a>
 							<div class="highlight">{{$t->highlight}}</div>
 						</div>
 						@endforeach
