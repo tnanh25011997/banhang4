@@ -14,20 +14,20 @@ class ProductController extends Controller
 {
     public function getDanhSach()
     {
-    	$product = Product::orderby('created_at','desc')->get();
-    	return view('admin.Product.danhsach',['product'=>$product]);
+        $product = Product::orderby('created_at','desc')->get();
+        return view('admin.Product.danhsach',['product'=>$product]);
     }
     public function getXoa($id)
     {
-    	$product = Product::find($id);
-    	$product->delete();
-    	return redirect('admin/Product/danhsach')->with('thongbao','Xóa Thành Công');
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('admin/Product/danhsach')->with('thongbao','Xóa Thành Công');
     }
     public function getThem()
     {
-    	$producttype = ProductType::all();
+        $producttype = ProductType::all();
         $brand = Brand::all();
-    	return view('admin.Product.them',['producttype'=>$producttype,'brand'=>$brand]);
+        return view('admin.Product.them',['producttype'=>$producttype,'brand'=>$brand]);
     }
     public function postThem(Request $req)
     {
@@ -36,40 +36,40 @@ class ProductController extends Controller
         if($giakm>$giagoc){
             return redirect()->back()->with('error','Giá Khuyến Mãi Không Được Lớn Hơn Giá Gốc');
         }
-    	$this->validate($req,
-    		[
-    			'loaisp'=>'required',
+        $this->validate($req,
+            [
+                'loaisp'=>'required',
                 'thuonghieu'=>'required',
-    			// 'ten'=>'required|unique:products,name',
+                // 'ten'=>'required|unique:products,name',
                 'ten'=>'required',
-    			'mota'=>'required',
-    			'giagoc'=>'required|gte:50000|lte:10000000',
-    			'hinhanh'=>'required'
-    		],
-    		[
-    			'loaisp.required'=>'Bạn Chưa Chọn Loại Sản Phẩm',
+                'mota'=>'required',
+                'giagoc'=>'required|gte:50000|lte:10000000',
+                'hinhanh'=>'required'
+            ],
+            [
+                'loaisp.required'=>'Bạn Chưa Chọn Loại Sản Phẩm',
                 'thuonghieu.required'=>'Bạn Chưa Chọn Thương Hiệu',
-    			'ten.required'=>'Bạn Chưa Nhập Tên Sản Phẩm',
-    			// 'ten.unique'=>'Tên Sản Phẩm đã tồn tại',
-    			'mota.required'=>'Bạn Chưa Nhập Mô Tả Sản Phẩm',
-    			'giagoc.required'=>'Bạn Chưa Nhập Giá Gốc Sản Phẩm',	
+                'ten.required'=>'Bạn Chưa Nhập Tên Sản Phẩm',
+                // 'ten.unique'=>'Tên Sản Phẩm đã tồn tại',
+                'mota.required'=>'Bạn Chưa Nhập Mô Tả Sản Phẩm',
+                'giagoc.required'=>'Bạn Chưa Nhập Giá Gốc Sản Phẩm',    
                 'giagoc.gte'=>'Giá Gốc Của Sản Phẩm Phải Lớn Hơn 50,000đ',
-                'giagoc.lte'=>'Giá Gốc Của Sản Phẩm Phải Bé Hơn 10,000,000đ',	
-    			'hinhanh.required'=>'Bạn Chưa Chọn Ảnh Sản Phẩm'
-    		]);
-    	$product = new Product;
-    	$product->name = $req->ten;
-    	$product->id_type = $req->loaisp;
+                'giagoc.lte'=>'Giá Gốc Của Sản Phẩm Phải Bé Hơn 10,000,000đ',   
+                'hinhanh.required'=>'Bạn Chưa Chọn Ảnh Sản Phẩm'
+            ]);
+        $product = new Product;
+        $product->name = $req->ten;
+        $product->id_type = $req->loaisp;
         $product->id_brand = $req->thuonghieu;
-    	$product->description = $req->mota;
-    	$product->unit_price = $req->giagoc;
+        $product->description = $req->mota;
+        $product->unit_price = $req->giagoc;
         if($req->giakhuyenmai == null || $req->giakhuyenmai <= 0 || $req->giakhuyenmai >  $req->giagoc){
             $product->promotion_price = $product->unit_price;
         }
         else{
             $product->promotion_price = $req->giakhuyenmai;
         }
-    	//gender
+        //gender
         //$product->unit = $req->unit;
         $type = ProductType::find($req->loaisp);
         if($type->gender == 1){
@@ -78,25 +78,36 @@ class ProductController extends Controller
             $product->gender = 0;
         }
         
-    	if($req->hasFile('hinhanh'))
-    	{
+        //upload image
+        $arrImg = array();
+        if($req->hasFile('hinhanh'))
+        {
+            foreach ($req->hinhanh as $file) {
+                $name = $file->getClientOriginalName(); // lay cai ten cua file hinhanh
+                $hinh = str_random(4)."_".$name;
+                while (file_exists("source/images/".$hinh)) {
+                    $hinh = str_random(4)."_".$name;
+                }
+                $file->move("source/images",$hinh);
+                array_push($arrImg, $hinh);
+                
+            }
+            
+            // $file = $req->file('hinhanh'); //lay file hinhanh
+            // $name = $file->getClientOriginalName(); // lay cai ten cua file hinhanh
+            // $hinh = str_random(4)."_".$name;
+            // while (file_exists("source/images/".$hinh)) {
+            //     $hinh = str_random(4)."_".$name;
+            // }
+            // $file->move("source/images",$hinh);
+            $product->image= json_encode($arrImg,JSON_FORCE_OBJECT);
+            print_r($product->image);
+        }
+        else{
+            $product->image="";
+        }
 
-    		$file = $req->file('hinhanh'); //lay file hinhanh
-    		$name = $file->getClientOriginalName(); // lay cai ten cua file hinhanh
-    		$hinh = str_random(4)."_".$name;
-    		while (file_exists("source/images/".$hinh)) {
-    		    $hinh = str_random(4)."_".$name;
-    		}
-    		$file->move("source/images",$hinh);
-    		$product->image= $hinh;
-    	}
-    	else{
-    		$product->image="";
-    	}
         //slug
-        // $str = $req->ten;
-        // $slug = Str::slug($str, '-');
-        // $product->slug = $slug;
         $slug = new Slug();
         $product->slug = $slug->createSlugProduct($req->ten);
         
@@ -107,8 +118,8 @@ class ProductController extends Controller
             $product->sale = 100-(($req->giakhuyenmai/$req->giagoc)*100);
         }
 
-    	$product->save();
-    	return redirect('admin/Product/them')->with('thongbao','Thêm Sản Phẩm Thành Công');
+        $product->save();
+        return redirect('admin/Product/them')->with('thongbao','Thêm Sản Phẩm Thành Công');
     }
     public function getSua($id)
     {
@@ -163,18 +174,33 @@ class ProductController extends Controller
             $product->gender = 0;
         }
 
+        //upload image
+        $arrImg = array();
+        $oldArr = json_decode($product->image,true);
         if($req->hasFile('hinhanh'))
         {
-
-            $file = $req->file('hinhanh');
-            $name = $file->getClientOriginalName();
-            $hinh = str_random(4)."_".$name;
-            while (file_exists("source/images/".$hinh)) {
-                $hinh = str_random(4)."_".$name;
+            for($i=0;$i<sizeof($oldArr);$i++){
+                unlink("source/images/".$oldArr[$i]);
             }
-            unlink("source/images/".$product->image);
-            $file->move("source/images",$hinh);
-            $product->image= $hinh;
+            foreach ($req->hinhanh as $file) {
+                $name = $file->getClientOriginalName(); // lay cai ten cua file hinhanh
+                $hinh = str_random(4)."_".$name;
+                while (file_exists("source/images/".$hinh)) {
+                    $hinh = str_random(4)."_".$name;
+                }
+                $file->move("source/images",$hinh);
+                array_push($arrImg, $hinh);   
+            }
+            $product->image= json_encode($arrImg,JSON_FORCE_OBJECT);
+            // $file = $req->file('hinhanh');
+            // $name = $file->getClientOriginalName();
+            // $hinh = str_random(4)."_".$name;
+            // while (file_exists("source/images/".$hinh)) {
+            //     $hinh = str_random(4)."_".$name;
+            // }
+            // unlink("source/images/".$product->image);
+            // $file->move("source/images",$hinh);
+            // $product->image= $hinh;
             
         }
         else{

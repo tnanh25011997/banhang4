@@ -20,7 +20,7 @@
       </div>
    </div>
    <!--bot widget -->
-   <div class="profile_div" id="profile_div">
-      <img class="imgProfile"  src="source/chatbot/img/chat-icon.svg"/>
+   <div class="chatbot-button" id="chatbot-button">
+      <img class="imgbot-button"  src="source/chatbot/img/chat-icon.svg"/>
    </div>
 </div>

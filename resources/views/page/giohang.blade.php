@@ -55,9 +55,11 @@
 					<tbody>
 						
 							@foreach($product_cart as $item)
+							<?php $arrImg = json_decode($item['item']['image'],true); ?>
+							
 								<tr>
 									<td>{{$item['item']['name']}}</td>
-									<td class="anhgiohangtd"><img  src="source/images/{{$item['item']['image']}}" alt="" class="anhgiohang"></td>
+									<td class="anhgiohangtd"><img  src="source/images/{{$arrImg[0]}}" alt="" class="anhgiohang"></td>
 									@if($item['item']['promotion_price'] == $item['item']['unit_price'])
 										<td class="giagiohang">{{number_format($item['item']['unit_price'])}}đ</td>
 									@else

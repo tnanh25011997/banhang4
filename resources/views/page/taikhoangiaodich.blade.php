@@ -28,10 +28,13 @@
 						<div class="list-group">
 							<p href="#" class="list-group-item list-group-item-action tendanhmuc">SẢN PHẨM KHUYẾN MÃI</p>
 							@foreach($sale_product as $sp)
+							<?php 
+				    			$arrSaleImg = json_decode($sp->image,true);
+				    		?>
 							<a href="chi-tiet-san-pham/{{$sp->slug}}">
 							<div class="list-group-item list-group-item-action motsanpham">
 								<div class="row">
-									<div class="col-5" style="text-align: right;"><img src="source/images/{{$sp->image}}"  alt="" class="img-fluid"></div>
+									<div class="col-5" style="text-align: right;"><img src="source/images/{{$arrSaleImg[0]}}"  alt="" class="img-fluid"></div>
 									<div class="col-7 thongtin">
 										<p class="tensp">{{$sp->name}}</p>
 										<p class="gia">{{number_format($sp->unit_price)}}đ</p>

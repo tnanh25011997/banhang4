@@ -32,6 +32,9 @@
                     </thead>
                     <tbody>
                         @foreach($product as $sp)
+                        <?php 
+                            $arrSaleImg = json_decode($sp->image,true);
+                        ?>
                         <tr class="odd gradeX" align="center">
                             <td>{{$sp->id}}</td>
                             <td>{{$sp->name}}</td>
@@ -39,7 +42,7 @@
                             <td>{{$sp->brand->name}}</td>
                             <th>{{number_format($sp->unit_price)}}đ</th>
                             <th>{{number_format($sp->promotion_price)}}đ</th>
-                            <th><img src="source/images/{{$sp->image}}" class="img-fluid" style="width: 100px;" alt=""></th>
+                            <th><img src="source/images/{{$arrSaleImg[0]}}" class="img-fluid" style="width: 100px;" alt=""></th>
                             <th>
                                 <p style="background-color: yellow;">
                                 <?php 

@@ -42,6 +42,7 @@ function setUserResponse(val) {
 	$(UserResponse).appendTo('.chats').show('slow');
 	$(".usrInput").val('');
 	scrollToBottomOfResults();
+	showBotTyping();
 	$('.suggestions').remove();
 }
 
@@ -78,6 +79,7 @@ function send(message) {
 //------------------------------------ Set bot response -------------------------------------
 function setBotResponse(val) {
 	setTimeout(function () {
+		hideBotTyping();
 		if (val.length < 1) {
 			//if there is no response from Rasa
 			msg = 'Sorry, Chatbot không hiểu bạn nói gì';
@@ -130,8 +132,8 @@ function setBotResponse(val) {
 
 // ------------------------------------------ Toggle chatbot -----------------------------------------------
 var flat = 0;
-$('#profile_div').click(function () {
-	$('.profile_div').toggle();
+$('#chatbot-button').click(function () {
+	$('.chatbot-button').toggle();
 	$('.widget').slideToggle("fast");
 	if(flat == 0){
 		send("I want to talk");
@@ -141,7 +143,7 @@ $('#profile_div').click(function () {
 });
 
 $('#close').click(function () {
-	$('.profile_div').toggle();
+	$('.chatbot-button').toggle();
 	$('.widget').toggle();
 });
 
@@ -239,9 +241,12 @@ function createCardsCarousel(listProduct) {
         price_test2 = price_test.toString();
 
         price = price_test2.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+
+        arrImg = JSON.parse(listProduct[i].image);
+        img = arrImg[0];
         slug = listProduct[i].slug;
         data = listProduct[i];
-        item = '<div class="carousel_cards in-left">' + '<img class="cardBackgroundImage" src="http://localhost/banhang/public/source/images/' + listProduct[i].image + '"><div class="cardFooter">' + '<a class="cardTitle" href="http://localhost/banhang/public/chi-tiet-san-pham/'+slug+'" target="_blank">' + title + "</a> " + '<div class="cardDescription">' + price +  " VNĐ</div>" + "</div>" + "</div>";
+        item = '<div class="carousel_cards in-left">' + '<img class="cardBackgroundImage" src="http://localhost/banhang/public/source/images/' + img + '"><div class="cardFooter">' + '<a class="cardTitle" href="http://localhost/banhang/public/chi-tiet-san-pham/'+slug+'" target="_blank">' + title + "</a> " + '<div class="cardDescription">' + price +  " VNĐ</div>" + "</div>" + "</div>";
 
         cards += item;
     }
@@ -249,4 +254,18 @@ function createCardsCarousel(listProduct) {
     var cardContents = '<div id="paginated_cards" class="cards"> <div class="cards_scroller">' + cards + '  <span class="arrow prev fa fa-chevron-circle-left in-left"></span> <span class="arrow next fa fa-chevron-circle-right in-left"></span> </div> </div>';
 
     return cardContents;
+}
+
+//======================================bot typing animation ======================================
+function showBotTyping() {
+
+    var botTyping = '<img class="botAvatar" id="botAvatar" src="./source/chatbot/img/logo.png"/><div class="botTyping">' + '<div class="jump1"></div>' + '<div class="jump2"></div>' + '<div class="jump3"></div>' + '</div>'
+    $(botTyping).appendTo(".chats");
+    $('.botTyping').show();
+    scrollToBottomOfResults();
+}
+
+function hideBotTyping() {
+    $('#botAvatar').remove();
+    $('.botTyping').remove();
 }

@@ -64,7 +64,7 @@
                             </div> 
                             <div class="form-group">
                                 <label>Images</label>
-                                <input type="file" name="hinhanh">
+                                <input type="file" name="hinhanh[]" multiple>
                             </div>
                             
                             <button type="submit" class="btn btn-default">Thêm Sản Phẩm</button>

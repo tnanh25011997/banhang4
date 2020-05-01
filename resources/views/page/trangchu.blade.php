@@ -21,11 +21,12 @@
 						<div class="list-group">
 							<p href="#" class="list-group-item list-group-item-action tendanhmuc">SẢN PHẨM MỚI</p>
 							@foreach($new_product as $new)
+							<?php $arrNewImg = json_decode($new->image,true); ?>
 							<a href="chi-tiet-san-pham/{{$new->slug}}">
 							<div class="list-group-item list-group-item-action motsanpham">
 								<div class="container">
 								<div class="row">
-									<div class="col-5" style="text-align: right;"><img src="source/images/{{$new->image}}" alt="" class="img-fluid"></div>
+									<div class="col-5" style="text-align: right;"><img src="source/images/{{$arrNewImg[0]}}" alt="" class="img-fluid"></div>
 									<div class="col-7 thongtin">
 										<p class="tensp">{{$new->name}}</p>
 										@if($new->promotion_price==$new->unit_price)
@@ -54,11 +55,12 @@
 						<div class="list-group">
 							<p href="#" class="list-group-item list-group-item-action tendanhmuc">SẢN PHẨM KHUYẾN MÃI</p>
 							@foreach($sale_product as $sale)
+							<?php $arrSalenImg = json_decode($sale->image,true); ?>
 							<a href="chi-tiet-san-pham/{{$sale->slug}}">
 							<div class="list-group-item list-group-item-action motsanpham">
 								<div class="container">
 								<div class="row">
-									<div class="col-5" style="text-align: right;"><img src="source/images/{{$sale->image}}" alt="" class="img-fluid"></div>
+									<div class="col-5" style="text-align: right;"><img src="source/images/{{$arrSalenImg[0]}}" alt="" class="img-fluid"></div>
 									<div class="col-7 thongtin">
 										<p class="tensp">{{$sale->name}}</p>
 										<p class="gia">{{number_format($sale->unit_price)}}đ</p>
@@ -100,10 +102,11 @@
 					    <div class="cacsanpham">
 					    	<div class="row">
 					    		@foreach($sanpham_nu as $spnu)
+					    		<?php $arrFemaleImg = json_decode($spnu->image,true); ?>
 					    		<div class="col-sm-4">
 					    			<div class="motsanpham">
 					    				<div class="anh">
-					    				    <img src="source/images/{{$spnu->image}}" alt="" class="img-fluid">
+					    				    <img src="source/images/{{$arrFemaleImg[0]}}" alt="" class="img-fluid">
 					    				    
 					    				    <div class="haiicon">
 					    				    	@if($spnu->status==1)
@@ -159,10 +162,11 @@
 					    <div class="cacsanpham">
 					    	<div class="row">
 					    		@foreach($sanpham_nam as $spnam)
+					    		<?php $arrMaleImg = json_decode($spnam->image,true); ?>
 					    		<div class="col-sm-4">
 					    			<div class="motsanpham">
 					    				<div class="anh">
-					    				    <img src="source/images/{{$spnam->image}}" alt="" class="img-fluid">
+					    				    <img src="source/images/{{$arrMaleImg[0]}}" alt="" class="img-fluid">
 					    				    <div class="haiicon">
 					    				    	@if($spnam->status==1)
 					    				    	<a href="gio-hang/{{$spnam->id}}"  data-placement="top" data-toggle="tooltip" title="Thêm vào giỏ"><i class="fas fa-shopping-cart iconnho"></i></a>

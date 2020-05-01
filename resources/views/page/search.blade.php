@@ -14,10 +14,13 @@
 			<hr>
 			<div class="row">
 				@foreach($product as $sp)
+				<?php 
+				    $arrSaleImg = json_decode($sp->image,true);
+				?>
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="motsanpham2">
 						<div class="anh2">
-							<img src="source/images/{{$sp->image}}" alt="" class="img-fluid">
+							<img src="source/images/{{$arrSaleImg[0]}}" alt="" class="img-fluid">
 							<div class="haiicon2">
 								@if($sp->status==1)
 								<a href="gio-hang/{{$sp->id}}" data-placement="top" data-toggle="tooltip" title="Thêm vào giỏ"><i class="fas fa-shopping-cart iconnho icon-shopping-cart"></i></a>

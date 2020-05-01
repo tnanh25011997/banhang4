@@ -29,10 +29,24 @@
                         <div class="alert alert-success">{{session('thongbao')}}</div>
                     @endif
 					<div class="row">
+						<?php 
+				    		$arrImg = json_decode($ct->image,true);
+				    	?>
 					    <div class="col-md-5">
-						    <div class="anhchinh">
-							    <img src="source/images/{{$ct->image}}"  alt="" class="img-fluid">
+					    	<?php for($j=0;$j<sizeof($arrImg);$j++){ ?>
+						    <div class="big-image">
+							    <img src="source/images/{{$arrImg[$j]}}"  alt="" class="img-fluid">
 						    </div>
+						    <?php } ?>
+						    <a class="prev-img" onclick="plusSlides(-1)">❮</a>
+  							<a class="next-img" onclick="plusSlides(1)">❯</a>
+						    <div class="sub-image">
+						    	<?php for($i=0;$i<sizeof($arrImg);$i++){ ?>
+								<div class="one-image">
+									<img class="small-image" src="source/images/{{$arrImg[$i]}}" onclick="currentSlide({{$i+1}})" alt="">
+								</div>
+								<?php } ?>
+							</div>
 					    </div>
 					    <div class="col-md-7">
 					    	<div class="noidunganhchinh">
@@ -178,10 +192,13 @@
 						<div class="list-group">
 							<p href="#" class="list-group-item list-group-item-action tendanhmuc">SẢN PHẨM KHUYẾN MÃI</p>
 							@foreach($sale_product2 as $sale2)
+							<?php 
+				    			$arrSaleImg = json_decode($sale2->image,true);
+				    		?>
 							<a href="chi-tiet-san-pham/{{$sale2->slug}}">
 							<div class="list-group-item list-group-item-action motsanpham">
 								<div class="row">
-									<div class="col-5" style="text-align: right;"><img src="source/images/{{$sale2->image}}" alt="" class="img-fluid"></div>
+									<div class="col-5" style="text-align: right;"><img src="source/images/{{$arrSaleImg[0]}}" alt="" class="img-fluid"></div>
 									<div class="col-7 thongtin">
 										<p class="tensp">{{$sale2->name}}</p>
 										<p class="gia">{{number_format($sale2->unit_price)}}đ</p>
@@ -269,6 +286,37 @@
 		     	console.log(input.value);
 		    };
 
+		}
+		// image
+		var slideIndex = 1;
+		showSlides(slideIndex);
+
+		function plusSlides(n) {
+		  showSlides(slideIndex += n);
+		}
+
+		function currentSlide(n) {
+		  showSlides(slideIndex = n);
+		}
+
+		function showSlides(n) {
+		  var i;
+		  var bigImage = document.getElementsByClassName("big-image");
+		  var smallImage = document.getElementsByClassName("small-image");
+		  if (n > bigImage.length){
+		  	slideIndex = 1;
+		  }
+		  if (n < 1){
+		  	slideIndex = bigImage.length;
+		  }
+		  for (i = 0; i < bigImage.length; i++){
+		      bigImage[i].style.display = "none";
+		  }
+		  for (i = 0; i < smallImage.length; i++) {
+		      smallImage[i].className = smallImage[i].className.replace(" active", "");
+		  }
+		  bigImage[slideIndex-1].style.display = "block";
+		  smallImage[slideIndex-1].className += " active";
 		}
 	</script>
 @endsection
