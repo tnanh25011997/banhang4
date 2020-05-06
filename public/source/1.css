@@ -1200,6 +1200,10 @@ thead.threadgiohang {
     color: white;
 }
 
+.banggiohang a.item-name{
+    color: #7AAEDD;
+}
+
 .banggiohang input[type="number"] {
     margin-top: 0px;
 }

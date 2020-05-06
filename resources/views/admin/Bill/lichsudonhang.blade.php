@@ -14,7 +14,7 @@
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>ID_Customer </th>
+                                <th>Khách Hàng</th>
                                 <th>Ngày Đặt Hàng</th>
                                 <th>Tổng Tiền</th>
                                 <th>Hình Thức Thanh Toán</th>

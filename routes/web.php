@@ -140,6 +140,8 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::get('danhsach','BillController@getDanhSach');
 		Route::get('billdetail/{id}','BillController@getBillDetail');
 		Route::get('xacnhan/{id}','BillController@getXacNhan');
+		Route::get('giaohang/{id}','BillController@getGiaoHang');
+		Route::get('huygiaohang/{id}','BillController@getHuyGiaoHang');
 		Route::get('huybill/{id}','BillController@getXoa');
 		Route::get('lichsudonhang','BillController@getLichSu');
 	});

@@ -58,7 +58,7 @@
 							<?php $arrImg = json_decode($item['item']['image'],true); ?>
 							
 								<tr>
-									<td>{{$item['item']['name']}}</td>
+									<td><a class="item-name" href="chi-tiet-san-pham/{{$item['item']['slug']}}">{{$item['item']['name']}}</a></td>
 									<td class="anhgiohangtd"><img  src="source/images/{{$arrImg[0]}}" alt="" class="anhgiohang"></td>
 									@if($item['item']['promotion_price'] == $item['item']['unit_price'])
 										<td class="giagiohang">{{number_format($item['item']['unit_price'])}}đ</td>

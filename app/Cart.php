@@ -24,25 +24,18 @@ class Cart
 				$giohang = $this->items[$id];
 			}
 		}
-
-		$giohang['qty']++;
-		// if($item->promotion_price==$item->unit_price){
-		// 	$giohang['price'] = $item->unit_price * $giohang['qty'];
-		// }
-		// else{
-		// 	$giohang['price'] = $item->promotion_price * $giohang['qty'];
-		// }
+		$oldQty = $giohang['qty'];
+		$qty = 1;
+		$giohang['qty'] = $giohang['qty'] + $qty;
+		if($giohang['qty']>20){
+			$giohang['qty']=20;
+			$qty = 0;
+		}
 		$giohang['price'] = $item->promotion_price * $giohang['qty'];
 
 		$this->items[$id] = $giohang; // bằng 1 mảng $giohang
 		$this->totalQty++;
-		// if($item->promotion_price==$item->unit_price){
-		// 	$this->totalPrice += $item->unit_price;
-		// }
-		// else{
-		// 	$this->totalPrice += $item->promotion_price;
-		// }
-		$this->totalPrice += $item->promotion_price;
+		$this->totalPrice += $item->promotion_price * $qty;
 		
 		
 	}
@@ -53,23 +46,16 @@ class Cart
 				$giohang = $this->items[$id];
 			}
 		}
+		$oldQty = $giohang['qty'];
 		$giohang['qty'] = $giohang['qty'] + $qty;
-		// if($item->promotion_price==$item->unit_price){
-		// 	$giohang['price'] = $item->unit_price * $giohang['qty'];
-		// }
-		// else{
-		// 	$giohang['price'] = $item->promotion_price * $giohang['qty'];
-		// }
+		if($giohang['qty']>20){
+			$giohang['qty']=20;
+			$qty = 20-$oldQty;
+		}
 		$giohang['price'] = $item->promotion_price * $giohang['qty'];
-
+		
 		$this->items[$id] = $giohang; 
-		$this->totalQty++;
-		// if($item->promotion_price==$item->unit_price){
-		// 	$this->totalPrice += $item->unit_price * $qty;
-		// }
-		// else{
-		// 	$this->totalPrice += $item->promotion_price * $qty;
-		// }		
+		$this->totalQty++;	
 		$this->totalPrice += $item->promotion_price * $qty;
 		
 	}
@@ -87,28 +73,11 @@ class Cart
 
 		$oldQty = $giohang['qty']; //tạo 1 biến lưu giá trị Qty cũ
 		$giohang['qty'] =  $qty; // Qty mới mà mình thay đổi
-		// if($item->promotion_price==$item->unit_price){
-		// 	$giohang['price'] = $item->unit_price * $giohang['qty'];
-		// }
-		// else{
-		// 	$giohang['price'] = $item->promotion_price * $giohang['qty'];
-		// }
 		$giohang['price'] = $item->promotion_price * $giohang['qty'];
 		
 		$this->items[$id] = $giohang;
 		$this->totalQty += $qty-$oldQty; //?
-		
 
-		// if($item->promotion_price==$item->unit_price){
-		// 	$oldPrice = $oldQty*$item->unit_price;
-		// 	$newPrice = $giohang['qty']*$item->unit_price;
-		// 	$this->totalPrice += $newPrice-$oldPrice;
-		// }
-		// else{
-		// 	$oldPrice = $oldQty*$item->promotion_price;
-		// 	$newPrice = $giohang['qty']*$item->promotion_price;
-		// 	$this->totalPrice += $newPrice-$oldPrice;
-		// }
 		$oldPrice = $oldQty*$item->promotion_price;
 		$newPrice = $giohang['qty']*$item->promotion_price;
 		$this->totalPrice += $newPrice-$oldPrice;

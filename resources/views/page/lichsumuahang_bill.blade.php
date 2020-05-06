@@ -45,14 +45,13 @@
 							<td>{{number_format($b->total)}}đ</td>
 							<td>{{$b->payment}}</td>
 							<td>
-								<?php if($b->tinhtrang==0){
-									echo "Chưa Thanh Toán";
-								}
-								else{
-									echo "Đã Thanh Toán";
-								}
-								?>
-								
+								@if($b->tinhtrang==0)
+									Chưa Thanh Toán
+								@elseif($b->tinhtrang==2)
+									Đang Giao Hàng
+								@else
+									Đã Thanh Toán
+								@endif
 							</td>
 							<td><a href="tai-khoan/lichsumuahang_billdetail/{{$b->id}}"><button style="background-color:#7AAEDD;border: 1px solid #7AAEDD;" class="btn btn-primary">Chi Tiết</button></a></td>
 						</tr>

@@ -54,11 +54,11 @@
                     </div>
                 </div>
                 @if(count($errors)>0)
-                    <alert class="alert alert-danger">
+                    <div class="alert alert-danger">
                         @foreach($errors->all() as $err)
-                           {{$err}} |
+                            <li>{{$err}}</li>
                         @endforeach
-                    </alert>
+                    </div>
                 @endif
                 @if(session('thongbao'))
                     <alert class="alert alert-danger">{{session('thongbao')}}</alert>

@@ -33,16 +33,29 @@ class BillController extends Controller
     }
     public function getXacNhan($id)
     {
-        $idxacnhan = Bill::find($id);
-        $idxacnhan->tinhtrang = 1;
-        $idxacnhan->save();
+        $bill = Bill::find($id);
+        $bill->tinhtrang = 1;
+        $bill->save();
         return redirect('admin/Bill/danhsach')->with('thongbao','Xác Nhận Bill Thành Công');
        
-
+    }
+    public function getGiaoHang($id)
+    {
+        $bill = Bill::find($id);
+        $bill->tinhtrang = 2;
+        $bill->save();
+        return redirect('admin/Bill/danhsach')->with('thongbao','Xác Nhận Giao Hàng Thành Công');
+    }
+    public function getHuyGiaoHang($id)
+    {
+        $bill = Bill::find($id);
+        $bill->tinhtrang = 0;
+        $bill->save();
+        return redirect('admin/Bill/danhsach')->with('thongbao','Hủy Giao Hàng Thành Công');
     }
     public function getLichSu()
     {
-       $thongke=DB::table("bills")->select(DB::raw("MONTH(created_at) as Thang")  ,DB::raw("(SUM(total)) as Tong"))->groupBy(DB::raw("MONTH(created_at)"))->where('tinhtrang',1)->whereYear('created_at', '2020')->get();
+        $thongke=DB::table("bills")->select(DB::raw("MONTH(created_at) as Thang")  ,DB::raw("(SUM(total)) as Tong"))->groupBy(DB::raw("MONTH(created_at)"))->where('tinhtrang',1)->whereYear('created_at', '2020')->get();
         $bill = Bill::where('tinhtrang',1)->get();
         
         return view('admin.Bill.lichsudonhang',compact('bill','thongke'));

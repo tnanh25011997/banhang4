@@ -74,27 +74,46 @@
                             <thead>
                                 <tr align="center">
                                     <th>ID</th>
-                                    <th>ID_Customer </th>
+                                    <th>Khách Hàng</th>
                                     <th>Ngày Đặt Hàng</th>
                                     <th>Tổng Tiền</th>
                                     <th>Hình Thức Thanh Toán</th>
                                     <th>Tình Trạng</th>
                                     <th>Chi Tiết</th>
+                                    <th>Giao Hàng</th>
                                     <th>Xác Nhận</th>
                                     <th>Hủy Đơn</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($bill as $b)
-                                    @if($b->tinhtrang == 0)
+                                    @if($b->tinhtrang != 1)
                                     <tr class="odd gradeX" align="center">
                                         <td>{{$b->id}}</td>
                                         <td>{{$b->customer->name}}</td>
                                         <td>{{$b->date_order}}</td>
                                         <td>{{number_format($b->total)}}đ</td>
                                         <td>{{$b->payment}}</td>
-                                        <td>Chưa Xác Nhận</td>
+                                        <td>
+                                            @if($b->tinhtrang == 0)
+                                                Chưa Xác Nhận
+                                            @else
+                                                Đang Giao Hàng
+                                            @endif
+                                        </td>
                                         <td class="center"><i class="fa fa-pencil  fa-fw"></i><a href="admin/Bill/billdetail/{{$b->id}}"> Chi Tiết</a></td>
+                                        <td>
+                                            @if($b->tinhtrang == 0)
+                                                <a href="admin/Bill/giaohang/{{$b->id}}">
+                                                    <button class="btn btn-warning">Giao Hàng</button>
+                                                </a>
+                                            @else
+                                                <a href="admin/Bill/huygiaohang/{{$b->id}}">
+                                                    <button class="btn btn-warning">Hủy Giao</button>
+                                                </a>
+                                            @endif
+                                            
+                                        </td>
                                         <td>
                                             <!-- <a href="admin/Bill/xacnhan/{{$b->id}}" class="btn btn-success">Xác Nhận</a> -->
                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#veriBill_{{$b->id}}">

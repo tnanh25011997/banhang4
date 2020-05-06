@@ -54,7 +54,7 @@
 						@if(Session::has('cart'))
 						    @foreach($product_cart as $item) 
 								<tr>
-									<td>{{$item['item']['name']}}</td>
+									<td><a class="item-name" href="chi-tiet-san-pham/{{$item['item']['slug']}}">{{$item['item']['name']}}</a></td>
 									
 									@if($item['item']['promotion_price'] == $item['item']['unit_price'])
 										<td class="giagiohang">{{number_format($item['item']['unit_price'])}}đ</td>
