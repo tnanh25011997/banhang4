@@ -5,8 +5,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Brand
-                    <small>List</small>
+                <h1 class="page-header">Thương Hiệu
+                    <small>Danh Sách</small>
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
@@ -17,14 +17,15 @@
                 @if(session('thongbaoerr'))
                 <div class="alert alert-danger">{{session('thongbaoerr')}}</div>
                 @endif
+                <a href="admin/Brand/them"><button type="button" class="btn btn-primary" style="float:right; margin-bottom: 10px;">Thêm Thương Hiệu</button></a>
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr align="center">
                             <th>ID</th>
                             <th>Tên Thương Hiệu</th>
                             <th>Nguồn Gốc</th>
-                            <th>Delete</th>
-                            <th>Edit</th>
+                            <th>Xóa</th>
+                            <th>Sửa</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +39,7 @@
                             <td class="center">
 
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delBrand_{{$br->id}}">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delBrand_{{$br->id}}">
                                   <i class="fa fa-trash-o  fa-fw"></i>
                                 </button>
                                 <div class="modal fade" id="delBrand_{{$br->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

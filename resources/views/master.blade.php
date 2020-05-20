@@ -20,12 +20,17 @@
 	<link rel="stylesheet" href="source/owl_vendor/owl.theme.default.min.css">
 	<script src="source/owl_vendor/jquery.min.js"></script>
 	<script  src="source/owl_vendor/owl.carousel.min.js"></script>
+	
 
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>	
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->	
+	
+
+	<!-- <link rel="stylesheet" href="source/vendor/bootstrap.css">
+	<script src="source/vendor/bootstrap.js"></script> -->
 </head>
 <body >
 	@include('header')

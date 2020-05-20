@@ -51,8 +51,12 @@ class PageController extends Controller
         else{
             $idsp = $ct->id;
             $sale_product2 = Product::where('sale','<>',0)->orderby('created_at','desc')->take(4)->get();
+            $id_brand = $ct->id_brand;
+            $related_product = Product::where('id_brand',$id_brand)->where('id','<>',$idsp)->orderby('created_at','desc')->take(6)->get();
+            //dd($related_product);
             $comments = Comments::where('id_product',$idsp)->where('status',1)->orderby('created_at','desc')->paginate(5);
-            return view('page.chitiet_sanpham',compact('ct','sale_product2','comments'));
+            $news = News::orderby('created_at','desc')->take(3)->get();
+            return view('page.chitiet_sanpham',compact('ct','sale_product2','comments','related_product','news'));
         }
         
     }

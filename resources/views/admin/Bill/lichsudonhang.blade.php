@@ -5,11 +5,11 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Bill
-                            <small>List</small>
+                        <h1 class="page-header">Đơn Hàng
+                            <small>Lịch Sử</small>
                         </h1>
                     </div>
-                    <h3>LỊCH SỬ ĐƠN HÀNG</h3>
+                    
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr align="center">

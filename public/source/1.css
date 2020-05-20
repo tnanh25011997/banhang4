@@ -1,5 +1,16 @@
 *{padding: 0;margin: 0}
 @media only screen and (min-width: 992px ) and (max-width: 1200px){
+    /*next*/
+    .slide-product[data-is-set="0"][data-is-reversing="0"] {
+        transform: translateX(-50%)!important;
+    }
+    /*previous*/
+    .slide-product[data-is-set="0"][data-is-reversing="1"] {
+        transform: translateX(50%)!important;
+    }
+    .one-product-slide {
+        flex: 1 0 47%!important;
+    }
     .add-to-cart-success{
         right: 110px!important;
     }
@@ -16,6 +27,17 @@
 
 }
 @media only screen and (min-width: 768px ) and (max-width: 992px){
+    /*next*/
+    .slide-product[data-is-set="0"][data-is-reversing="0"] {
+        transform: translateX(-50%)!important;
+    }
+    /*previous*/
+    .slide-product[data-is-set="0"][data-is-reversing="1"] {
+        transform: translateX(50%)!important;
+    }
+    .one-product-slide {
+        flex: 1 0 47%!important;
+    }
     .add-to-cart-success{
         right: 131px!important;
     }
@@ -40,6 +62,17 @@
     }
 }
 @media only screen and (min-width: 576px ) and (max-width: 768px){
+    /*next*/
+    .slide-product[data-is-set="0"][data-is-reversing="0"] {
+        transform: translateX(-51.2%)!important;
+    }
+    /*previous*/
+    .slide-product[data-is-set="0"][data-is-reversing="1"] {
+        transform: translateX(51.2%)!important;
+    }
+    .one-product-slide {
+        flex: 1 0 47%!important;
+    }
     input.input-phone-checkout{
         width: 100%!important;
     }
@@ -91,6 +124,17 @@
 }
 
 @media only screen and (max-width: 576px) {
+    /*next*/
+    .slide-product[data-is-set="0"][data-is-reversing="0"] {
+        transform: translateX(-56%)!important;
+    }
+    /*previous*/
+    .slide-product[data-is-set="0"][data-is-reversing="1"] {
+        transform: translateX(56%)!important;
+    }
+    .one-product-slide {
+        flex: 1 0 47%!important;
+    }
     input.input-phone-checkout{
         width: 100%!important;
     }
@@ -1899,4 +1943,134 @@ span.icondanhmuc {
 /*.thoitrang2 anh:hover .haiicon{
     display:flex;
 }*/
+.related-product{
+    
+    margin: 30px 0px;
+}
+.slider{
+    background: white;
+    overflow: hidden;
+    position: relative;
+}
+.slider ul{
+    list-style-type: none;
+}
+.slide-product{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.rel-product{
+    text-align: center;
+    margin: 15px 15px;
+    box-sizing: border-box;
+}
+.rel-product p{
+    text-align: left;
+    padding-left: 10px;
+}
+.slide-product a{
+    text-decoration: none;
+}
+.rel-product .rel-product-title{
+    font-size: 15px;
+    color: #242424;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    height: 65px;
+    
+}
+.rel-product-pro-price{
+    color: #242424;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+.rel-product-unit-price{
+    color: #787878;
+    text-decoration: line-through;
+    font-size: 13px;
+}
+.one-product-slide{
+    padding: 0px;
+    margin: 2px 10px;
+}
+.one-product-slide:hover{
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    z-index: 1;
+}
+.but-left,.but-right{
+    position: absolute;
+    padding: 10px 17px;
+    top: 42%;
+    z-index: 10;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #f3f0f0;
+}
+.but-left{
+    left: 15px;
+    
+}
+.but-right{
+    right: 15px;
+}
+.title-related-product{
+    margin-bottom: 15px;
+}
+/*next*/
+.slide-product[data-is-set="0"][data-is-reversing="0"] {
+    transform: translateX(-25.2%);
+}
+/*previous*/
+.slide-product[data-is-set="0"][data-is-reversing="1"] {
+    transform: translateX(25.2%);
+}
 
+.slide-product[data-is-set="0"] {
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.one-product-slide {
+    flex: 1 0 12%;
+}
+
+.menu-responsive{
+    display: none;
+}
+.product-images{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.rel-product img{
+    width: 150px;
+    height: 150px;
+}
+ul.slide-product a:hover{
+    text-decoration: none;
+}
+.news-in-detail li{
+    list-style-type: none;
+    margin-bottom: 15px;
+}
+span.number-of-news{
+    color: white;
+    background-color: #3f3f3f;
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.news-in-detail h5{
+    color: #3f3f3f;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.news-in-detail li a{
+    color: black;
+}
+.nav-tabs a.nav-link{
+    color: #7AAEDD;
+}

@@ -192,7 +192,7 @@
 					    </div>
 				    </div>
 				    <div class="col-lg-3 benphai">
-					    <img src="source/images/anhbenphai2.jpg" alt="" class="img-fluid">
+					    <img src="source/images/anhbenphai2.png" alt="" class="img-fluid">
 				    </div>
 			    </div>
 			</div>

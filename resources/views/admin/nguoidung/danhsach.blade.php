@@ -15,6 +15,7 @@
                         @if(session('thongbao'))
                             <div class="alert alert-success">{{session('thongbao')}}</div>
                         @endif
+                        <a href="admin/nguoidung/them"><button type="button" class="btn btn-primary" style="float:right; margin-bottom: 10px;">Thêm User</button></a>
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr align="center">
@@ -46,7 +47,7 @@
                                 <td>{{$u->address}}</td>
                                 <td class="center">
                                     <!-- <a href="admin/nguoidung/xoa/{{$u->id}}"> Xóa</a> -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delUser_{{$u->id}}">
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delUser_{{$u->id}}">
                                           <i class="fa fa-trash-o  fa-fw"></i>
                                     </button>
                                     <div class="modal fade" id="delUser_{{$u->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Chi Tiết Hóa Đơn
-                            <small>list</small>
+                            <small>Danh Sách</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->

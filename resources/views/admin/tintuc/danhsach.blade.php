@@ -14,6 +14,7 @@
                         @if(session('thongbao'))
                             <div class="alert alert-success">{{session('thongbao')}}</div>
                         @endif
+                        <a href="admin/tintuc/them"><button type="button" class="btn btn-primary" style="float:right; margin-bottom: 10px;">Thêm Tin Tức</button></a>
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr align="center">
@@ -35,7 +36,7 @@
                                   
                                     <td class="center">
                                         <!-- <a href="admin/tintuc/xoa/{{$t->id}}">Xóa</a> -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delNew_{{$t->id}}">
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delNew_{{$t->id}}">
                                               <i class="fa fa-trash-o  fa-fw"></i>
                                         </button>
                                         <div class="modal fade" id="delNew_{{$t->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

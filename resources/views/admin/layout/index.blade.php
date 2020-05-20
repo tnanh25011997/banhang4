@@ -26,6 +26,8 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="admin_asset/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <script src="admin_asset/Chart.min.js"></script>
+    <script src="admin_asset/bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body>
@@ -40,7 +42,7 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="admin_asset/bower_components/jquery/dist/jquery.min.js"></script>
+    
 
     <!-- Bootstrap Core JavaScript -->
     <script src="admin_asset/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

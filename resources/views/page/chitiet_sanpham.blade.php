@@ -43,7 +43,8 @@
 						    <div class="sub-image">
 						    	<?php for($i=0;$i<sizeof($arrImg);$i++){ ?>
 								<div class="one-image">
-									<img class="small-image" src="source/images/{{$arrImg[$i]}}" onclick="currentSlide({{$i+1}})" alt="">
+									<img class="small-image" src="source/images/{{$arrImg[$i]}}" 
+									onclick="currentSlide({{$i+1}})" alt="">
 								</div>
 								<?php } ?>
 							</div>
@@ -182,9 +183,53 @@
 				 				@endforeach
 								<div class="row" style="">{{$comments->links()}}</div>
 				    		</div>
-				    		<div class="tab-pane container fade" id="home">{!!$ct->description!!}</div>
+				    		<div class="tab-pane container fade" id="home" style="margin-top: 15px;">
+				    			{!!$ct->description!!}
+				    			<hr>
+				    		</div>
 				    	</div>
+
+				    	
 				    </div>
+				    <div class="container">
+						<div class="related-product">
+							<p class="title-related-product">SẢN PHẨM THƯỜNG ĐƯỢC XEM CÙNG</p>
+							<div class="slider">
+								<ul class="slide-product">
+										@foreach($related_product as $related)
+										<?php 
+							    			$arrRelatedImg = json_decode($related->image,true);
+							    		?>
+										<a href="chi-tiet-san-pham/{{$related->slug}}" class="one-product-slide">
+										<li >
+											<div class="rel-product">
+												<img src="source/images/{{$arrRelatedImg[0]}}" alt="">
+												<p class="rel-product-title">{{$related->name}}</p>
+												@if($related->promotion_price == $related->unit_price)
+												<p class="rel-product-pro-price">{{number_format($related->unit_price)}}đ</p>
+												
+												@else
+												<p class="rel-product-pro-price">{{number_format($related->promotion_price)}}đ</p>
+												<p class="rel-product-unit-price">{{number_format($related->unit_price)}}đ</p>
+												@endif
+												
+											</div>
+										</li>
+										</a>
+										@endforeach
+
+			
+								</ul>
+								<div class="slider__controls">
+						        <div class="but but-left">❮</div>
+						        <div class="but but-right" data-toggle="next">❯</div>
+						    </div>
+							</div>
+							
+						</div>
+					</div>
+				    
+				    
 				</div>
 				
 				<div class="col-lg-3 col-12">
@@ -211,6 +256,17 @@
 							@endforeach
 							
 						</div>
+					</div>
+					<div class="news-in-detail">
+						<h5>TIN TỨC NỔI BẬT</h5>
+						<?php $i=1; ?>
+						@foreach($news as $ne)
+							
+							<li><span class="number-of-news">{{$i}}</span><a href="chi-tiet-tin-tuc/{{$ne->id}}">{{$ne->title}}</a></li>
+							<?php $i++; ?>
+						@endforeach
+						
+
 					</div>
 				</div>
 			</div>
@@ -318,5 +374,66 @@
 		  bigImage[slideIndex-1].style.display = "block";
 		  smallImage[slideIndex-1].className += " active";
 		}
+		/*********************************** slide scroll ***********************************/
+
+		let slider = Array.from(document.getElementsByClassName('slider'));
+		slider.forEach((s) => {
+		    //console.log(s.getElementsByClassName('slide-product'));
+		    let container = Array.from(s.getElementsByClassName('slide-product'))[0],
+		        products = Array.from(s.getElementsByClassName('one-product-slide')),
+		        buttons = Array.from(s.getElementsByClassName('but')),
+		        current = products[0],
+		        next = (element) => {
+		            return element.nextElementSibling || products[0]
+		        },
+
+		        prev = (element) => {
+		            return element.previousElementSibling || products[products.length - 1];
+		        };
+		    //console.log(container);
+		    container.dataset.isSet = '1';
+		    container.dataset.isReversing = '0';
+		    for (let i = 0; i < products.length; i++) {
+		        products[i].style.order = (i+1).toString();
+		    }
+
+		    for (let btn of buttons) {
+		            btn.addEventListener('click', (e)=> {
+		                console.log(e);
+		                //hạn chế click liên tiếp
+		                if (container.dataset.isSet === '0') {
+		                    return ;
+		                }
+		                //nếu là next
+		                if (e.target.dataset.toggle === 'next') {
+		                    container.dataset.isSet = '0';
+		                    console.log(current);
+		                    current = next(current);
+
+		                    setTimeout((function () {
+		                        for (let i = 1, tmp = current; i <= products.length; i++, tmp = next(tmp)) {
+		                            tmp.style.order = i.toString();
+		                        }
+		                        container.dataset.isSet = '1';
+		                    }), 500);
+
+		                } 
+		                // previous
+		                else {
+		                    
+		                    container.dataset.isSet = '0';
+		                    container.dataset.isReversing = '1';
+		                    current = prev(current);
+		                     setTimeout((function () {
+		                        for (let i = 1, tmp = current; i <= products.length; i++, tmp = next(tmp)) {
+		                            tmp.style.order = i.toString();
+		                        }
+		                        container.dataset.isReversing = '0';
+		                        container.dataset.isSet = '1';
+		                    }), 500);
+		                }
+		            });   
+		    }
+		});
 	</script>
 @endsection

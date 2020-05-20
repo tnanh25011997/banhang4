@@ -5,8 +5,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Comments
-                            <small>List</small>
+                        <h1 class="page-header">Đăng Ký Nhận Khuyến Mãi
+                            <small>Danh Sách</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->

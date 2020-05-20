@@ -14,6 +14,7 @@
                 @if(session('thongbao'))
                 <div class="alert alert-success">{{session('thongbao')}}</div>
                 @endif
+                <a href="admin/Product/them"><button type="button" class="btn btn-primary" style="float:right; margin-bottom: 10px;">Thêm Sản Phẩm</button></a>
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr align="center">

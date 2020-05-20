@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Slide
-                            <small>List</small>
+                            <small>Danh Sách</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -14,7 +14,7 @@
                         @if(session('thongbao'))
                         <div class="alert alert-success">{{session('thongbao')}}</div>
                         @endif
-                        
+                        <a href="admin/Slide/them"><button type="button" class="btn btn-primary" style="float:right; margin-bottom: 10px;">Thêm Slide</button></a>
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr align="center">
