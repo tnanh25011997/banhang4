@@ -55,7 +55,10 @@
                                     <input name="phanquyen" value="0" checked="" type="radio">Thường
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="phanquyen" value="1"  type="radio">Admin
+                                    <input name="phanquyen" value="1"  type="radio">Nhân Viên
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="phanquyen" value="2"  type="radio">Admin
                                 </label>
                                 
                             </div>

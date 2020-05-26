@@ -20,8 +20,8 @@
                                 <tr align="center">
                                     <th>ID</th>
                                     <th>Ảnh</th>
-                                    <th>Delete</th>
-                                    <th>Edit</th>
+                                    <th>Xóa</th>
+                                    <th>Sửa</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,8 +29,29 @@
                                     <tr class="odd gradeX" align="center">
                                         <td>{{$s->id}}</td>
                                         <td><img src="source/images/{{$s->image}}" style="width: 200px;" alt=""></td>
-                                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/Slide/xoa/{{$s->id}}"> Xóa</a></td>
-                                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/Slide/sua/{{$s->id}}">Sửa</a></td>
+                                        <td class="center">
+                                            
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delSlide_{{$s->id}}">
+                                                  <i class="fa fa-trash-o  fa-fw"></i>
+                                            </button>
+                                            <div class="modal fade" id="delSlide_{{$s->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                        Bạn có thực sự muốn xóa slide này?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a href="admin/Slide/xoa/{{$s->id}}"><button type="button" class="btn btn-primary">Xóa Luôn</button></a>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="center">
+                                            <a href="admin/Slide/sua/{{$s->id}}"><button class="btn btn-info"><i class="fa fa-pencil fa-fw"></i></button></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                

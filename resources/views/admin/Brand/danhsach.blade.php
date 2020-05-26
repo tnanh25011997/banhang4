@@ -58,7 +58,9 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/Brand/sua/{{$br->id}}">Sửa</a></td>
+                            <td class="center">
+                                <a href="admin/Brand/sua/{{$br->id}}"><button class="btn btn-info"><i class="fa fa-pencil fa-fw"></i></button></a>
+                            </td>
                         </tr>
                         @endforeach
 

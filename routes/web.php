@@ -86,6 +86,9 @@ Route::fallback(function(){
     return view('page.errors');
 });
 
+Route::get('admin/errors',function(){
+	return view('page.errorsadmin');
+});
 
 //PHAN ADMIN
 
@@ -96,7 +99,7 @@ Route::get('admin/logout','UserController@getDangXuatAdmin');
 
 Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
-	Route::group(['prefix'=>'ProductType'],function(){
+	Route::group(['prefix'=>'ProductType','middleware'=>'quantri'],function(){
 		//admin/ProducType/danhsach
 		Route::get('danhsach','ProductTypeController@getDanhSach');
 
@@ -108,7 +111,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
 		Route::get('xoa/{id}','ProductTypeController@getXoa');
 	});
-	Route::group(['prefix'=>'Product'],function(){
+	Route::group(['prefix'=>'Product','middleware'=>'quantri'],function(){
 
 		Route::get('danhsach','ProductController@getDanhSach');
 
@@ -124,7 +127,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::get('ngung-kinh-doanh/{id}','ProductController@getNgungKinhDoanh');
 
 	});
-	Route::group(['prefix'=>'nguoidung'],function(){
+	Route::group(['prefix'=>'nguoidung','middleware'=>'quantri'],function(){
 
 		Route::get('danhsach','UserController@getDanhSach');
 
@@ -179,7 +182,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 		Route::get('xoa-comment/{id}','CommentsController@getXoaComment');
 
 	});
-	Route::group(['prefix'=>'Brand'],function(){
+	Route::group(['prefix'=>'Brand','middleware'=>'quantri'],function(){
 		Route::get('danhsach','BrandController@getDanhSach');
 
 		Route::get('sua/{id}','BrandController@getSua');
@@ -190,7 +193,7 @@ Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
 
 		Route::get('xoa/{id}','BrandController@getXoa');
 	});
-	Route::group(['prefix'=>'thong-ke'],function(){
+	Route::group(['prefix'=>'thong-ke','middleware'=>'quantri'],function(){
 		Route::get('danhsach','StatisticController@getDoanhThu');
 
 	});

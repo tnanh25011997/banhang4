@@ -36,10 +36,12 @@
                                 <td>{{$u->full_name}}</td>
                                 <td>{{$u->email}}</td>
                                 <td>
-                                    @if($u->level==1)
-                                      {{"Admin"}}
+                                    @if($u->level==2)
+                                        {{"Admin"}}
+                                    @elseif($u->level==1)
+                                        {{"Nhân Viên"}}
                                     @else
-                                       {{"Thường"}}
+                                        {{"Thường"}}
                                     @endif
                                 </td>
                                     
@@ -65,7 +67,9 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/nguoidung/sua/{{$u->id}}">Sửa</a></td>
+                                <td class="center">
+                                    <a href="admin/nguoidung/sua/{{$u->id}}"><button class="btn btn-info"><i class="fa fa-pencil fa-fw"></i></button></a>
+                                </td>
                                 
                             </tr>
                             @endforeach

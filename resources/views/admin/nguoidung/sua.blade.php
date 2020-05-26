@@ -66,7 +66,10 @@
                                     <input name="phanquyen" value="0" @if($user->level==0) {{"checked"}} @endif type="radio">Thường
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="phanquyen" value="1" @if($user->level==1) {{"checked"}} @endif  type="radio">Admin
+                                    <input name="phanquyen" value="1" @if($user->level==1) {{"checked"}} @endif  type="radio">Nhân Viên
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="phanquyen" value="2" @if($user->level==2) {{"checked"}} @endif  type="radio">Admin
                                 </label>
                                 
                             </div>

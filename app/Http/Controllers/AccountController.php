@@ -91,9 +91,10 @@ class AccountController extends Controller
                 'password_login.max'=>'Mật khẩu phải bé hơn 20 ký tự.'
                 
             ]);
+        $remember = $req->has('remember') ? true : false;
         $credentials = array('email'=>$req->email_login,'password'=>$req->password_login);
         
-        if(Auth::attempt($credentials))
+        if(Auth::attempt($credentials, $remember))
         {
            return redirect()->back();
         }

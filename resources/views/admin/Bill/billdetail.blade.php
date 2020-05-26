@@ -17,7 +17,7 @@
                             <tr align="center">
                                 <th>ID</th>
                                 <th>Tên Sản Phẩm</th>
-                                <th>Id_product</th>
+                                <th>Ảnh</th>
                                 <th>Số Lượng</th>
                                 <th>Đơn Giá</th>
                                 
@@ -25,11 +25,13 @@
                         </thead>
                         <tbody>
                         	@foreach($billdetail as $bd)
-                                
+                                <?php 
+                                    $arrImg = json_decode($bd->product->image,true);
+                                ?>
 	                            <tr class="odd gradeX" align="center">
 	                                <td>{{$bd->id}}</td>
 	                                <td>{{$bd->product->name}}</td>
-	                                <td>{{$bd->id_product}}</td>
+	                                <td><img src="source/images/{{$arrImg[0]}}" class="img-fluid" style="width: 100px;" alt=""></td>
                                     <td>{{$bd->quantity}}</td>
                                     <td>{{number_format($bd->unit_price)}}đ</td>
 	                                

@@ -28,7 +28,6 @@ class BillController extends Controller
     	$billdetail = BillDetail::where('id_bill',$id)->get();
     	$bill = Bill::find($id);
     	$customer = Customer::find($bill->id_customer);//dùng where thì phải duyệt for
-
     	return view('admin.Bill.billdetail',compact('billdetail','customer'));
     }
     public function getXacNhan($id)

@@ -149,7 +149,7 @@ class UserController extends Controller
     }
     public function getDangNhapAdmin()
     {
-        if(Auth::check() && Auth::user()->level==1){
+        if(Auth::check() && (Auth::user()->level==1 || Auth::user()->level==2)){
             return redirect('admin/Bill/danhsach');
         }
         else{

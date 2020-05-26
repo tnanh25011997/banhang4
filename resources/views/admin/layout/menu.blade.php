@@ -12,6 +12,7 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+                        @if(Auth::user()->level==2)
                         <li>
                             <a href="admin/Brand/danhsach"><i class="fa fa-youtube fa-fw"></i> Thương Hiệu<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -24,6 +25,8 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @endif
+                        @if(Auth::user()->level==2)
                         <li>
                             <a href="admin/ProductType/danhsach"><i class="fa fa-bar-chart-o fa-fw"></i> Loại Sản Phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -36,6 +39,8 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @endif
+                        @if(Auth::user()->level==2)
                         <li>
                             <a href="#"><i class="fa fa-cube fa-fw"></i> Sản Phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -48,6 +53,8 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @endif
+                        @if(Auth::user()->level==2)
                         <li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -60,6 +67,8 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @endif
+
                         <li>
                             <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Đơn Hàng<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -72,6 +81,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @if(Auth::user()->level==2)
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Thống Kê<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -82,6 +92,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @endif
                         <li>
                             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Slide<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
