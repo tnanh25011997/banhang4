@@ -32,7 +32,7 @@
 						<?php 
 				    		$arrImg = json_decode($ct->image,true);
 				    	?>
-					    <div class="col-md-5">
+					    <div class="col-md-5 arr-of-image">
 					    	<?php for($j=0;$j<sizeof($arrImg);$j++){ ?>
 						    <div class="big-image">
 							    <img src="source/images/{{$arrImg[$j]}}"  alt="" class="img-fluid">
@@ -73,13 +73,30 @@
 						            <h4 class="giakhuyenmai">{{number_format($ct->promotion_price)}}đ</h4>
 						        @endif
 						        <p class="thuong_hieu">Thương hiệu: {{$ct->brand->name}}</p>
-						        <span>Số Lượng:</span>
+						        <span>Số lượng:</span>
 						        <form action="gio-hang-detail" method="post">
 						        	@csrf
 						        	<!-- <input type="number" style="margin-top: 5px;" min="0" max="50" value="1" name="soluong"> -->
+						        	
 						        	<div class="spin">
 										<span>&ndash;</span><input value="1" name="soluong"/><span>+</span>
 									</div>
+									@if($ct->color!=null)
+									<div class="color-picker" style="">
+										<p>Màu sắc:</p>
+										<select name="checkboxColor">
+										<?php 
+								    		$arrColor = json_decode($ct->color,true);?>
+								    		<option value="{{$arrColor[0]}}" checked><?php echo $arrColor[0];?></option>
+								    		<?php 
+								    		for($i=1;$i<sizeof($arrColor);$i++){?>
+								    			<option value="{{$arrColor[$i]}}"><?php echo $arrColor[$i];?></option>
+								    		<?php  }
+								    	?>
+								    	</select>
+
+									</div>
+									@endif
 						        	<input type="hidden" value="{{$ct->id}}" name="idsp">
 						        	<p>
 						        		@if($ct->status==1)

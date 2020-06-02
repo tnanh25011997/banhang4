@@ -42,6 +42,7 @@
                                     
                                 </select>
                             </div>
+                            
                             <div class="form-group">
                                 <label>Thương Hiệu</label>
                                 <select class="form-control" name="thuonghieu">
@@ -55,6 +56,31 @@
                                     @endforeach
                                     
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Màu</label>
+
+                                <!-- <select class="form-control" name="thuonghieu">
+                                          
+                                </select> -->
+                                <input type="checkbox" id="checkboxColor" name="vehicle1">
+                                <div id="autoUpdate" style="display: none;" class="autoUpdate">
+                                    @foreach($color as $cl)
+                                    <label class="checkbox-inline"><input type="checkbox" name="color_array[]"
+                                    <?php
+                                       if($product->color!=null){
+                                            $arrColor = json_decode($product->color,true);
+                                           for($i=0;$i<sizeof($arrColor);$i++){
+                                                if($arrColor[$i]==$cl->name){
+                                                    echo "checked";
+                                                } 
+                                           }
+                                       }
+                                       
+                                    ?>
+                                     value="{{$cl->name}}">{{$cl->name}}</label>
+                                    @endforeach  
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Tên Sản Phẩm</label>
@@ -88,4 +114,16 @@
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $('#checkboxColor').change(function(){
+                    if(this.checked)
+                        $('#autoUpdate').fadeIn('slow');
+                    else
+                        $('#autoUpdate').fadeOut('slow');
+
+                });
+            });
+        </script>
 @endsection

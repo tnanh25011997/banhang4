@@ -38,6 +38,18 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label>Màu</label>
+                                <!-- <select class="form-control" name="thuonghieu">
+                                          
+                                </select> -->
+                                <input type="checkbox" id="checkboxColor" name="vehicle1">
+                                <div id="autoUpdate" style="display: none;" class="autoUpdate">
+                                   @foreach($color as $cl)
+                                    <label class="checkbox-inline"><input type="checkbox" name="color_array[]" value="{{$cl->name}}">{{$cl->name}}</label>
+                                    @endforeach  
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label>Thương Hiệu</label>
                                 <select class="form-control" name="thuonghieu">
                                     @foreach($brand as $br)
@@ -77,4 +89,16 @@
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $('#checkboxColor').change(function(){
+                    if(this.checked)
+                        $('#autoUpdate').fadeIn('slow');
+                    else
+                        $('#autoUpdate').fadeOut('slow');
+
+                });
+            });
+        </script>
 @endsection

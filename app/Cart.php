@@ -4,7 +4,7 @@ namespace App;
 
 class Cart
 {
-	public $items = null; //đây là 1 mảng chứa các iteam theo id
+	public $items = array(); //đây là 1 mảng chứa các iteam theo id
 	public $totalQty = 0;
 	public $totalPrice = 0;
 
@@ -17,12 +17,24 @@ class Cart
 	}
 
 	public function add($item, $id){
-		$giohang = ['qty'=>0, 'price' => $item->unit_price, 'item' => $item];
+		$k = -1;
+		$max = 0;
+		$giohang = ['qty'=>0, 'price' => $item->unit_price, 'item' => $item,'color'=>null];
 		//kiểm tra tồn tại sản phẩm trong giỏ chưa
-		if($this->items){
-			if(array_key_exists($id, $this->items)){
-				$giohang = $this->items[$id];
+		// if($this->items){
+		// 	if(array_key_exists($id, $this->items)){
+		// 		$giohang = $this->items[$id];
+		// 	}
+		// }
+		foreach ($this->items as $key => $value ) {
+			if($value['item']->id==$id && $value['color']==null){
+				$giohang = $value;
+				$k = $key;
 			}
+			if($max<$key){
+				$max=$key;
+			}
+			
 		}
 		$oldQty = $giohang['qty'];
 		$qty = 1;
@@ -33,19 +45,43 @@ class Cart
 		}
 		$giohang['price'] = $item->promotion_price * $giohang['qty'];
 
-		$this->items[$id] = $giohang; // bằng 1 mảng $giohang
+		//$this->items[$id] = $giohang; // bằng 1 mảng $giohang
+		if($k== -1){
+			$this->items[$max+1]= $giohang;
+			
+		}
+		else{
+			$this->items[$k]= $giohang;
+
+		}
 		$this->totalQty++;
 		$this->totalPrice += $item->promotion_price * $qty;
 		
 		
 	}
-	public function addInDetail($item, $id, $qty){
-		$giohang = ['qty'=>0, 'price' => $item->unit_price, 'item' => $item];
-		if($this->items){
-			if(array_key_exists($id, $this->items)){
-				$giohang = $this->items[$id];
+	public function addInDetail($item, $id, $qty, $color){
+		
+		$k = -1;
+		$max = 0;
+		$giohang = ['qty'=>0, 'price' => $item->promotion_price, 'item' => $item,'color'=>$color];
+		// if($this->items){
+		// 	if(array_key_exists($id, $this->items)){
+		// 		$giohang = $this->items[$id];
+		// 	}
+		// }
+		
+		foreach ($this->items as $key => $value ) {
+			if($value['item']->id==$id && $value['color']==$color){
+				$giohang = $value;
+				$k = $key;
 			}
+			if($max<$key){
+				$max=$key;
+			}
+			
 		}
+
+			
 		$oldQty = $giohang['qty'];
 		$giohang['qty'] = $giohang['qty'] + $qty;
 		if($giohang['qty']>20){
@@ -54,33 +90,67 @@ class Cart
 		}
 		$giohang['price'] = $item->promotion_price * $giohang['qty'];
 		
-		$this->items[$id] = $giohang; 
-		$this->totalQty++;	
+		//$this->items[$id] = $giohang;
+		if($k== -1){
+			$this->items[$max+1]= $giohang;
+		}
+		else{
+			$this->items[$k]= $giohang;
+		}
+		
+		$this->totalQty += ($qty-$oldQty);	
 		$this->totalPrice += $item->promotion_price * $qty;
+		//dd(session('cart'));
+
 		
 	}
 	public function update($item, $id, $qty)
 	{
+		$k = -1;
+		$max = 0;
 		if($qty > 20){
 			$qty = 20;
 		}
-		$giohang = ['qty'=>0, 'price' => $item->unit_price, 'item' => $item];
-		if($this->items){
-			if(array_key_exists($id, $this->items)){
-				$giohang = $this->items[$id];
-			}
+		if($qty < 0 ){
+			$qty = 0;
 		}
-
-		$oldQty = $giohang['qty']; //tạo 1 biến lưu giá trị Qty cũ
+		$giohang = ['qty'=>1, 'price' => $item->promotion_price, 'item' => $item,'color'=>null];
+		// if($this->items){
+		// 	if(array_key_exists($id, $this->items)){
+		// 		$giohang = $this->items[$id];
+		// 	}
+		// }
+		//dd($giohang);
+		foreach ($this->items as $key => $value ) {
+			if($key==$id){
+				$giohang = $value;
+				$k= $key;	
+			}
+			if($max<$key){
+				$max=$key;
+			}
+			
+		}
+		
+		$oldQty = $giohang['qty'];//tạo 1 biến lưu giá trị Qty cũ
 		$giohang['qty'] =  $qty; // Qty mới mà mình thay đổi
+
 		$giohang['price'] = $item->promotion_price * $giohang['qty'];
 		
-		$this->items[$id] = $giohang;
-		$this->totalQty += $qty-$oldQty; //?
+		//$this->items[$id] = $giohang;
+		if($k== -1){
+			
+		}
+		else{
+			$this->items[$k]= $giohang;
+			$this->totalQty += ($qty-$oldQty); //?
 
-		$oldPrice = $oldQty*$item->promotion_price;
-		$newPrice = $giohang['qty']*$item->promotion_price;
-		$this->totalPrice += $newPrice-$oldPrice;
+			$oldPrice = $oldQty*$item->promotion_price;
+			$newPrice = $giohang['qty']*$item->promotion_price;
+
+			$this->totalPrice += $newPrice-$oldPrice;
+		}
+		
 		if($this->items[$id]['qty']<=0){
 			unset($this->items[$id]);
 		}

@@ -40,7 +40,7 @@ class PageController extends Controller
         $myphamnam = ProductType::where('gender',1)->get();
         $sanpham_nam = Product::where('gender',1)->where('status','!=',3)->orderby('created_at','desc')->take(6)->get();
         $sanpham_nu = Product::where('gender',0)->where('status','!=',3)->orderby('created_at','desc')->take(6)->get();
-    	return view('page.trangchu',compact('slide','new_product','sale_product','myphamnu','myphamnam','sanpham_nam','sanpham_nu'));
+        return view('page.trangchu',compact('slide','new_product','sale_product','myphamnu','myphamnam','sanpham_nam','sanpham_nu'));
     }
     public function getChiTiet($id)
     {
@@ -112,7 +112,7 @@ class PageController extends Controller
     public function getDangKy()
     {
         $province = Province::all();
-    	return view('page.dangky',compact('province'));
+        return view('page.dangky',compact('province'));
     }
     public function getDangNhap()
     {
@@ -122,7 +122,7 @@ class PageController extends Controller
         else{
             return view('page.dangnhap');
         }
-    	
+        
     }
     public function getGioHang()
     {
@@ -455,7 +455,7 @@ class PageController extends Controller
     
     public function getSearch(Request $req)
     {
-        $product = DB::table("products")->join('brand','products.id_brand','=','brand.id')->select(DB::raw("products.id"), DB::raw("products.name"), DB::raw("products.image"),DB::raw("products.status"),DB::raw("products.rate"),DB::raw("products.sale"),DB::raw("products.promotion_price"),DB::raw("products.unit_price"),DB::raw("products.slug"))->where('products.name','like','%'.$req->key.'%')->where('products.status','!=',3)->orWhere('products.unit_price',$req->key)->orWhere('brand.name','like','%'.$req->key.'%')->orderby('products.created_at','desc')->paginate(8)->appends(request()->except('page'));
+        $product = DB::table("products")->join('brand','products.id_brand','=','brand.id')->select(DB::raw("products.id"), DB::raw("products.name"), DB::raw("products.image"),DB::raw("products.status"),DB::raw("products.rate"),DB::raw("products.color"),DB::raw("products.sale"),DB::raw("products.promotion_price"),DB::raw("products.unit_price"),DB::raw("products.slug"))->where('products.name','like','%'.$req->key.'%')->where('products.status','!=',3)->orWhere('products.unit_price',$req->key)->orWhere('brand.name','like','%'.$req->key.'%')->orderby('products.created_at','desc')->paginate(8)->appends(request()->except('page'));
         return view('page.search',compact('product'));
         // $product = Product::where('name','like','%'.$req->key.'%')->orWhere('unit_price',$req->key)->get();
         // return view('page.search',compact('product'));

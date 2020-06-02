@@ -75,7 +75,7 @@
 								<div class="anh2">
 									<img src="source/images/{{$arrSaleImg[0]}}" alt="" class="img-fluid">
 									<div class="haiicon2">
-										@if($sp->status==1)
+										@if($sp->status==1 && $sp->color==null)
 										<a href="gio-hang/{{$sp->id}}" data-placement="top" data-toggle="tooltip" title="Thêm vào giỏ"><i class="fas fa-shopping-cart iconnho icon-shopping-cart"></i></a>
 										@endif
 										<a href="chi-tiet-san-pham/{{$sp->slug}}" data-placement="top" data-toggle="tooltip" title="Xem chi tiết"><i class="fas fa-align-center iconnho"></i></a>

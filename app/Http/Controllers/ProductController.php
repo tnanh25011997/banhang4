@@ -8,7 +8,7 @@ use App\Product;
 use App\ProductType;
 use App\Brand;
 use App\Slug;
-
+use App\Color;
 
 class ProductController extends Controller
 {
@@ -27,7 +27,8 @@ class ProductController extends Controller
     {
         $producttype = ProductType::all();
         $brand = Brand::all();
-        return view('admin.Product.them',['producttype'=>$producttype,'brand'=>$brand]);
+        $color = Color::all();
+        return view('admin.Product.them',['producttype'=>$producttype,'brand'=>$brand,'color'=>$color]);
     }
     public function postThem(Request $req)
     {
@@ -117,6 +118,12 @@ class ProductController extends Controller
         }else{
             $product->sale = 100-(($req->giakhuyenmai/$req->giagoc)*100);
         }
+        //color
+        if($req->input('color_array')!=null){
+            $arrColor = $req->input('color_array');
+            $product->color= json_encode($arrColor,JSON_FORCE_OBJECT);
+        }
+        
 
         $product->save();
         return redirect('admin/Product/them')->with('thongbao','Thêm Sản Phẩm Thành Công');
@@ -125,8 +132,9 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $producttype = ProductType::all();
+        $color = Color::all();
         $brand = Brand::all();
-        return view('admin.Product.sua',['product'=>$product,'producttype'=>$producttype,'brand'=>$brand]);
+        return view('admin.Product.sua',['product'=>$product,'producttype'=>$producttype,'brand'=>$brand,'color'=>$color]);
     }
     public function postSua(Request $req,$id)
     {
@@ -220,6 +228,16 @@ class ProductController extends Controller
         }else{
             $product->sale = 100-(($req->giakhuyenmai/$req->giagoc)*100);
         }
+
+        //color
+        if($req->input('color_array')!=null){
+            $arrColor = $req->input('color_array');
+            $product->color= json_encode($arrColor,JSON_FORCE_OBJECT);
+        }else{
+             $product->color=null;
+        }
+         
+        
         $product->save();
         return redirect('admin/Product/sua/'.$id)->with('thongbao','Sửa Sản Phẩm Thành Công');
     }

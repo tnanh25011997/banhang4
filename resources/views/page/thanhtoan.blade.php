@@ -54,7 +54,7 @@
 						@if(Session::has('cart'))
 						    @foreach($product_cart as $item) 
 								<tr>
-									<td><a class="item-name" href="chi-tiet-san-pham/{{$item['item']['slug']}}">{{$item['item']['name']}}</a></td>
+									<td><a class="item-name" href="chi-tiet-san-pham/{{$item['item']['slug']}}">{{$item['item']['name']}} {{$item['color']}}</a></td>
 									
 									@if($item['item']['promotion_price'] == $item['item']['unit_price'])
 										<td class="giagiohang">{{number_format($item['item']['unit_price'])}}đ</td>
@@ -215,8 +215,9 @@
 											<label class="form-check-label">
 												<input type="radio" class="form-check-input" value="ATM" name="payment"> <img src="source/images/payment-2.png" alt=""> Chuyển Khoản Ngân Hàng
 												<div id="clusterchuyenkhoan">
-													<p>STK : 23213245648</p>
-													<p>Tên : Trần Ngọc Ánh</p>
+													<p>Quý khách vui lòng chuyển khoản đến tài khoản sau:</p>
+													<p>STK: 23213245648</p>
+													<p>Họ Tên: Trần Ngọc Ánh</p>
 													<p>Ngân Hàng Công Thương Việt Nam</p>
 												</div>
 											</label>

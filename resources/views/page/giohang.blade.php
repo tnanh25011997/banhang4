@@ -23,6 +23,7 @@
 			<div class="giohangcuatoi"><p>GIỎ HÀNG CỦA TÔI</p></div>
 			<hr>
 			@if(Session::has('cart'))
+			<?php  ?>
 			<div class="khoibieutuong">
 				<div class="motbieutuong">
 					<p><i class="fas fa-shopping-cart"></i></p>
@@ -54,11 +55,11 @@
 					</thead>
 					<tbody>
 						
-							@foreach($product_cart as $item)
-							<?php $arrImg = json_decode($item['item']['image'],true); ?>
-							
+							@foreach($product_cart as $key=>$item)
+							<?php $arrImg = json_decode($item['item']['image'],true);?>
+								
 								<tr>
-									<td><a class="item-name" href="chi-tiet-san-pham/{{$item['item']['slug']}}">{{$item['item']['name']}}</a></td>
+									<td><a class="item-name" href="chi-tiet-san-pham/{{$item['item']['slug']}}">{{$item['item']['name']}} {{$item['color']}}</a></td>
 									<td class="anhgiohangtd"><img  src="source/images/{{$arrImg[0]}}" alt="" class="anhgiohang"></td>
 									@if($item['item']['promotion_price'] == $item['item']['unit_price'])
 										<td class="giagiohang">{{number_format($item['item']['unit_price'])}}đ</td>
@@ -68,16 +69,20 @@
 									<td class="quantity-cart">
 										<form action="update-giohang" method="post">
 											@csrf
+											<input type="hidden" value="{{$key}}" name="idcart">
+											
 											<input type="hidden" value="{{$item['item']['id']}}" name="idsp">
-										    <input type="number" onchange="updateItem(<?php echo $item['item']['id'] ?>)" class="inputgiohang" min="0" max="20" value="{{$item['qty']}}" id="num_<?php echo $item['item']['id'] ?>" name="soluong">
+											
+										    <input type="number" onchange="updateItem(<?php echo $key ?>,<?php echo $item['item']['id'] ?>)"  class="inputgiohang" min="1" max="20" value="{{$item['qty']}}" id="num_<?php echo $key ?>" name="soluong">
 										    <input type="hidden" value="Cập Nhật">
+										    <!-- <button type="submit">update</button> -->
 										</form>
 									</td>
 									<td class="giagiohang">
 									
 									{{number_format($item['price'])}}đ
 									</td>
-									<td><a href="xoa-gio/{{$item['item']['id']}}"><i class="fas fa-trash-alt icontrash"></i></a></td>
+									<td><a href="xoa-gio/{{$key}}"><i class="fas fa-trash-alt icontrash"></i></a></td>
 								</tr>
 							@endforeach
 						

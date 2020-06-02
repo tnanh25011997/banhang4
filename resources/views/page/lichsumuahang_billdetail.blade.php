@@ -36,7 +36,7 @@
 						@foreach($billDetail as $bd)
 						<tr>
 							<td>{{$bd->id}}</td>
-							<td>{{$bd->product->name}}</td>
+							<td>{{$bd->product->name}} {{$bd->color}}</td>
 							<td>{{$bd->quantity}}</td>
 							<td>{{number_format($bd->unit_price)}}đ</td>
 							

@@ -109,7 +109,7 @@
 					    				    <img src="source/images/{{$arrFemaleImg[0]}}" alt="" class="img-fluid">
 					    				    
 					    				    <div class="haiicon">
-					    				    	@if($spnu->status==1)
+					    				    	@if($spnu->status==1 && $spnu->color==null)
 					    				    	<a href="gio-hang/{{$spnu->id}}" data-placement="top" data-toggle="tooltip" title="Thêm vào giỏ"><i class="fas fa-shopping-cart iconnho"></i></a>
 					    				    	@endif
 					    				    	<a href="chi-tiet-san-pham/{{$spnu->slug}}" class="tooltest" data-placement="top" data-toggle="tooltip" title="Xem chi tiết"><i class="fas fa-align-center iconnho"></i></a>
@@ -168,7 +168,7 @@
 					    				<div class="anh">
 					    				    <img src="source/images/{{$arrMaleImg[0]}}" alt="" class="img-fluid">
 					    				    <div class="haiicon">
-					    				    	@if($spnam->status==1)
+					    				    	@if($spnam->status==1 && $spnam->color==null)
 					    				    	<a href="gio-hang/{{$spnam->id}}"  data-placement="top" data-toggle="tooltip" title="Thêm vào giỏ"><i class="fas fa-shopping-cart iconnho"></i></a>
 					    				    	@endif
 					    				    	<a href="chi-tiet-san-pham/{{$spnam->slug}}" class="tooltest" data-placement="top" data-toggle="tooltip" title="Xem chi tiết"><i class="fas fa-align-center iconnho"></i></a>

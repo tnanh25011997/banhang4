@@ -70,16 +70,17 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-function updateItem(id){
-	num = $("#num_"+id).val();
-	$.ajax({
+function updateItem(idcart,id){
+    num = $("#num_"+idcart).val();
+    $.ajax({
        type:'POST',
        url:'update-giohang',
-       data:{idsp:id, soluong:num},
+       data:{idcart:idcart, idsp:id, soluong:num},
        success:function(data){
-       		$("#noidunggiohang").load("http://localhost/banhang/public/gio-hang #ndgh");
+            //$("#noidunggiohang").load("http://localhost/banhang/public/gio-hang #ndgh");
+            location.reload()
+             
         }
     });
 
 }
-

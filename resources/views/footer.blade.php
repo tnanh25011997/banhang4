@@ -62,7 +62,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6">
 				<div class="footertren">
-					<p>KẾT NỐI VỚI CHÚNG TÔI</p>
+					<p>MẠNG XÃ HỘI</p>
 				</div>
 				<div class="footerduoi">
 					<a href="https://www.facebook.com/NA-Store-2617915788253381/" target="_blank"><i class="fab fa-facebook-square iconfooter"></i>Facebook</a>

@@ -27,37 +27,50 @@ use Mail;
 use App\Mail\ShoppingMail;
 use Carbon\Carbon;
 
+
 class CartController extends Controller
 {
     public function getGioHangId(Request $req,$id)
     {
         $product  = Product::find($id);
-        $oldCart = Session('cart')?Session::get('cart'):null;// kiem tra co session cart chua
-        $cart = new Cart($oldCart); //gan vao gio hang cu de chung gio hang ban dau
-        $cart->add($product,$id); // them gio hang
-        $req->session()->put('cart',$cart); // dung req de put vao trong session
-        //return view('page.giohang');
-        return redirect()->back()->with('messagecart', 'IT WORKS!');
+        if($product!=null){
+            $oldCart = Session('cart')?Session::get('cart'):null;// kiem tra co session cart chua
+            $cart = new Cart($oldCart); //gan vao gio hang cu de chung gio hang ban dau
+            $cart->add($product,$id); // them gio hang
+            $req->session()->put('cart',$cart); // dung req de put vao trong session
+            //d(session('cart'));
+            //return view('page.giohang');
+            return redirect()->back()->with('messagecart', 'IT WORKS!');
+        }
+        else{
+            return view('page.errors');
+        }
     }
     public function gioHangIdDetail(Request $request)
     {
         $id = $request->idsp;
         $qty = $request->soluong;
+        $color = $request->checkboxColor;
+
         $product  = Product::find($id);
         $oldCart = Session('cart')?Session::get('cart'):null;// kiem tra co session cart chua
         $cart = new Cart($oldCart); //gan vao gio hang cu de chung gio hang ban dau
-        $cart->addInDetail($product,$id,$qty); // them gio hang
+        $cart->addInDetail($product,$id,$qty,$color); // them gio hang
+        
         $request->session()->put('cart',$cart); // dung req de put vao trong session
         return redirect()->back()->with('messagecart', 'IT WORKS!');
     }
     public function updateGioHangId(Request $request)
     {
+        //$color = $request->color;
         $id = $request->idsp;
+        $idcart = $request->idcart;
         $qty = $request->soluong;
         $product  = Product::find($id);
+        
         $oldCart = Session('cart')?Session::get('cart'):null;
         $cart = new Cart($oldCart); //để chung vào giỏ hàng ban đầu
-        $cart->update($product,$id,$qty); //thêm vào giỏ hàng
+        $cart->update($product,$idcart,$qty); //thêm vào giỏ hàng
         if(count($cart->items)>0)
         {
             $request->session()->put('cart',$cart); // dùng req để put card vào trong session
@@ -169,8 +182,9 @@ class CartController extends Controller
         foreach ($cart->items as $key => $value) {
             $bill_detail = new BillDetail;
             $bill_detail->id_bill = $bill->id;
-            $bill_detail->id_product = $key; //dd để xem
+            $bill_detail->id_product = $value['item']->id; //dd để xem
             $bill_detail->quantity = $value['qty'];//dd để xem
+            $bill_detail->color = $value['color'];
             $bill_detail->unit_price = $value['price']/$value['qty'];
             $bill_detail->save();
             array_push($orderdetails, $value);

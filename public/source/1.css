@@ -560,7 +560,7 @@
 .spin {
     display: inline-block;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .spin span {
     display: inline-block;
@@ -1426,6 +1426,7 @@ button.btn.btn-primary.nutthemvaogio {
     width: 180px;
     height: 60px;
     margin-right: 25px;
+    margin-top: 10px;
 }
 
 input[type="number"] {
@@ -1450,7 +1451,8 @@ ol.breadcrumb {
 }
 
 .noidungsanpham .big-image {
-    border: 1px solid #d5d1d1;
+    /*border: 1px solid #d5d1d1;*/
+    background: white;
     text-align: center;
 }
 .noidungsanpham .big-image .img-fluid {
@@ -2073,4 +2075,27 @@ span.number-of-news{
 }
 .nav-tabs a.nav-link{
     color: #7AAEDD;
+}
+.color-picker{
+    margin-bottom: 14px;
+
+}
+.color-picker select{
+    cursor: pointer;
+    padding: 4px 9px;
+    border: 1px solid #aaa;
+    width: 102px;
+}
+.color-picker select option{
+    cursor: pointer;
+}
+.color-picker p{
+    margin-bottom: 12px;
+}
+.arr-of-image{
+    background: #eee;
+    padding-top: 15px;
+}
+.noidungthanhtoan #clusterchuyenkhoan p{
+    margin-bottom: 0px!important;
 }
