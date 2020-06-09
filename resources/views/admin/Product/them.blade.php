@@ -29,11 +29,19 @@
                         <form action="admin/Product/them" method="POST" enctype='multipart/form-data'>
                             @csrf
                             <div class="form-group">
-                                <label>Loại Sản Phẩm</label>
-                                <select class="form-control" name="loaisp">
-                                    @foreach($producttype as $pt)
-                                    <option value="{{$pt->id}}">{{$pt->name}}</option>
+                                <label>Danh Mục</label>
+                                <select class="form-control" name="danhmuc" id="danhmuc">
+                                    <option value>Chọn Danh Mục</option>
+                                    @foreach($category as $cate)
+                                    <option value="{{$cate->id}}">{{$cate->name}}</option>
                                     @endforeach
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Loại Sản Phẩm</label>
+                                <select class="form-control" name="loaisp" id="loaisp">
+                                    <option value> Chọn Loại Sản Phẩm</option>
                                     
                                 </select>
                             </div>
@@ -101,4 +109,18 @@
                 });
             });
         </script>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $("#danhmuc").change(function(event) {
+                var danhmuc_id = $(this).val();
+                $.get("ajax/product-type/"+danhmuc_id,function(data){
+                    $("#loaisp").html(data);
+                    
+                });
+            });
+            
+        });
+    </script>
 @endsection

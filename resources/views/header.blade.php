@@ -120,22 +120,43 @@
 					<a class="nav-link" href="gioi-thieu">GIỚI THIỆU</a>
 				</li>
 				<li class="nav-item sanphammenu">
-					<a class="nav-link" href="my-pham-nam">MỸ PHẨM NAM <i class="fas fa-angle-down"></i></a>
-					<ul class='sub-nav'>
+					<a class="nav-link" href="my-pham-nam">MỸ PHẨM NAM </a>
+					<ul class='sub-nav sub-mpnam'>
 						@foreach($loai_sp_nam as $loai)
 						<a href="san-pham-theo-loai/{{$loai->slug}}"><li>{{$loai->name}}</li></a>
 						@endforeach
 						
 					</ul>
+					<i class="nut-xuong1 fas fa-angle-down"></i>
 				</li>
-				<li class="nav-item sanphammenu">
-					<a class="nav-link" href="my-pham-nu">MỸ PHẨM NỮ <i class="fas fa-angle-down"></i></a>
-					<ul class='sub-nav'>
+				<!-- <li class="nav-item sanphammenu">
+					<a class="nav-link" href="my-pham-nu">MỸ PHẨM NỮ</a>
+					<ul class='sub-nav sub-mpnu'>
 						@foreach($loai_sp_nu as $loai)
 						<a href="san-pham-theo-loai/{{$loai->slug}}"><li>{{$loai->name}}</li></a>
 						@endforeach
 						
 					</ul>
+					<i class="nut-xuong2 fas fa-angle-down"></i>
+				</li> -->
+				<li class="nav-item sanphammenu">
+					<a class="nav-link" href="my-pham-nu">MỸ PHẨM NỮ</a>
+					<ul class='sub-nav sub-mpnu'>
+						@foreach($category as $cate)
+						<li>
+							<span class="sub-sub-title">{{$cate->name}}</span>
+							<ul class="sub-sub-nav">
+								@foreach($loai_sp_nu as $loai)
+									@if($loai->category->id==$cate->id)
+									<a href="san-pham-theo-loai/{{$loai->slug}}"><li>{{$loai->name}}</li></a>
+									@endif
+								@endforeach
+							</ul>
+						</li>
+						@endforeach
+						
+					</ul>
+					<i class="nut-xuong2 fas fa-angle-down"></i>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="tin-tuc">TIN TỨC</a>

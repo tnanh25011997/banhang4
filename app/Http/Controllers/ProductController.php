@@ -9,6 +9,7 @@ use App\ProductType;
 use App\Brand;
 use App\Slug;
 use App\Color;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -25,10 +26,11 @@ class ProductController extends Controller
     }
     public function getThem()
     {
+        $category = Category::all();
         $producttype = ProductType::all();
         $brand = Brand::all();
         $color = Color::all();
-        return view('admin.Product.them',['producttype'=>$producttype,'brand'=>$brand,'color'=>$color]);
+        return view('admin.Product.them',['producttype'=>$producttype,'brand'=>$brand,'color'=>$color,'category'=>$category]);
     }
     public function postThem(Request $req)
     {
@@ -130,11 +132,12 @@ class ProductController extends Controller
     }
     public function getSua($id)
     {
+        $category = Category::all();
         $product = Product::find($id);
-        $producttype = ProductType::all();
+        $producttype = ProductType::where('id_category',$product->product_type->category->id)->get();
         $color = Color::all();
         $brand = Brand::all();
-        return view('admin.Product.sua',['product'=>$product,'producttype'=>$producttype,'brand'=>$brand,'color'=>$color]);
+        return view('admin.Product.sua',['product'=>$product,'producttype'=>$producttype,'brand'=>$brand,'color'=>$color,'category'=>$category]);
     }
     public function postSua(Request $req,$id)
     {
@@ -261,6 +264,18 @@ class ProductController extends Controller
         $product->status = 3;
         $product->save();
         return redirect('admin/Product/danhsach')->with('thongbao','Cập Nhật Thành Công');
+    }
+
+    public function getProductType($danhmuc_id)
+    {
+        
+        $type = ProductType::where('id_category',$danhmuc_id)->get();
+        $output = "<option value> Chọn Loại Sản Phẩm</option>";
+        foreach ($type as $ty) {
+            $output.= "<option value='".sprintf($ty->id)."'>".$ty->name."</option>";
+        }
+        echo $output;
+       
     }
     
     

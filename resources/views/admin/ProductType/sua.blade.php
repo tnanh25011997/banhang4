@@ -24,17 +24,30 @@
                         <form action="admin/ProductType/sua/{{$producttype->id}}" method="POST">
                             @csrf
                             <div class="form-group">
+                                <label>Danh Mục</label>
+                                <select class="form-control" name="danhmuc">
+                                    @foreach($category as $cate)
+                                    <option 
+                                       @if($producttype->category->id == $cate->id)
+                                           {{"selected"}}
+                                        @endif
+
+                                        value="{{$cate->id}}">{{$cate->name}}</option>
+                                    @endforeach        
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label>Tên Loại Sản Phẩm</label>
                                 <input class="form-control" name="ten" placeholder="Điền tên loại sản phẩm" value="{{$producttype->name}}" />
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="sel1">Nam/Nữ</label>
                                 <select class="form-control" id="sel1" name="loai">
                                     <option @if($producttype->gender == 1) {{"selected"}} @endif >Nam</option>
                                     <option @if($producttype->gender == 0) {{"selected"}} @endif>Nữ</option>
                                     
                                </select>
-                             </div>
+                             </div> -->
                             
                             <button type="submit" class="btn btn-default">Sửa</button>
                             <button type="reset" class="btn btn-default">Đặt Lại</button>

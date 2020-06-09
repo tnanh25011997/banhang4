@@ -234,7 +234,7 @@ class AccountController extends Controller
     public function getLichSuMuaHangBill($id)
     {
         if(Auth::user()->id == $id){
-            $bill = Bill::where('id_user',$id)->orderBy('created_at','desc')->get();
+            $bill = Bill::where('id_user',$id)->orderBy('created_at','desc')->paginate(6);
             return view('page.lichsumuahang_bill',compact('bill'));
         }
         else{

@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Loại Sản Phẩm
+                        <h1 class="page-header">Danh Mục Sản Phẩm
                             <small>Thêm</small>
                         </h1>
                     </div>
@@ -23,28 +23,20 @@
                         @if(session('thongbao'))
                             <div class="alert alert-success">{{session('thongbao')}}</div>
                         @endif
-                        <form action="admin/ProductType/them" method="POST">
+                        <form action="admin/Category/them" method="POST">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="form-group">
-                                <label>Danh Mục</label>
-                                <select class="form-control" name="danhmuc">
-                                    @foreach($category as $cate)
-                                    <option value="{{$cate->id}}">{{$cate->name}}</option>
-                                    @endforeach        
-                                </select>
+                                <label>Tên Danh Mục</label>
+                                <input class="form-control" name="ten" value="{{ old('ten') }}" placeholder="Nhập Tên Danh Mục" />
                             </div>
                             <div class="form-group">
-                                <label>Tên Loại Sản Phẩm</label>
-                                <input class="form-control" name="ten" value="{{ old('ten') }}" placeholder="Nhập Tên Loại Sản Phẩm" />
-                            </div>
-                            <!-- <div class="form-group">
                                 <label for="sel1">Nam/Nữ</label>
                                 <select class="form-control" id="sel1" name="loai">
                                     <option>Nam</option>
                                     <option>Nữ</option>
                                     
                                </select>
-                             </div> -->
+                             </div>
                             
                             <button type="submit" class="btn btn-default">Thêm</button>
                             <button type="reset" class="btn btn-default">Đặt Lại</button>

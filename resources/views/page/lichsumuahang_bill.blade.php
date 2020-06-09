@@ -57,7 +57,9 @@
 						</tr>
 						@endforeach
 					</tbody>
+
 				</table>
+				<div class="row" style="">{{$bill->links()}}</div>
 			</div>
 			@endif
 		</div>

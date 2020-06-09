@@ -1,52 +1,42 @@
 @extends('admin.layout.index')
 @section('content')
-
 <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Loại Sản Phẩm
-                            <small>Thêm</small>
+                        <h1 class="page-header">Danh Mục
+                            <small>{{$category->name}}</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                        @if(count($errors)>0)
+                        @if(count($errors) > 0)
                             <div class="alert alert-danger">
                                 @foreach($errors->all() as $err)
                                     <li>{{$err}}</li>
                                 @endforeach
                             </div>
                         @endif
-
                         @if(session('thongbao'))
-                            <div class="alert alert-success">{{session('thongbao')}}</div>
+                           <div class="alert alert-success">{{session('thongbao')}}</div>
                         @endif
-                        <form action="admin/ProductType/them" method="POST">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <form action="admin/Category/sua/{{$category->id}}" method="POST">
+                            @csrf
                             <div class="form-group">
-                                <label>Danh Mục</label>
-                                <select class="form-control" name="danhmuc">
-                                    @foreach($category as $cate)
-                                    <option value="{{$cate->id}}">{{$cate->name}}</option>
-                                    @endforeach        
-                                </select>
+                                <label>Tên Danh Mục</label>
+                                <input class="form-control" name="ten" placeholder="Điền tên loại sản phẩm" value="{{$category->name}}" />
                             </div>
                             <div class="form-group">
-                                <label>Tên Loại Sản Phẩm</label>
-                                <input class="form-control" name="ten" value="{{ old('ten') }}" placeholder="Nhập Tên Loại Sản Phẩm" />
-                            </div>
-                            <!-- <div class="form-group">
                                 <label for="sel1">Nam/Nữ</label>
                                 <select class="form-control" id="sel1" name="loai">
-                                    <option>Nam</option>
-                                    <option>Nữ</option>
+                                    <option @if($category->gender == 1) {{"selected"}} @endif >Nam</option>
+                                    <option @if($category->gender == 0) {{"selected"}} @endif>Nữ</option>
                                     
                                </select>
-                             </div> -->
+                             </div>
                             
-                            <button type="submit" class="btn btn-default">Thêm</button>
+                            <button type="submit" class="btn btn-default">Sửa</button>
                             <button type="reset" class="btn btn-default">Đặt Lại</button>
                         <form>
                     </div>

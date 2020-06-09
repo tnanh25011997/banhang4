@@ -18,6 +18,7 @@ use App\Comments;
 use App\Province;
 use App\District;
 use App\Ward;
+use App\Category;
 use Illuminate\Support\Facades\DB;
 
 use Hash;
@@ -40,6 +41,7 @@ class PageController extends Controller
         $myphamnam = ProductType::where('gender',1)->get();
         $sanpham_nam = Product::where('gender',1)->where('status','!=',3)->orderby('created_at','desc')->take(6)->get();
         $sanpham_nu = Product::where('gender',0)->where('status','!=',3)->orderby('created_at','desc')->take(6)->get();
+        $test = Product::where('status','!=',3)->orderby('created_at','desc')->take(6)->get();
         return view('page.trangchu',compact('slide','new_product','sale_product','myphamnu','myphamnam','sanpham_nam','sanpham_nu'));
     }
     public function getChiTiet($id)
@@ -142,7 +144,8 @@ class PageController extends Controller
     {
         //$sanpham = Product::orderby('id','asc')->paginate(9);
         $sanpham = Product::where('sale','<',100)->where('status','!=',3);
-        $danhmuc = ProductType::orderBy('gender','desc')->get();
+        $danhmuc = Category::orderBy('gender','desc')->get();
+        $loaisp = ProductType::orderBy('gender','desc')->get();
         $brand = Brand::where('name','!=','None')->get();   
         if($request->price){
             $price = $request->price;
@@ -196,13 +199,14 @@ class PageController extends Controller
             }
         }
         $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
-        return view('page.sanpham',compact('sanpham','danhmuc','brand'));
+        return view('page.sanpham',compact('sanpham','danhmuc','brand','loaisp'));
     }
     public function getSanPhamNu(Request $request)
     {
         //$sanpham = Product::orderby('id','asc')->paginate(9);
         $sanpham = Product::where('sale','<',100)->where('gender',0)->where('status','!=',3);
-        $danhmuc = ProductType::orderBy('gender','desc')->get();
+        $danhmuc = Category::orderBy('gender','desc')->get();
+        $loaisp = ProductType::orderBy('gender','desc')->get();
         $brand = Brand::where('name','!=','None')->get();   
         if($request->price){
             $price = $request->price;
@@ -256,12 +260,13 @@ class PageController extends Controller
             }
         }
         $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
-        return view('page.sanphamnu',compact('sanpham','danhmuc','brand'));
+        return view('page.sanphamnu',compact('sanpham','danhmuc','brand','loaisp'));
     }
     public function getSanPhamNam(Request $request)
     {
         $sanpham = Product::where('sale','<',100)->where('gender',1)->where('status','!=',3);
-        $danhmuc = ProductType::orderBy('gender','desc')->get();
+        $danhmuc = Category::orderBy('gender','desc')->get();
+        $loaisp = ProductType::orderBy('gender','desc')->get();
         $brand = Brand::where('name','!=','None')->get();   
         if($request->price){
             $price = $request->price;
@@ -315,7 +320,7 @@ class PageController extends Controller
             }
         }
         $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
-        return view('page.sanphamnam',compact('sanpham','danhmuc','brand'));
+        return view('page.sanphamnam',compact('sanpham','loaisp','brand','danhmuc'));
     }
     
     public function getTheoLoai($slug, Request $request)
@@ -326,8 +331,9 @@ class PageController extends Controller
         }
         else{
 
-            $loai_sanpham = Product::where('id_type',$tenloai->id)->where('status','!=',3);;
-            $danhmuc = ProductType::orderBy('gender','desc')->get();
+            $loai_sanpham = Product::where('id_type',$tenloai->id)->where('status','!=',3);
+            $danhmuc = Category::orderBy('gender','desc')->get();
+            $loaisp = ProductType::orderBy('gender','desc')->get();
             $brand = Brand::where('name','!=','None')->get();
             if($request->price){
                 $price = $request->price;
@@ -381,7 +387,7 @@ class PageController extends Controller
                 }
             }
             $loai_sanpham = $loai_sanpham->paginate(9)->appends(request()->except('page'));
-            return view('page.sanphamtheoloai',compact('loai_sanpham','tenloai','danhmuc','brand'));
+            return view('page.sanphamtheoloai',compact('loai_sanpham','tenloai','danhmuc','brand','loaisp'));
         }
     }
 
@@ -393,7 +399,8 @@ class PageController extends Controller
         }
         else{
             $sanpham = Product::where('id_brand',$thuonghieu->id)->where('status','!=',3);
-            $danhmuc = ProductType::orderBy('gender','desc')->get();
+            $loaisp = ProductType::orderBy('gender','desc')->get();
+            $danhmuc = Category::orderBy('gender','desc')->get();
             $brand = Brand::where('name','!=','None')->get();  
         
             if($request->orderby){
@@ -448,7 +455,7 @@ class PageController extends Controller
                 }
             }
             $sanpham = $sanpham->paginate(9)->appends(request()->except('page'));
-            return view('page.sanphamtheothuonghieu',compact('sanpham','thuonghieu','danhmuc','brand'));
+            return view('page.sanphamtheothuonghieu',compact('sanpham','thuonghieu','danhmuc','brand','loaisp'));
         }
        
     }

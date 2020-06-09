@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Loại Sản Phẩm
+                        <h1 class="page-header">Danh Mục Sản Phẩm
                             <small>Danh Sách</small>
                         </h1>
                     </div>
@@ -17,40 +17,47 @@
                         @if(session('thongbaoerr'))
                                <div class="alert alert-danger">{{session('thongbaoerr')}}</div>
                         @endif
-                        <a href="admin/ProductType/them"><button type="button" class="btn btn-primary" style="float:right; margin-bottom: 10px;">Thêm Loại Sản Phẩm</button></a>
+                        <a href="admin/Category/them"><button type="button" class="btn btn-primary" style="float:right; margin-bottom: 10px;">Thêm Danh Mục</button></a>
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr align="center">
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Danh Mục</th>
+                                    <th>Nam/Nữ</th>
                                     <th>Delete</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($producttype as $pt)
+                                @foreach($category as $cate)
                                     <tr class="odd gradeX" align="center">
-                                        <td>{{$pt->id}}</td>
-                                        <td>{{$pt->name}}</td>
+                                        <td>{{$cate->id}}</td>
+                                        <td>{{$cate->name}}</td>
                                         <td>
-                                            {{$pt->category->name}}
+                                            <?php
+                                                if($cate->gender==0){
+                                                    echo "Nữ";
+                                                }else{
+                                                    echo "Nam";
+                                                }
+
+                                            ?>
                                         </td>
                                         <td class="center">
                                             
-                                            <!-- <a href="admin/ProductType/xoa/{{$pt->id}}"> Xóa</a> -->
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delPro_{{$pt->id}}">
+                                            
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delPro_{{$cate->id}}">
                                               <i class="fa fa-trash-o  fa-fw"></i>
                                             </button>
-                                            <div class="modal fade" id="delPro_{{$pt->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal fade" id="delPro_{{$cate->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                   
                                                         <div class="modal-body">
-                                                        Bạn có thực sự muốn xóa {{$pt->name}}?
+                                                        Bạn có thực sự muốn xóa {{$cate->name}}?
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="admin/ProductType/xoa/{{$pt->id}}"><button type="button" class="btn btn-primary">Xóa Luôn</button></a>
+                                                            <a href="admin/Category/xoa/{{$cate->id}}"><button type="button" class="btn btn-primary">Xóa Luôn</button></a>
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
                                                         
                                                         </div>
@@ -59,7 +66,7 @@
                                             </div>
                                         </td>
                                         <td class="center">
-                                            <a href="admin/ProductType/sua/{{$pt->id}}"><button class="btn btn-info"><i class="fa fa-pencil fa-fw"></i></button></a>
+                                            <a href="admin/Category/sua/{{$cate->id}}"><button class="btn btn-info"><i class="fa fa-pencil fa-fw"></i></button></a>
                                         </td>
                                     </tr>
                                 @endforeach

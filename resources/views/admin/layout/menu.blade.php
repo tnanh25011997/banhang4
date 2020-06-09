@@ -28,7 +28,21 @@
                         @endif
                         @if(Auth::user()->level==2)
                         <li>
-                            <a href="admin/ProductType/danhsach"><i class="fa fa-bar-chart-o fa-fw"></i> Loại Sản Phẩm<span class="fa arrow"></span></a>
+                            <a href="admin/Category/danhsach"><i class="fa fa-copyright fa-fw"></i> Danh Mục<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="admin/Category/danhsach">Danh Mục Sản Phẩm</a>
+                                </li>
+                                <li>
+                                    <a href="admin/Category/them">Thêm Danh Mục</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        @endif
+                        @if(Auth::user()->level==2)
+                        <li>
+                            <a href="admin/ProductType/danhsach"><i class="fa fa-cubes fa-fw"></i> Loại Sản Phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="admin/ProductType/danhsach">Danh Sách Loại Sản Phẩm</a>

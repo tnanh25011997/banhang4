@@ -49,9 +49,30 @@
 					<div class="list-category-product-page">
 						<ul>
 							<p>DANH MỤC SẢN PHẨM</p>
-							@foreach($danhmuc as $danh)
-							<a href="san-pham-theo-loai/{{$danh->slug}}"><li><?php if($danh->gender==0) echo '<i class="fas fa-venus" style="color:#ef77a0;"></i>'; else echo '<i class="fas fa-mars" style="color:#2196f3;"></i>' ?>&nbsp;&nbsp;{{$danh->name}}</li></a>
-							@endforeach
+							<div class="accordion" id="accordionExample">
+							  @foreach($danhmuc as $danh)
+							  <div class="card">
+							    <div class="card-header" id="headingOne">
+							      <h2 class="mb-0">
+							        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_<?php echo $danh->id ?>" aria-expanded="true" aria-controls="collapse">
+							          {{$danh->name}}
+							        </button>
+							      </h2>
+							    </div>
+
+							    <div id="collapse_<?php echo $danh->id ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+							      <div class="card-body">
+							       @foreach($loaisp as $loai)
+							       	@if($loai->id_category == $danh->id)
+									<a href="san-pham-theo-loai/{{$loai->slug}}"><li>{{$loai->name}}</li></a>
+									@endif
+									@endforeach
+							      </div>
+							    </div>
+							  </div>
+							  @endforeach
+							</div>
+							
 						</ul>
 					</div>
 					<div class="list-category-product-page">

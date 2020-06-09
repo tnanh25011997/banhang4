@@ -81,6 +81,8 @@ Route::group(['prefix'=>'ajax'],function(){
 	Route::get('district/{province_id}','AddressController@getDistrict');
 
 	Route::get('ward/{district_id}','AddressController@getWard');
+
+	Route::get('product-type/{danhmuc_id}','ProductController@getProductType');
 });
 Route::fallback(function(){
     return view('page.errors');
@@ -98,6 +100,18 @@ Route::post('admin/dangnhap','UserController@postDangNhapAdmin');
 Route::get('admin/logout','UserController@getDangXuatAdmin');
 
 Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
+
+	Route::group(['prefix'=>'Category','middleware'=>'quantri'],function(){
+		Route::get('danhsach','CategoryController@getDanhSach');
+
+		Route::get('sua/{id}','CategoryController@getSua');//goi trang sửa lên
+		Route::post('sua/{id}','CategoryController@postSua'); //gửi DL lên
+
+		Route::get('them','CategoryController@getThem');
+		Route::post('them','CategoryController@postThem');
+
+		Route::get('xoa/{id}','CategoryController@getXoa');
+	});
 
 	Route::group(['prefix'=>'ProductType','middleware'=>'quantri'],function(){
 		//admin/ProducType/danhsach
