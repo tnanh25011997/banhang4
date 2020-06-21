@@ -32,7 +32,8 @@ class AppServiceProvider extends ServiceProvider
             if(Session('cart')){
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);
-                $view->with(['cart'=>Session::get('cart'),'product_cart'=>$cart->items,'totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]);
+                // $view->with(['cart'=>Session::get('cart'),'product_cart'=>$cart->items,'totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]);
+                $view->with(['cart'=>Session::get('cart'),'product_cart'=>$cart->items,'totalPrice'=>$cart->totalPrice]);
             }      
         });
         view()->composer('header',function($view)
@@ -57,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
             if(Session('cart')){
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);
-                $view->with(['cart'=>Session::get('cart'),'product_cart'=>$cart->items,'totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]);
+                $view->with(['cart'=>Session::get('cart'),'product_cart'=>$cart->items,'totalPrice'=>$cart->totalPrice]);
             }     
         });
     }

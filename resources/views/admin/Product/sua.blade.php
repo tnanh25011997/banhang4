@@ -115,7 +115,14 @@
                             </div>
                             <div class="form-group">
                                 <label>Images</label>
-                                <p><img src="source/images/{{$product->image}}" style="width: 200px"  alt=""></p>
+                                <?php 
+                                    $arrImg = json_decode($product->image,true);
+                                ?>
+                                <p> <span></span>
+                                    <?php for($i=0;$i<sizeof($arrImg);$i++) {?>
+                                    <img src="source/images/{{$arrImg[$i]}}" style="width: 200px; height: 200px;"  alt="">
+                                <?php } ?>
+                                </p>
                                 <input type="file" name="hinhanh[]" multiple>
                             </div>
                             

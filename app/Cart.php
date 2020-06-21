@@ -5,13 +5,13 @@ namespace App;
 class Cart
 {
 	public $items = array(); //đây là 1 mảng chứa các iteam theo id
-	public $totalQty = 0;
+	//public $totalQty = 0;
 	public $totalPrice = 0;
 
 	public function __construct($oldCart){
 		if($oldCart){
 			$this->items = $oldCart->items;
-			$this->totalQty = $oldCart->totalQty;
+			//$this->totalQty = $oldCart->totalQty;
 			$this->totalPrice = $oldCart->totalPrice;
 		}
 	}
@@ -21,13 +21,9 @@ class Cart
 		$max = 0;
 		$giohang = ['qty'=>0, 'price' => $item->unit_price, 'item' => $item,'color'=>null];
 		//kiểm tra tồn tại sản phẩm trong giỏ chưa
-		// if($this->items){
-		// 	if(array_key_exists($id, $this->items)){
-		// 		$giohang = $this->items[$id];
-		// 	}
-		// }
+		
 		foreach ($this->items as $key => $value ) {
-			if($value['item']->id==$id && $value['color']==null){
+			if($value['item']->id==$id && $value['item']->promotion_price == $item->promotion_price && $value['color']==null){
 				$giohang = $value;
 				$k = $key;
 			}
@@ -54,7 +50,7 @@ class Cart
 			$this->items[$k]= $giohang;
 
 		}
-		$this->totalQty++;
+		//$this->totalQty++;
 		$this->totalPrice += $item->promotion_price * $qty;
 		
 		
@@ -64,14 +60,10 @@ class Cart
 		$k = -1;
 		$max = 0;
 		$giohang = ['qty'=>0, 'price' => $item->promotion_price, 'item' => $item,'color'=>$color];
-		// if($this->items){
-		// 	if(array_key_exists($id, $this->items)){
-		// 		$giohang = $this->items[$id];
-		// 	}
-		// }
+		
 		
 		foreach ($this->items as $key => $value ) {
-			if($value['item']->id==$id && $value['color']==$color){
+			if($value['item']->id==$id && $value['item']->promotion_price == $item->promotion_price && $value['color']==$color){
 				$giohang = $value;
 				$k = $key;
 			}
@@ -98,7 +90,7 @@ class Cart
 			$this->items[$k]= $giohang;
 		}
 		
-		$this->totalQty += ($qty-$oldQty);	
+		//$this->totalQty += ($qty-$oldQty);	
 		$this->totalPrice += $item->promotion_price * $qty;
 		//dd(session('cart'));
 
@@ -115,14 +107,10 @@ class Cart
 			$qty = 0;
 		}
 		$giohang = ['qty'=>1, 'price' => $item->promotion_price, 'item' => $item,'color'=>null];
-		// if($this->items){
-		// 	if(array_key_exists($id, $this->items)){
-		// 		$giohang = $this->items[$id];
-		// 	}
-		// }
+		
 		//dd($giohang);
 		foreach ($this->items as $key => $value ) {
-			if($key==$id){
+			if($key==$id && $value['item']->promotion_price == $item->promotion_price ){
 				$giohang = $value;
 				$k= $key;	
 			}
@@ -143,7 +131,7 @@ class Cart
 		}
 		else{
 			$this->items[$k]= $giohang;
-			$this->totalQty += ($qty-$oldQty); //?
+			//$this->totalQty += ($qty-$oldQty); //?
 
 			$oldPrice = $oldQty*$item->promotion_price;
 			$newPrice = $giohang['qty']*$item->promotion_price;
@@ -159,7 +147,7 @@ class Cart
 	
 	//xóa nhiều
 	public function removeItem($id){
-		$this->totalQty -= $this->items[$id]['qty'];
+		//$this->totalQty -= $this->items[$id]['qty'];
 		$this->totalPrice -= $this->items[$id]['price'];
 		unset($this->items[$id]);
 	}

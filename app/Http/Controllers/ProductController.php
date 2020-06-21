@@ -110,6 +110,10 @@ class ProductController extends Controller
             $product->image="";
         }
 
+        if(sizeof($arrImg)>3){
+            return redirect()->back()->with('error','Không được upload quá 3 hình ảnh');
+        }
+
         //slug
         $slug = new Slug();
         $product->slug = $slug->createSlugProduct($req->ten);
@@ -212,6 +216,7 @@ class ProductController extends Controller
             // unlink("source/images/".$product->image);
             // $file->move("source/images",$hinh);
             // $product->image= $hinh;
+            
             
         }
         else{

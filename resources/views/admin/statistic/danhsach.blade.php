@@ -11,6 +11,24 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
+                            <form method="get" id="form-month">
+                            <span>Tháng:</span>
+                            <select name="selectmonth" class="sel-month">
+                                <option value>{{$current_month}}</option>
+                                <option {{Request::get('selectmonth')=="1"?"selected='selected'":""}} value="1">01</option>
+                                <option {{Request::get('selectmonth')=="2"?"selected='selected'":""}} value="2">02</option>
+                                <option {{Request::get('selectmonth')=="3"?"selected='selected'":""}} value="3">03</option>
+                                <option {{Request::get('selectmonth')=="4"?"selected='selected'":""}} value="4">04</option>
+                                <option {{Request::get('selectmonth')=="5"?"selected='selected'":""}} value="5">05</option>
+                                <option {{Request::get('selectmonth')=="6"?"selected='selected'":""}} value="6">06</option>
+                                <option {{Request::get('selectmonth')=="7"?"selected='selected'":""}} value="7">07</option>
+                                <option {{Request::get('selectmonth')=="8"?"selected='selected'":""}} value="8">08</option>
+                                <option {{Request::get('selectmonth')=="9"?"selected='selected'":""}} value="9">09</option>
+                                <option {{Request::get('selectmonth')=="10"?"selected='selected'":""}} value="10">10</option>
+                                <option {{Request::get('selectmonth')=="11"?"selected='selected'":""}} value="11">11</option>
+                                <option {{Request::get('selectmonth')=="12"?"selected='selected'":""}} value="12">12</option>
+                            </select>
+                             </form>
                             <h3>DOANH SỐ BÁN HÀNG</h3>
                             <canvas id="myChartPie"></canvas>
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -76,6 +94,11 @@
         $(document).ready(function() {
             $('.sel-year').change(function() {
                 $("#form-year").submit();
+            });
+        });
+        $(document).ready(function() {
+            $('.sel-month').change(function() {
+                $("#form-month").submit();
             });
         });
     </script>
