@@ -120,14 +120,14 @@
 					<a class="nav-link" href="gioi-thieu">GIỚI THIỆU</a>
 				</li>
 				<li class="nav-item sanphammenu">
-					<a class="nav-link" href="my-pham-nam">MỸ PHẨM NAM </a>
+					<a class="nav-link" href="my-pham-nam">MỸ PHẨM NAM <i class="fas fa-angle-down"></i></a>
 					<ul class='sub-nav sub-mpnam'>
 						@foreach($loai_sp_nam as $loai)
 						<a href="san-pham-theo-loai/{{$loai->slug}}"><li>{{$loai->name}}</li></a>
 						@endforeach
 						
 					</ul>
-					<i class="nut-xuong1 fas fa-angle-down"></i>
+					
 				</li>
 				<!-- <li class="nav-item sanphammenu">
 					<a class="nav-link" href="my-pham-nu">MỸ PHẨM NỮ</a>
@@ -140,7 +140,7 @@
 					<i class="nut-xuong2 fas fa-angle-down"></i>
 				</li> -->
 				<li class="nav-item sanphammenu">
-					<a class="nav-link" href="my-pham-nu">MỸ PHẨM NỮ</a>
+					<a class="nav-link" href="my-pham-nu">MỸ PHẨM NỮ <i class="fas fa-angle-down"></i></a>
 					<ul class='sub-nav sub-mpnu'>
 						@foreach($category as $cate)
 						<li>
@@ -156,7 +156,7 @@
 						@endforeach
 						
 					</ul>
-					<i class="nut-xuong2 fas fa-angle-down"></i>
+					
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="tin-tuc">TIN TỨC</a>
@@ -174,3 +174,6 @@
 		</div>
 	</nav>
 </div>
+@if(session('thongbaodangnhap'))
+    <div class="alert alert-success" style="text-align: center;margin-bottom: 0px;">{{session('thongbaodangnhap')}}</div>
+@endif

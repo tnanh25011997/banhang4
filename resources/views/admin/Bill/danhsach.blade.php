@@ -70,6 +70,9 @@
                         @if(session('thongbao'))
                             <div class="alert alert-success">{{session('thongbao')}}</div>
                         @endif
+                        @if(session('thongbaodangnhap'))
+                            <div class="alert alert-success" >{{session('thongbaodangnhap')}}</div>
+                        @endif
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr align="center">

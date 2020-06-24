@@ -96,7 +96,7 @@ class AccountController extends Controller
         
         if(Auth::attempt($credentials, $remember))
         {
-           return redirect()->back();
+           return redirect()->back()->with(['thongbaodangnhap'=>'Đăng Nhập Thành Công']);
         }
         else
         {

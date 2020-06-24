@@ -175,7 +175,7 @@ class UserController extends Controller
         
         if(Auth::attempt($credentials))
         {
-           return redirect('admin/Bill/danhsach');
+           return redirect('admin/Bill/danhsach')->with(['thongbaodangnhap'=>'Đăng Nhập Thành Công']);
         }
         else
         {
